@@ -55,4 +55,6 @@ public class User {
 
     public List<Goal> getGoals() { return _goals; }
     public void setGoals (List<Goal> goals) { _goals = goals; }
+
+
 }
