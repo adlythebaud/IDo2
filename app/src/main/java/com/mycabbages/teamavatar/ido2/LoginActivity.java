@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
-    public final static String USERLOG = "User_log";
+    public final static String LOGINLOG = "Login_log";
     private FirebaseAuth myAuth;
 
 
@@ -38,24 +38,24 @@ public class LoginActivity extends AppCompatActivity {
         EditText _password = (EditText)findViewById(R.id.passwordInput);
         String email = _email.getText().toString();
         String password = _password.getText().toString();
-        Log.d(USERLOG, email);
-        Log.d(USERLOG, password);
+        Log.d(LOGINLOG, email);
+        Log.d(LOGINLOG, password);
 
 
-        Log.d(USERLOG, "About to go into Firebase Create User");
+        Log.d(LOGINLOG, "About to go into Firebase Create User");
         myAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(USERLOG, "Inside the oncomplete: " + task.isSuccessful());
+                        Log.d(LOGINLOG, "Inside the oncomplete: " + task.isSuccessful());
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(USERLOG, "createUserWithEmail:success");
+                            Log.d(LOGINLOG, "createUserWithEmail:success");
                             FirebaseUser user = myAuth.getCurrentUser();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(USERLOG, "createUserWithEmail:failure", task.getException());
+                            Log.w(LOGINLOG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
@@ -69,8 +69,8 @@ public class LoginActivity extends AppCompatActivity {
         EditText _password = (EditText)findViewById(R.id.passwordInput);
         String email = _email.getText().toString();
         String password = _password.getText().toString();
-        Log.d(USERLOG, email);
-        Log.d(USERLOG, password);
+        Log.d(LOGINLOG, email);
+        Log.d(LOGINLOG, password);
 
         myAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -78,12 +78,12 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(USERLOG, "signInWithEmail:success");
+                            Log.d(LOGINLOG, "signInWithEmail:success");
                             FirebaseUser user = myAuth.getCurrentUser();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(USERLOG, "signInWithEmail:failure", task.getException());
+                            Log.w(LOGINLOG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_LONG).show();
                             updateUI(null);
