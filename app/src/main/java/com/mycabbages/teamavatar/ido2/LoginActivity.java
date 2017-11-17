@@ -35,8 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void signUpNewUser(View view) {
-        EditText _email = (EditText)findViewById(R.id.emailInput);
-        EditText _password = (EditText)findViewById(R.id.passwordInput);
+        EditText _email = findViewById(R.id.emailInput);
+        EditText _password = findViewById(R.id.passwordInput);
         String email = _email.getText().toString();
         String password = _password.getText().toString();
         Log.d(LOGINLOG, email);
@@ -67,8 +67,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void signInExistingUser(View view) {
-        EditText _email = (EditText)findViewById(R.id.emailInput);
-        EditText _password = (EditText)findViewById(R.id.passwordInput);
+        EditText _email = findViewById(R.id.emailInput);
+        EditText _password = findViewById(R.id.passwordInput);
         String email = _email.getText().toString();
         String password = _password.getText().toString();
         Log.d(LOGINLOG, email);
@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void updateUI(FirebaseUser currentUser) {
+    private void updateUI(FirebaseUser user) {
 
     }
 }
