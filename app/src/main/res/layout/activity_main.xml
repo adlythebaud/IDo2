@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mycabbages.teamavatar.ido2.MainActivity"
-    android:background="@color/black">
+    tools:context="com.mycabbages.teamavatar.ido2.MainActivity">
 
     <View
         android:id="@+id/middle_background_view"
@@ -17,5 +16,12 @@
         android:id="@+id/middle_viewpager"
         android:layout_height="match_parent"
         android:layout_width="match_parent" />
+
+    <com.mycabbages.teamavatar.ido2.View.MenuTabsView
+        android:id="@+id/am_menu_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"/>
 
 </android.support.constraint.ConstraintLayout>
