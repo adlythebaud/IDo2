@@ -1,5 +1,6 @@
 package com.mycabbages.teamavatar.ido2;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,8 +52,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(LOGINLOG, "createUserWithEmail:success");
-                            FirebaseUser user = myAuth.getCurrentUser();
-                            updateUI(user);
+                            Intent intentToStartMainActivity = new Intent(LoginActivity.this,
+                                    MainActivity.class);
+                            startActivity(intentToStartMainActivity);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(LOGINLOG, "createUserWithEmail:failure", task.getException());
@@ -79,8 +81,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(LOGINLOG, "signInWithEmail:success");
-                            FirebaseUser user = myAuth.getCurrentUser();
-                            updateUI(user);
+                            Intent intentToStartMainActivity = new Intent(LoginActivity.this,
+                                    MainActivity.class);
+                            startActivity(intentToStartMainActivity);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(LOGINLOG, "signInWithEmail:failure", task.getException());
