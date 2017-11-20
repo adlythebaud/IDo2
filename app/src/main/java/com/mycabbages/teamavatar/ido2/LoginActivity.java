@@ -1,9 +1,9 @@
 package com.mycabbages.teamavatar.ido2;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     public final static String LOGINLOG = "Login_log";
+
     private FirebaseAuth myAuth;
 
 
