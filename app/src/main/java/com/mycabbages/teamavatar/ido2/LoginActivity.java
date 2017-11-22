@@ -98,4 +98,10 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
 
     }
+
+
+    public void testnotification(View v){
+        PushNotification data = new PushNotification();
+        data.scheduleAnNotification(this,"this worked!!!!", "TEST",10000, 0);
+    }
 }

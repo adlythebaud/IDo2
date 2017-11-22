@@ -1,5 +1,6 @@
 package com.mycabbages.teamavatar.ido2;
 
+import android.app.Notification;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         final int colorBlue = ContextCompat.getColor(this, R.color.light_blue);
         final int colorPurple = ContextCompat.getColor(this, R.color.light_purple);
 
+
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -46,5 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+//
+
+
     }
 }
