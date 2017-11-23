@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = (ViewPager)findViewById(R.id.middle_viewpager);
         MainPagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(1); // Sets initial fragment to be GoalsFragment
 
         final int colorBlue = ContextCompat.getColor(this, R.color.light_blue);
         final int colorPurple = ContextCompat.getColor(this, R.color.light_purple);
