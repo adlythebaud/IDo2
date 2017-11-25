@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="184dp"
     tools:layout_gravity="bottom"
-    tools:background="@color/yellow">
+    tools:background="@color/light_purple">
 
     <ImageView
         android:id="@+id/vmt_center_image"
         android:layout_width="88dp"
         android:layout_height="88dp"
-        android:background="@color/black"
         android:layout_gravity="center|bottom"
-        android:layout_marginBottom="96dp"/>
+        android:layout_marginBottom="96dp"
+        android:src="@drawable/large_circle" />
 
     <ImageView
         android:id="@+id/vmt_start_image"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="56dp"
         android:layout_gravity="start|bottom"
-        android:background="@color/black"/>
+        android:layout_marginBottom="56dp"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/ic_assignment_24dp" />
 
     <ImageView
         android:id="@+id/vmt_end_image"
@@ -30,7 +31,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="56dp"
         android:layout_gravity="end|bottom"
-        android:background="@color/black"/>
+        android:src="@drawable/ic_chat_bubble_24dp"/>
 
     <ImageView
         android:id="@+id/vmt_bottom_image"
@@ -38,7 +39,7 @@
         android:layout_height="32dp"
         android:layout_marginBottom="48dp"
         android:layout_gravity="center|bottom"
-        android:background="@color/black"/>
+        android:src="@drawable/small_circle"/>
 
     <View
         android:id="@+id/vmt_indicator"
@@ -46,6 +47,6 @@
         android:layout_height="4dp"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="44dp"
-        android:background="@color/black"/>
+        android:background="@drawable/indicator_background"/>
 
 </FrameLayout>

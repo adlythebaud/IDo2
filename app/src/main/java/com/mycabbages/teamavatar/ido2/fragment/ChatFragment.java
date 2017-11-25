@@ -17,4 +17,6 @@ public class ChatFragment extends Fragment {
     public static ChatFragment create() {
         return new ChatFragment();
     }
+
+
 }

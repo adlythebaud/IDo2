@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.mycabbages.teamavatar.ido2.View.MenuTabsView;
 import com.mycabbages.teamavatar.ido2.adapter.MainPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = (ViewPager)findViewById(R.id.middle_viewpager);
         MainPagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(1); // Sets initial fragment to be GoalsFragment
+
+        MenuTabsView menuTabsView = (MenuTabsView) findViewById(R.id.am_menu_tabs);
+        menuTabsView.setUpWithViewPager(viewPager);
 
         final int colorBlue = ContextCompat.getColor(this, R.color.light_blue);
         final int colorPurple = ContextCompat.getColor(this, R.color.light_purple);
