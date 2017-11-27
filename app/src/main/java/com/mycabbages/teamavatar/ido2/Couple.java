@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.util.Log;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.TreeMap;
@@ -21,7 +23,7 @@ public class Couple {
     private Chat _coupleChat;
     private Date _anniversary;
     private Map<Date, Goal> _importantDates;
-    private Queue<PushNotification> _pushNotifications;
+    private List<PushNotification> _pushNotifications;
     private String _coupleID;
 
     public Couple(Activity activity) {
@@ -30,7 +32,7 @@ public class Couple {
         _coupleChat = null;
         _anniversary = null;
         _importantDates = new TreeMap<Date, Goal>();
-        _pushNotifications = new ArrayDeque<PushNotification>();
+        _pushNotifications = new ArrayList<PushNotification>();
         _coupleID = "";
     }
 
@@ -40,7 +42,7 @@ public class Couple {
         _anniversary = anniversary;
         _coupleChat = coupleChat;
         _importantDates = new TreeMap<Date, Goal>();
-        _pushNotifications = new ArrayDeque<PushNotification>();
+        _pushNotifications = new ArrayList<PushNotification>();
         _coupleID = coupleID;
     }
 
@@ -56,8 +58,8 @@ public class Couple {
     public Map<Date, Goal> getImportantDates() { return _importantDates; }
     public void setImportantDates(Map<Date, Goal> importantDates) { this._importantDates = importantDates; }
 
-    public Queue<PushNotification> getPushNotifications() { return _pushNotifications; }
-    public void setPushNotifications(Queue<PushNotification> pushNotifications) { this._pushNotifications = pushNotifications; }
+    public List<PushNotification> getPushNotifications() { return _pushNotifications; }
+    public void setPushNotifications(List<PushNotification> pushNotifications) { this._pushNotifications = pushNotifications; }
 
     public Date getAnniversary() { return _anniversary; }
     public void setAnniversary(Date anniversary) { this._anniversary = anniversary; }
