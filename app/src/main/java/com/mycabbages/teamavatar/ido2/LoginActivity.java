@@ -26,13 +26,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         myAuth = FirebaseAuth.getInstance();
+
+
+        FirebaseUser currentUser = myAuth.getCurrentUser();
+        updateUI(currentUser);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = myAuth.getCurrentUser();
-        updateUI(currentUser);
+
+
     }
 
     public void signUpNewUser(View view) {
@@ -53,6 +57,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(LOGINLOG, "createUserWithEmail:success");
+
+//                          // TODO: add new user to "users" child of Firebase
+
                             Intent intentToStartMainActivity = new Intent(LoginActivity.this,
                                     MainActivity.class);
                             startActivity(intentToStartMainActivity);
