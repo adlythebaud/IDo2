@@ -20,7 +20,7 @@ import com.mycabbages.teamavatar.ido2.R;
  * Created by Preston on 11/17/2017.
  */
 
-public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeListener {
+public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeListener{
 
     private ImageView mCenterImage;
     private ImageView mStartImage;
@@ -50,8 +50,42 @@ public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeL
         init();
     }
 
-    public void setUpWithViewPager(ViewPager viewPager) {
+    public void setUpWithViewPager(final ViewPager viewPager) {
         viewPager.addOnPageChangeListener(this);
+
+        mStartImage.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (viewPager.getCurrentItem() != 0) {
+                    viewPager.setCurrentItem(0);
+                }
+            }
+        });
+
+        mBottomImage.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (viewPager.getCurrentItem() != 1) {
+                    viewPager.setCurrentItem(1);
+                }
+            }
+        });
+
+        mEndImage.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (viewPager.getCurrentItem() != 2) {
+                    viewPager.setCurrentItem(2);
+                }
+            }
+        });
+
+        mCenterImage.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void init() {
