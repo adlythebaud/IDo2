@@ -13,7 +13,8 @@
         android:layout_height="88dp"
         android:layout_gravity="center|bottom"
         android:layout_marginBottom="96dp"
-        android:src="@drawable/large_circle" />
+        android:src="@drawable/large_circle"
+        android:visibility="invisible" />
 
     <ImageView
         android:id="@+id/vmt_start_image"
