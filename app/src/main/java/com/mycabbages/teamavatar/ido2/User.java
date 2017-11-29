@@ -18,7 +18,7 @@ public class User {
     private String _firstName;
 
     //Default constructor
-    User() {
+    public User() {
         _email = "";
         _birthday = null;
         _lastName = "";
@@ -28,13 +28,20 @@ public class User {
     }
 
     //Non-default Constructor to initialize the email as user is made
-    User(String email) {
+    public User(String email) {
         _email = email;
         _birthday = null;
         _lastName = "";
         _coupleID = "";
         _firstName = "";
         _goals = new Vector<Goal>();
+    }
+
+    public User(String _firstName, String _lastName, String _coupleID, String _email) {
+        this._firstName = _firstName;
+        this._lastName = _lastName;
+        this._coupleID = _coupleID;
+        this._email = _email;
     }
 
     //Getters and Setters

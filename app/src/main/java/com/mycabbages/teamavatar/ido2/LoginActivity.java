@@ -14,11 +14,25 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.UUID;
+
+/**
+ * LOGIN ACTIVITY
+ *
+ *
+ */
 public class LoginActivity extends AppCompatActivity {
     public final static String LOGINLOG = "Login_log";
 
     private FirebaseAuth myAuth;
+    public FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference mDatabase;        // this is our database reference.
 
 
     @Override
@@ -30,50 +44,38 @@ public class LoginActivity extends AppCompatActivity {
 
         FirebaseUser currentUser = myAuth.getCurrentUser();
         updateUI(currentUser);
+
+        // set your DatabaseReference object to our current database.
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        // now all calls to FirebaseDatabase are called with mDatabase.
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-
+        // add listener for auth state changes.
+//        myAuth.addAuthStateListener(mAuthListener);
     }
 
-    public void signUpNewUser(View view) {
-        EditText _email = findViewById(R.id.emailInput);
-        EditText _password = findViewById(R.id.passwordInput);
-        String email = _email.getText().toString();
-        String password = _password.getText().toString();
-        Log.d(LOGINLOG, email);
-        Log.d(LOGINLOG, password);
+    @Override
+    public void onStop() {
+        super.onStop();
 
-
-        Log.d(LOGINLOG, "About to go into Firebase Create User");
-        myAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(LOGINLOG, "Inside the oncomplete: " + task.isSuccessful());
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(LOGINLOG, "createUserWithEmail:success");
-
-//                          // TODO: add new user to "users" child of Firebase
-
-                            Intent intentToStartMainActivity = new Intent(LoginActivity.this,
-                                    MainActivity.class);
-                            startActivity(intentToStartMainActivity);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(LOGINLOG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                    }
-                });
+        // when we log out, remove listener for authorizations.
+//        if (mAuthListener != null) {
+//            myAuth.removeAuthStateListener(mAuthListener);
+//        }
     }
 
+
+
+    /**
+     * SIGN IN EXISTING USER
+     * called from sign in button.
+     * @param view
+     */
     public void signInExistingUser(View view) {
         EditText _email = findViewById(R.id.emailInput);
         EditText _password = findViewById(R.id.passwordInput);
@@ -89,9 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(LOGINLOG, "signInWithEmail:success");
-                            Intent intentToStartMainActivity = new Intent(LoginActivity.this,
-                                    MainActivity.class);
-                            startActivity(intentToStartMainActivity);
+                            goToHome();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(LOGINLOG, "signInWithEmail:failure", task.getException());
@@ -101,6 +101,149 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    /**
+     * CREATE ACCOUNT
+     * Called from registerNewUser()
+     * @param firstName
+     * @param lastName
+     * @param coupleID
+     * @param email
+     * @param password
+     */
+    public void createAccount(final String firstName, final String lastName, final String coupleID, final String email, final String password) {
+        myAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(LOGINLOG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {                             // TASK FAILURE
+                            Toast.makeText(LoginActivity.this, "Auth failure.",
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+                        if (task.isSuccessful()) {                              // TASK SUCCESSFUL
+                            Log.w(LOGINLOG, "createAccountWithEmail:succeeded", task.getException());
+                            Toast.makeText(LoginActivity.this, "auth success!",
+                                    Toast.LENGTH_SHORT).show();
+
+                            //TODO: need to add last name, first name, coupleID. You don't need password.
+
+                             addUserToDatabase(firstName, lastName, coupleID, email);
+
+                             // start a new intent
+                             goToHome();
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
+    /**
+     * REGISTER NEW USER
+     * Specific method that's called from sign up button on UI.
+     * @param view
+     */
+    public void registerNewUser(View view) {
+        EditText firstNameET     = (EditText)findViewById(R.id.firstNameEditText);
+        EditText lastNameET      = (EditText)findViewById(R.id.lastNameEditText);
+        EditText coupleIDET      = (EditText)findViewById(R.id.coupleIDEditText);
+        EditText emailTextBox    = (EditText)findViewById(R.id.emailInput);
+        EditText passwordTextBox = (EditText)findViewById(R.id.passwordInput);
+
+        String firstName = firstNameET.getText().toString();
+        String lastName = lastNameET.getText().toString();
+        String coupleID = coupleIDET.getText().toString();
+        String email = emailTextBox.getText().toString();
+        String password = passwordTextBox.getText().toString();
+
+        if (coupleID.trim().length() == 0) {
+            coupleID = UUID.randomUUID().toString();
+        }
+
+        createAccount(firstName, lastName, coupleID, email, password);
+
+    }
+
+    /**
+     * ADD USER TO DATABASE
+     * @param firstName
+     * @param lastName
+     * @param coupleID
+     * @param email
+     */
+    public void addUserToDatabase(String firstName, String lastName, final String coupleID, String email) {
+        // create a user object.
+        final User user = new User(firstName, lastName, coupleID, email);
+
+        // create a couple object. Assume the user is always the husband for now...
+
+        final Chat chat = new Chat();
+
+        final Couple couple = new Couple(user.getLastName(), user, null, null);
+
+        // create a new reference under the users in FB, add the user to the database
+        DatabaseReference userRef = mDatabase.child("users").push();
+        userRef.setValue(user);
+
+
+        // handle for if coupleID is found in database
+        final DatabaseReference couples = mDatabase.child("couples");
+        couples.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(coupleID).exists()) {
+                    // The coupleID already exists, add this user to the couple...
+                    // To determine whether husband or wife needs to be created,
+                    // check if the child of this child exists.
+                    if (dataSnapshot.child(coupleID).child("spouse1").exists()) {
+                        // add wife child.
+                        Log.d(LOGINLOG, "adding spouse2 to " + coupleID);
+                        DatabaseReference spouse2Ref = couples.child(coupleID).child("spouse2");
+                        spouse2Ref.setValue(user);
+                    } else {
+                        // add husband child.
+                        Log.d(LOGINLOG, "adding spouse1 to " + coupleID);
+                        DatabaseReference spouse1Ref = couples.child(coupleID).child("spouse1");
+                        spouse1Ref.setValue(user);
+                    }
+
+                } else {
+                    // coupleID does not exist...
+                    Log.d(LOGINLOG, "adding new couple to firebase");
+                    DatabaseReference coupleRef = mDatabase.child("couples").child(coupleID);
+                    coupleRef.setValue(couple);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // error handle here....
+            }
+        });
+
+
+        // save this new user in firebase database tree under "users" child tree.
+
+        // create a new couple in "couples" tree, add user to it.
+
+
+    }
+
+    /**
+     * GO TO HOME
+     * Start intent to go to next activity after successful login and sign up.
+     */
+    public void goToHome() {
+        Intent intentToStartMainActivity = new Intent(LoginActivity.this,
+                MainActivity.class);
+        startActivity(intentToStartMainActivity);
     }
 
     private void updateUI(FirebaseUser user) {
