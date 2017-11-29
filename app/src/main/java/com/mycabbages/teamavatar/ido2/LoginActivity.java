@@ -219,6 +219,8 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d(LOGINLOG, "adding new couple to firebase");
                     DatabaseReference coupleRef = mDatabase.child("couples").child(coupleID);
                     coupleRef.setValue(couple);
+                    coupleRef.child(coupleID).child("chat").push();
+                    coupleRef.child(coupleID).child("push notifications").push();
                 }
             }
 
