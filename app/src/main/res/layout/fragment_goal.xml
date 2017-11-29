@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/this_weeks_goal_title"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:background="@color/light_purple">
@@ -16,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="75dp"
         android:text="Todays Goals"
         android:textSize="25sp" />
 
@@ -26,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="275dp"
         android:text="This Weeks Goals"
         android:textSize="25sp" />
 
@@ -35,58 +37,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="200dp" />
-
-    <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="250dp" />
+        android:layout_marginTop="175dp" />
 
     <CheckBox
         android:id="@+id/checkBox4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="350dp" />
+        android:layout_marginTop="325dp" />
 
     <CheckBox
         android:id="@+id/checkBox5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="400dp" />
-
-    <CheckBox
-        android:id="@+id/checkBox6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="450dp" />
-
-    <CheckBox
-        android:id="@+id/checkBox3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="150dp" />
+        android:layout_marginTop="375dp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="310dp"
         android:layout_height="33dp"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="150dp"
-        android:gravity="center_vertical"
-        android:text="nothing is here"
-        android:textSize="15sp" />
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="310dp"
-        android:layout_height="33dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="125dp"
         android:gravity="center_vertical"
         android:text="nothing is here"
         android:textSize="15sp" />
@@ -96,7 +68,7 @@
         android:layout_width="310dp"
         android:layout_height="33dp"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="225dp"
         android:gravity="center_vertical"
         android:text="nothing is here"
         android:textSize="15sp" />
@@ -106,7 +78,7 @@
         android:layout_width="310dp"
         android:layout_height="33dp"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="325dp"
         android:gravity="center_vertical"
         android:text="nothing is here"
         android:textSize="15sp" />
@@ -116,7 +88,7 @@
         android:layout_width="310dp"
         android:layout_height="33dp"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="375dp"
         android:gravity="center_vertical"
         android:text="nothing is here"
         android:textSize="15sp" />
@@ -126,22 +98,59 @@
         android:layout_width="310dp"
         android:layout_height="33dp"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="425dp"
         android:gravity="center_vertical"
         android:text="nothing is here"
         android:textSize="15sp" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="47dp"
-        android:layout_height="wrap_content"
-        android:text="3" />
-
-    <Button
-        android:id="@+id/button3"
+    <ImageButton
+        android:id="@+id/imageButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
-        android:text="Button" />
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="25dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="225dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="125dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="425dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="58dp"
+        android:layout_height="55dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_chat_bubble_24dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="310dp"
+        android:layout_height="33dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="175dp"
+        android:gravity="center_vertical"
+        android:text="nothing is here"
+        android:textSize="15sp" />
 
 </FrameLayout>
