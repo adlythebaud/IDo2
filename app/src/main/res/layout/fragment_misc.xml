@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:background="@color/light_blue"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,4 +12,31 @@
         <!--android:layout_marginTop="80dp"-->
         <!--android:background="@drawable/card_background"/>-->
 
+    <Button
+        android:id="@+id/couples_quiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="100dp"
+        android:background="@android:color/transparent"
+        android:text="Couple Quiz                     "
+        android:textSize="20sp" />
+
+    <ImageButton
+        android:id="@+id/couples_quiz_pic"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="100dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="?android:attr/actionModePasteDrawable" />
+
+    <Button
+        android:id="@+id/log_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="75dp"
+        android:layout_marginRight="15dp"
+        android:text="Log Out" />
 </FrameLayout>

@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.mycabbages.teamavatar.ido2.fragment.ChatFragment;
 import com.mycabbages.teamavatar.ido2.fragment.GoalsFragment;
 import com.mycabbages.teamavatar.ido2.fragment.MiscFragment;
+import com.mycabbages.teamavatar.ido2.fragment.TextFragment;
 
 /**
  * Created by Preston on 11/17/2017.
@@ -27,12 +28,14 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
                 return GoalsFragment.create();
             case 2:
                 return ChatFragment.create();
+            case 3:
+                return TextFragment.create();
         }
         return null;
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 }
