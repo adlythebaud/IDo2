@@ -18,7 +18,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="100dp"
         android:text="Todays Goals"
-        android:textSize="25dp" />
+        android:textSize="25sp" />
 
 
     <TextView
@@ -28,7 +28,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="300dp"
         android:text="This Weeks Goals"
-        android:textSize="25dp" />
+        android:textSize="25sp" />
 
     <CheckBox
         android:id="@+id/checkBox1"
@@ -80,7 +80,7 @@
         android:layout_marginTop="150dp"
         android:gravity="center_vertical"
         android:text="nothing is here"
-        android:textSize="15dp" />
+        android:textSize="15sp" />
     <TextView
         android:id="@+id/textView3"
         android:layout_width="310dp"
@@ -89,7 +89,7 @@
         android:layout_marginTop="200dp"
         android:gravity="center_vertical"
         android:text="nothing is here"
-        android:textSize="15dp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/textView4"
@@ -99,7 +99,7 @@
         android:layout_marginTop="250dp"
         android:gravity="center_vertical"
         android:text="nothing is here"
-        android:textSize="15dp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/textView5"
@@ -109,7 +109,7 @@
         android:layout_marginTop="350dp"
         android:gravity="center_vertical"
         android:text="nothing is here"
-        android:textSize="15dp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/textView6"
@@ -119,7 +119,7 @@
         android:layout_marginTop="400dp"
         android:gravity="center_vertical"
         android:text="nothing is here"
-        android:textSize="15dp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/textView7"
@@ -129,7 +129,20 @@
         android:layout_marginTop="450dp"
         android:gravity="center_vertical"
         android:text="nothing is here"
-        android:textSize="15dp" />
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="47dp"
+        android:layout_height="wrap_content"
+        android:text="3" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:text="Button" />
 
 
 </FrameLayout>
