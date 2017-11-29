@@ -5,7 +5,14 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * Created by Preston on 11/17/2017.
+ *  A class that holds the needed member variables and functions to allow consistently over the
+ *  app for the user.
+ *
+ *  This class hols the Users name, coupleID, list of goals and some important dates. This class
+ *  will help with consistency over the whole application, giving easy access to needed data.
+ *
+ *  @author Preston Higgins
+ *
  */
 
 public class User {

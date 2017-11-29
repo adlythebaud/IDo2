@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.mycabbages.teamavatar.ido2.R;
 
@@ -12,6 +13,8 @@ import com.mycabbages.teamavatar.ido2.R;
  */
 
 public class GoalsFragment extends BaseFragment {
+
+
 
     public static GoalsFragment create() {
         return new GoalsFragment();
@@ -26,4 +29,7 @@ public class GoalsFragment extends BaseFragment {
     public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
     }
+
+
+
 }

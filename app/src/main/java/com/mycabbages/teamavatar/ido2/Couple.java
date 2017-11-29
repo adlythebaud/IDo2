@@ -3,9 +3,13 @@ package com.mycabbages.teamavatar.ido2;
 import android.app.Activity;
 import android.util.Log;
 
+
+
+
+import java.util.TreeMap;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -30,7 +34,7 @@ public class Couple {
         spouse2 = null;
         _coupleChat = null;
         _anniversary = null;
-        _importantDates = new HashMap<>();
+        _importantDates = new TreeMap<String, Goal>();
         _pushNotifications = new ArrayList<PushNotification>();
         _coupleID = "";
     }
@@ -40,7 +44,7 @@ public class Couple {
         this.spouse2 = spouse2;
         _anniversary = anniversary;
         _coupleChat = coupleChat;
-        _importantDates = new HashMap<>();
+        _importantDates = new TreeMap<String, Goal>();
         _pushNotifications = new ArrayList<PushNotification>();
         _coupleID = coupleID;
     }

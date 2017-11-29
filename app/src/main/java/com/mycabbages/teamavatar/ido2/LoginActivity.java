@@ -22,11 +22,16 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.UUID;
 
+
 /**
  * LOGIN ACTIVITY
  *
  *
  */
+import java.io.FileNotFoundException;
+import java.util.Calendar;
+
+
 public class LoginActivity extends AppCompatActivity {
     public final static String LOGINLOG = "Login_log";
 
@@ -250,5 +255,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
 
+    }
+
+
+    public void testnotification(View v)throws FileNotFoundException{
+        ReadWrite data = new ReadWrite();
+        pushImplimentation check = new pushImplimentation();
+        Calendar calendar = Calendar.getInstance();
+        data.addNotification(getApplicationContext(),"TEST3", "YIPPY3!!!!!!", calendar.getTimeInMillis()+ 200000);
+        check.alarmSet(getApplicationContext());
+       //check.checkNotifications(getApplicationContext());
     }
 }

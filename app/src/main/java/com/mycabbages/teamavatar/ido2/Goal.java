@@ -1,9 +1,10 @@
 package com.mycabbages.teamavatar.ido2;
 
+
 import java.util.Date;
 
 /**
- * Created by Preston on 11/17/2017.
+ * Created by Conrad on 11/3/2017.
  */
 
 public class Goal {
