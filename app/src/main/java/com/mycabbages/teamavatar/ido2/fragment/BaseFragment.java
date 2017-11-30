@@ -25,6 +25,8 @@ public abstract class BaseFragment extends Fragment {
         return mRoot;
     }
 
+    public abstract void init();
+
     @LayoutRes
     public abstract int getLayoutResId();
 

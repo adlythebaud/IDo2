@@ -12,7 +12,7 @@ public class TextMessage {
     private long messageTime;
 
     // Constructors
-    TextMessage() {
+    public TextMessage() {
         messageText = "";
         messageUser = "";
 
@@ -20,7 +20,7 @@ public class TextMessage {
         messageTime = 0;
     }
 
-    TextMessage(String messageText, String messageUser) {
+    public TextMessage(String messageText, String messageUser) {
         messageText = messageText;
         messageUser = messageUser;
 

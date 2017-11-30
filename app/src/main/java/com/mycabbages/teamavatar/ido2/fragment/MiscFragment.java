@@ -18,6 +18,11 @@ public class MiscFragment extends BaseFragment {
     }
 
     @Override
+    public void init() {
+
+    }
+
+    @Override
     public int getLayoutResId() {
         return R.layout.fragment_misc;
     }
