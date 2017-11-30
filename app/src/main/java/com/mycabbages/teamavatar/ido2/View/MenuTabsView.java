@@ -2,11 +2,13 @@ package com.mycabbages.teamavatar.ido2.View;
 
 import android.animation.ArgbEvaluator;
 import android.content.Context;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,7 @@ import com.mycabbages.teamavatar.ido2.R;
  */
 
 public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeListener{
+    final static String cameraLog = "Camera_log";
 
     private ImageView mCenterImage;
     private ImageView mStartImage;
@@ -90,10 +93,10 @@ public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeL
 
     private void init() {
         LayoutInflater.from(getContext()).inflate(R.layout.view_menu_tabs,this, true);
-        mCenterImage =(ImageView) findViewById(R.id.vmt_center_image);
-        mStartImage =(ImageView) findViewById(R.id.vmt_start_image);
-        mBottomImage =(ImageView) findViewById(R.id.vmt_bottom_image);
-        mEndImage =(ImageView) findViewById(R.id.vmt_end_image);
+        mCenterImage = findViewById(R.id.vmt_center_image);
+        mStartImage = findViewById(R.id.vmt_start_image);
+        mBottomImage = findViewById(R.id.vmt_bottom_image);
+        mEndImage = findViewById(R.id.vmt_end_image);
         mIndicator = findViewById(R.id.vmt_indicator);
 
         argbEvaluator = new ArgbEvaluator();
@@ -132,6 +135,8 @@ public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeL
             mIndicator.setTranslationX(positionOffset * indicatorTranslationX);
         } else if (position == 2) {
             mCenterImage.setVisibility(View.VISIBLE);
+        } else if (position == 3) {
+            mCenterImage.setVisibility(View.INVISIBLE);
         }
     }
 

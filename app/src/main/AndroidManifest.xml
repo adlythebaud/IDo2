@@ -28,4 +28,7 @@
         <receiver android:name="com.mycabbages.teamavatar.ido2.PushIt" />
     </application>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-feature android:name="android.hardware.camera2."/>
 </manifest>

@@ -1,5 +1,6 @@
 package com.mycabbages.teamavatar.ido2.fragment;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
