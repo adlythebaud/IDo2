@@ -34,9 +34,6 @@ public class MainActivity extends AppCompatActivity {
         MenuTabsView menuTabsView = (MenuTabsView) findViewById(R.id.am_menu_tabs);
         menuTabsView.setUpWithViewPager(viewPager);
 
-        final int colorBlue = ContextCompat.getColor(this, R.color.light_blue);
-        final int colorPurple = ContextCompat.getColor(this, R.color.light_purple);
-
         user = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
