@@ -6,31 +6,29 @@ import java.util.Date;
  * Created by Preston on 11/17/2017.
  */
 
-public class SnapMessage implements Message {
-    private User _receivingUser;
-    private User _sendingUser;
-    private long _timeSnapRecieved;
-    private long _timeSnapSent;
+public class SnapMessage {
+    private User receivingUser;
+    private User sendingUser;
+    private long messageTime;
 
     SnapMessage() {
-        _receivingUser = null;
-        _sendingUser = null;
-        _timeSnapRecieved = (long)0.0;
-        _timeSnapSent = (long)0.0;
+        receivingUser = null;
+        sendingUser = null;
+
+        // Initialize to current time
+        messageTime = 0;
     }
 
     SnapMessage(User receivingUser, User sendingUser) {
-        _receivingUser = receivingUser;
-        _sendingUser = sendingUser;
-        _timeSnapRecieved = (long)0.0;
-        _timeSnapSent = (long)0.0;
+        receivingUser = receivingUser;
+        sendingUser = sendingUser;
+
+        // Initialize to current time
+        messageTime = new Date().getTime();
     }
 
-    public Date getDateSent() { return new Date(_timeSnapSent); }
-    public void setDateSent(Date dateSent) { _timeSnapSent = dateSent.getTime(); }
 
-    public Date getDateReceived() { return new Date(_timeSnapRecieved); }
-    public void setDateReceived(Date dateRecived) {_timeSnapRecieved = dateRecived.getTime(); }
+    public void sendMessage(String message){
 
-    public void sendMessage(String message) {}
+    }
 }

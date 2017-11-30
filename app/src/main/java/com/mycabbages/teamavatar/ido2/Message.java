@@ -8,8 +8,9 @@ import java.util.Date;
 
 public interface Message {
     public void sendMessage(String message);
-    public Date getDateSent();
-    public void setDateSent(Date dateSent);
-    public Date getDateReceived();
-    public void setDateReceived(Date dateRecived);
+
+    // Getters and setters
+    public long getMessageTime();
+    public void setMessageTime(long messageTime);
+
 }
