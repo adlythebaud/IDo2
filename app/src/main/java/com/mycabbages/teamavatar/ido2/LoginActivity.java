@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -52,7 +53,12 @@ public class LoginActivity extends AppCompatActivity {
 
         // set your DatabaseReference object to our current database.
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
+//        EditText firstNameET     = (EditText)findViewById(R.id.firstNameEditText);
+//        EditText lastNameET      = (EditText)findViewById(R.id.lastNameEditText);
+//        EditText coupleIDET      = (EditText)findViewById(R.id.coupleIDEditText);
+//        firstNameET.setVisibility(View.INVISIBLE);
+//        lastNameET.setVisibility(View.INVISIBLE);
+//        coupleIDET.setVisibility(View.INVISIBLE);
         // now all calls to FirebaseDatabase are called with mDatabase.
     }
 
@@ -155,6 +161,42 @@ public class LoginActivity extends AppCompatActivity {
      * Specific method that's called from sign up button on UI.
      * @param view
      */
+
+    public void cancelButton(View v){
+
+        EditText firstNameET     = (EditText)findViewById(R.id.firstNameEditText);
+        EditText lastNameET      = (EditText)findViewById(R.id.lastNameEditText);
+        EditText coupleIDET      = (EditText)findViewById(R.id.coupleIDEditText);
+        Button registerButton      = (Button)findViewById(R.id.RegisterButton);
+        Button signUp      = (Button)findViewById(R.id.signUp);
+        Button cancel      = (Button)findViewById(R.id.CancelButton);
+        Button signin      = (Button)findViewById(R.id.signIn);
+        signin.setVisibility(View.VISIBLE);
+        cancel.setVisibility(View.INVISIBLE);
+        firstNameET.setVisibility(View.INVISIBLE);
+        lastNameET.setVisibility(View.INVISIBLE);
+        coupleIDET.setVisibility(View.INVISIBLE);
+        registerButton.setVisibility(View.VISIBLE);
+        signUp.setVisibility(View.INVISIBLE);
+
+    }
+    public void registerButton(View v){
+
+        EditText firstNameET     = (EditText)findViewById(R.id.firstNameEditText);
+        EditText lastNameET      = (EditText)findViewById(R.id.lastNameEditText);
+        EditText coupleIDET      = (EditText)findViewById(R.id.coupleIDEditText);
+        Button registerButton      = (Button)findViewById(R.id.RegisterButton);
+        Button signUp      = (Button)findViewById(R.id.signUp);
+        Button cancel      = (Button)findViewById(R.id.CancelButton);
+        Button signin      = (Button)findViewById(R.id.signIn);
+        signin.setVisibility(View.INVISIBLE);
+        cancel.setVisibility(View.VISIBLE);
+        firstNameET.setVisibility(View.VISIBLE);
+        lastNameET.setVisibility(View.VISIBLE);
+        coupleIDET.setVisibility(View.VISIBLE);
+        registerButton.setVisibility(View.INVISIBLE);
+        signUp.setVisibility(View.VISIBLE);
+    }
     public void registerNewUser(View view) {
         EditText firstNameET     = (EditText)findViewById(R.id.firstNameEditText);
         EditText lastNameET      = (EditText)findViewById(R.id.lastNameEditText);
