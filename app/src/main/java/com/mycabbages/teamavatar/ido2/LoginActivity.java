@@ -20,16 +20,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.FileNotFoundException;
+import java.util.Calendar;
 import java.util.UUID;
-
+import java.util.Vector;
 
 /**
  * LOGIN ACTIVITY
- *
- *
  */
-import java.io.FileNotFoundException;
-import java.util.Calendar;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -224,8 +222,17 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d(LOGINLOG, "adding new couple to firebase");
                     DatabaseReference coupleRef = mDatabase.child("couples").child(coupleID);
                     coupleRef.setValue(couple);
-                    coupleRef.child(coupleID).child("chat").push();
-                    coupleRef.child(coupleID).child("push notifications").push();
+
+                    DatabaseReference chatRef =  coupleRef.child("chat");
+//                  DatabaseReference notifRef = coupleRef.child(coupleID).child("push notifications").push();
+
+                    Vector <String> v = new Vector<>();
+                    v.add("Hello! this is a space where you can chat with your boo thang.");
+                    v.add("Send messages to your spouse about whatever you'd like");
+                    v.add("Don't worry, this is a private space.");
+
+                    chatRef.setValue(v);
+
                 }
             }
 
