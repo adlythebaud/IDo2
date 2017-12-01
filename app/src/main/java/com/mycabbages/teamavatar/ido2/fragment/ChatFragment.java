@@ -874,6 +874,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Acti
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.camera_capture: {
+                Log.d(TAG, "Picture was taken");
                 takePicture();
                 break;
             }
