@@ -14,6 +14,7 @@ import com.mycabbages.teamavatar.ido2.R;
 public class TextFragment extends BaseFragment {
 
     public static TextFragment create () { return new TextFragment(); }
+
     @Override
     public int getLayoutResId() { return R.layout.fragment_text;}
 

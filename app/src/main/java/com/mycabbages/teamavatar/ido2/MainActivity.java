@@ -1,24 +1,26 @@
 package com.mycabbages.teamavatar.ido2;
 
 
-import android.media.Image;
-import android.provider.ContactsContract;
-import android.app.Notification;
-import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.mycabbages.teamavatar.ido2.View.MenuTabsView;
 import com.mycabbages.teamavatar.ido2.adapter.MainPagerAdapter;
 
-import java.io.File;
-
 public class MainActivity extends AppCompatActivity {
+
+    private DatabaseReference mDatabase;
+    private FirebaseUser user;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +35,13 @@ public class MainActivity extends AppCompatActivity {
         MenuTabsView menuTabsView = (MenuTabsView) findViewById(R.id.am_menu_tabs);
         menuTabsView.setUpWithViewPager(viewPager);
 
-        final int colorBlue = ContextCompat.getColor(this, R.color.light_blue);
-        final int colorPurple = ContextCompat.getColor(this, R.color.light_purple);
-
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -54,9 +54,5 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-//
-
-
     }
-
 }

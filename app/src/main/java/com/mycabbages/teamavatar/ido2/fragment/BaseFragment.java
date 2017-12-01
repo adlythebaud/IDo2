@@ -1,5 +1,6 @@
 package com.mycabbages.teamavatar.ido2.fragment;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -14,8 +15,8 @@ import android.view.ViewGroup;
  */
 
 public abstract class BaseFragment extends Fragment {
-
     private View mRoot;
+
 
     @Nullable
     @Override
