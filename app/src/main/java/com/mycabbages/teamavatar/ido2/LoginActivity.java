@@ -227,12 +227,12 @@ public class LoginActivity extends AppCompatActivity {
 //                  DatabaseReference notifRef = coupleRef.child(coupleID).child("push notifications").push();
 
                     Vector <String> v = new Vector<>();
+
                     v.add("Hello! this is a space where you can chat with your boo thang.");
                     v.add("Send messages to your spouse about whatever you'd like");
                     v.add("Don't worry, this is a private space.");
 
                     chatRef.setValue(v);
-
                 }
             }
 
