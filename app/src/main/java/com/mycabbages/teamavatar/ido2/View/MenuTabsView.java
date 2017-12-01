@@ -82,13 +82,6 @@ public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeL
                 }
             }
         });
-
-        mCenterImage.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 
     private void init() {
@@ -118,7 +111,6 @@ public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeL
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         if (position == 0) {
-            mCenterImage.setVisibility(View.INVISIBLE);
             setColor(1 - positionOffset);
             moveViews(1 - positionOffset);
 
@@ -126,7 +118,6 @@ public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeL
 
             mIndicator.setTranslationX((positionOffset - 1) * indicatorTranslationX);
         } else if (position == 1) {
-            mCenterImage.setVisibility(View.INVISIBLE);
             setColor(positionOffset);
             moveViews(positionOffset);
 
@@ -134,9 +125,7 @@ public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeL
 
             mIndicator.setTranslationX(positionOffset * indicatorTranslationX);
         } else if (position == 2) {
-            mCenterImage.setVisibility(View.VISIBLE);
         } else if (position == 3) {
-            mCenterImage.setVisibility(View.INVISIBLE);
         }
     }
 
