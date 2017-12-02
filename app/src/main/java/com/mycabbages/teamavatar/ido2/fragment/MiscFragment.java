@@ -17,10 +17,6 @@ public class MiscFragment extends BaseFragment {
         return new MiscFragment();
     }
 
-    @Override
-    public void init() {
-
-    }
 
     @Override
     public int getLayoutResId() {
