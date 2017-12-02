@@ -21,15 +21,11 @@ public class TextMessage {
     }
 
     public TextMessage(String messageText, String messageUser) {
-        messageText = messageText;
-        messageUser = messageUser;
+        this.messageText = messageText;
+        this.messageUser = messageUser;
 
         // Initialize to current time
         messageTime = new Date().getTime();
-    }
-
-    public void sendMessage(String message) {
-
     }
 
     // Getters and Setters
