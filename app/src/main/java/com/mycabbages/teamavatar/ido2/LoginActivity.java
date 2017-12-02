@@ -274,6 +274,7 @@ public class LoginActivity extends AppCompatActivity {
                     v.add("Send messages to your spouse about whatever you'd like");
                     v.add("Don't worry, this is a private space.");
                     String message = new String();
+
                     message = "testMessage";
                     chatRef.setValue(message);
                 }
@@ -298,6 +299,8 @@ public class LoginActivity extends AppCompatActivity {
      * Start intent to go to next activity after successful login and sign up.
      */
     public void goToHome() {
+
+        // send coupleID and userID across activities.
         Intent intentToStartMainActivity = new Intent(LoginActivity.this,
                 MainActivity.class);
         startActivity(intentToStartMainActivity);
