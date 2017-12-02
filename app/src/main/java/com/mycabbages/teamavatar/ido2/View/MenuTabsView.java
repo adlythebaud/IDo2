@@ -126,6 +126,7 @@ public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeL
             mIndicator.setTranslationX(positionOffset * indicatorTranslationX);
         } else if (position == 2) {
         } else if (position == 3) {
+
         }
     }
 
