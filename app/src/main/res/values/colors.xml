@@ -18,4 +18,5 @@
     <color name="light_grey">#e0e0e0</color>
     <color name="dark_grey">#616161</color>
     <color name="card_background_color">@color/white</color>
+    <color name="control_background">#cc4285f4</color>
 </resources>

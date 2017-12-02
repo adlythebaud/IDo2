@@ -21,13 +21,6 @@ public class TextFragment extends BaseFragment {
 
     public static TextFragment create () { return new TextFragment(); }
 
-    // onCreate() for our TextFragment
-    public void init(){
-        Log.d("Text_Log", "Inside init!");
-
-
-    }
-
     @Override
     public int getLayoutResId() { return R.layout.fragment_text;}
 

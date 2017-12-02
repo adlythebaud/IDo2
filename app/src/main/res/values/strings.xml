@@ -5,4 +5,9 @@
     <string name="password">Password</string>
     <string name="sign_up">Sign Up</string>
     <string name="message_hint">Message</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="couple_id">Couple ID (Optional)</string>
+    <string name="request_permission">This sample needs camera permission</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 </resources>
