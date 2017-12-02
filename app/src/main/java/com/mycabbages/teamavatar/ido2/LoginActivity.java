@@ -157,7 +157,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * REGISTER NEW USER
      * Specific method that's called from sign up button on UI.
-     * @param view
+     * @param v
      */
 
     public void cancelButton(View v){
@@ -273,10 +273,8 @@ public class LoginActivity extends AppCompatActivity {
                     v.add("Hello! this is a space where you can chat with your boo thang.");
                     v.add("Send messages to your spouse about whatever you'd like");
                     v.add("Don't worry, this is a private space.");
-                    String message = new String();
 
-                    message = "testMessage";
-                    chatRef.setValue(message);
+                    chatRef.setValue(v);
                 }
             }
 
