@@ -25,8 +25,16 @@ public class TextFragment extends BaseFragment {
     public void init(){
         Log.d("Text_Log", "Inside init!");
 
+
+    }
+
+    @Override
+    public int getLayoutResId() { return R.layout.fragment_text;}
+
+    @Override
+    public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Causing crash. See Log Cat
-        /*FloatingActionButton fab = getActivity().findViewById(R.id.sendFab);
+        FloatingActionButton fab = root.findViewById(R.id.sendFab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,19 +48,12 @@ public class TextFragment extends BaseFragment {
                         .push()
                         .setValue(new TextMessage(input.getText().toString(),
                                 FirebaseAuth.getInstance().getCurrentUser()
-                                .getDisplayName()));
+                                        .getDisplayName()));
 
                 // clear the input
                 input.setText("");
             }
-        });*/
-    }
-
-    @Override
-    public int getLayoutResId() { return R.layout.fragment_text;}
-
-    @Override
-    public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        });
 
     }
 }
