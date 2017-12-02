@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mycabbages.teamavatar.ido2.R;
 import com.mycabbages.teamavatar.ido2.TextMessage;
@@ -19,6 +21,9 @@ import com.mycabbages.teamavatar.ido2.TextMessage;
 
 public class TextFragment extends BaseFragment {
 
+    private DatabaseReference mDatabase;
+    private FirebaseUser mUser;
+
     public static TextFragment create () { return new TextFragment(); }
 
     @Override
@@ -28,6 +33,10 @@ public class TextFragment extends BaseFragment {
     public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Causing crash. See Log Cat
         FloatingActionButton fab = root.findViewById(R.id.sendFab);
+
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        final String firstName = mDatabase.child("users").child(mUser.getUid()).child("firstName").toString();
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,8 +49,7 @@ public class TextFragment extends BaseFragment {
                         .getReference()
                         .push()
                         .setValue(new TextMessage(input.getText().toString(),
-                                FirebaseAuth.getInstance().getCurrentUser()
-                                        .getDisplayName()));
+                                firstName));
 
                 // clear the input
                 input.setText("");
