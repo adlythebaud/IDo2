@@ -235,6 +235,9 @@ public class LoginActivity extends AppCompatActivity {
 
         // create a new reference under the users in FB, add the user to the database
         DatabaseReference userRef = mDatabase.child("users").push();
+
+        // You can change the users ID to be their email address.
+        // DatabaseReference userRef = mDatabase.child("users").child(user.getEmail());
         userRef.setValue(user);
 
 
@@ -268,11 +271,16 @@ public class LoginActivity extends AppCompatActivity {
                     DatabaseReference chatRef =  coupleRef.child("chat");
 //                  DatabaseReference notifRef = coupleRef.child(coupleID).child("push notifications").push();
 
-                    Vector <String> v = new Vector<>();
+                    Vector <TextMessage> v = new Vector<>();
 
-                    v.add("Hello! this is a space where you can chat with your boo thang.");
-                    v.add("Send messages to your spouse about whatever you'd like");
-                    v.add("Don't worry, this is a private space.");
+//                    v.add("Hello! this is a space where you can chat with your boo thang.");
+//                    v.add("Send messages to your spouse about whatever you'd like");
+//                    v.add("Don't worry, this is a private space.");
+
+
+
+                    TextMessage tm = new TextMessage("test message", user.getFirstName());
+                    v.add(tm);
 
                     chatRef.setValue(v);
                 }
