@@ -39,7 +39,6 @@
         android:hint="@string/message_hint"
         android:inputType="textPersonName"
         android:visibility="visible"
-        android:windowSoftInputMode="adjustResize|adjustPan"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/messageList"
         app:layout_constraintTop_toBottomOf="@+id/messageList"

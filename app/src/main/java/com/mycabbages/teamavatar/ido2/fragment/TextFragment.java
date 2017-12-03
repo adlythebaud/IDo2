@@ -38,10 +38,8 @@ public class TextFragment extends BaseFragment {
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-
-
-        final String uUID = mDatabase.child("users").child(mUser.getUid()).toString();
-        Log.d("TextFragment", "firstName found: " + uUID);
+        /*final String uUID = mDatabase.child("users").child(mUser.getUid()).toString();
+        Log.d("TextFragment", "firstName found: " + uUID);*/
 
         final String firstName = mDatabase.child("users").child(mUser.getUid()).child("firstName").toString();
         Log.d("TextFragment", "firstName found: " + firstName);
@@ -50,14 +48,15 @@ public class TextFragment extends BaseFragment {
 //        Log.d("TextFragment", "CoupleID found: " + coupleID);
 
 //        final DatabaseReference coupleChatRef = mDatabase.child("couples").child(coupleID).child("chat").push();
-        final String coupleID = mDatabase.child("users").child(mUser.getEmail()).child("coupleID").toString();
-        Log.d("TextFragment", "CoupleID found: " + coupleID);
+        //final String coupleID = mDatabase.child("users").child(mUser.getEmail()).child("coupleID").toString();
+        //Log.d("TextFragment", "CoupleID found: " + coupleID);
 
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EditText input = getActivity().findViewById(R.id.messageBox);
+
 
                 getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
