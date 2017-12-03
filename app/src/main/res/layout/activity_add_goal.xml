@@ -8,4 +8,107 @@
     android:background="@color/light_blue"
     tools:context="com.mycabbages.teamavatar.ido2.AddGoalActivity">
 
+    <EditText
+        android:id="@+id/MonthEditText"
+        android:layout_width="80dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/month_hint"
+        android:inputType="date"
+        app:layout_constraintEnd_toStartOf="@+id/DayEditText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/MonthTextView"
+        app:layout_constraintTop_toBottomOf="@+id/MonthTextView" />
+
+    <TextView
+        android:id="@+id/MonthTextView"
+        android:layout_width="65dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/pick_month"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="244dp" />
+
+    <TextView
+        android:id="@+id/YearTextView"
+        android:layout_width="65dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginStart="64dp"
+        android:text="@string/pick_year"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/DayTextView"
+        tools:layout_editor_absoluteY="244dp" />
+
+    <EditText
+        android:id="@+id/YearEditText"
+        android:layout_width="80dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="124dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/year_hint"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/YearTextView"
+        app:layout_constraintTop_toBottomOf="@+id/YearTextView" />
+
+    <TextView
+        android:id="@+id/DayTextView"
+        android:layout_width="65dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="64dp"
+        android:text="@string/pick_day"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/MonthTextView"
+        tools:layout_editor_absoluteY="244dp" />
+
+    <EditText
+        android:id="@+id/DayEditText"
+        android:layout_width="80dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/day_hint"
+        android:inputType="date"
+        app:layout_constraintEnd_toStartOf="@+id/YearEditText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/DayTextView"
+        app:layout_constraintTop_toBottomOf="@+id/DayTextView" />
+
+    <TextView
+        android:id="@+id/GoalTextView"
+        android:layout_width="77dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/goal"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/GoalEditText"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/goal_hint"
+        android:inputType="textShortMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/GoalTextView"
+        app:layout_constraintTop_toBottomOf="@+id/GoalTextView" />
+
 </android.support.constraint.ConstraintLayout>
