@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,7 +32,7 @@ public class TextFragment extends BaseFragment {
 
     @Override
     public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Causing crash. See Log Cat
+
         FloatingActionButton fab = root.findViewById(R.id.sendFab);
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -42,6 +43,8 @@ public class TextFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 EditText input = getActivity().findViewById(R.id.messageBox);
+
+                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
                 // Read the input field and push a new instance
                 // of TextMessage to the Firebase database
