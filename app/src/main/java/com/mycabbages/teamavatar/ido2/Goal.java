@@ -8,15 +8,16 @@ import java.util.Date;
  */
 
 public class Goal {
-    private Date date;
+    private long startDate;
     private String title;
     private Boolean completed;
+    private long endDate;
 
-    public Date getDate(){
-        return date;
+    public long getStartDate(){
+        return startDate;
     }
-    public void setDate(Date date){
-        this.date = date;
+    public void setStartDate(long startDate){
+        this.startDate = startDate;
     }
 
     public String getGoalTitle() { return title; }
@@ -27,4 +28,9 @@ public class Goal {
     public boolean getCompleted(){ return completed; }
     public void setCompleted(Boolean completed) { this.completed = completed; }
 
+    public long getEndDate() {return endDate;}
+
+    public void setEndDate(long endDate) {
+        this.endDate = endDate;
+    }
 }
