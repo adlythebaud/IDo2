@@ -36,22 +36,20 @@ public class TextFragment extends BaseFragment {
         FloatingActionButton fab = root.findViewById(R.id.sendFab);
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
 
+        //TODO: remove https://ido2-18f4f.firebaseio.com/users/ from the uUID variable
         final String uUID = mDatabase.child("users").child(mUser.getUid()).toString();
         Log.d("TextFragment", "firstName found: " + uUID);
+        // this will give you: https://ido2-18f4f.firebaseio.com/users/F5KkF3x5tnbGoUqp9XjHN78Cf4I2
 
-        final String firstName = mDatabase.child("users").child(mUser.getUid()).child("firstName").toString();
-        Log.d("TextFragment", "firstName found: " + firstName);
 
-//        final String coupleID = mDatabase.child("users").child(mUser.getUid()).child("coupleID").toString();
-//        Log.d("TextFragment", "CoupleID found: " + coupleID);
 
 //        final DatabaseReference coupleChatRef = mDatabase.child("couples").child(coupleID).child("chat").push();
-        final String coupleID = mDatabase.child("users").child(mUser.getEmail()).child("coupleID").toString();
-        Log.d("TextFragment", "CoupleID found: " + coupleID);
+
 
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -72,10 +70,11 @@ public class TextFragment extends BaseFragment {
                         .setValue(new TextMessage(input.getText().toString(),
                                 mUser.getEmail()));
 
+
+
                 // clear the input
                 input.setText("");
             }
         });
-
     }
 }

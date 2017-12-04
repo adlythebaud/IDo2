@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth myAuth;
     public FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;        // this is our database reference.
+    private FirebaseUser mUser;
 
 
     @Override
@@ -233,8 +234,9 @@ public class LoginActivity extends AppCompatActivity {
 
         final Couple couple = new Couple(user.getLastName(), user, null, null);
 
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
         // create a new reference under the users in FB, add the user to the database
-        DatabaseReference userRef = mDatabase.child("users").push();
+        DatabaseReference userRef = mDatabase.child("users").child(mUser.getUid().toString());
 
         // You can change the users ID to be their email address.
         // DatabaseReference userRef = mDatabase.child("users").child(user.getEmail());
@@ -283,6 +285,7 @@ public class LoginActivity extends AppCompatActivity {
                     v.add(tm);
 
                     chatRef.setValue(v);
+
                 }
             }
 
