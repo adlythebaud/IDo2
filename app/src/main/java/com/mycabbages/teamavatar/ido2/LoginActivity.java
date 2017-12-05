@@ -195,6 +195,7 @@ public class LoginActivity extends AppCompatActivity {
         registerButton.setVisibility(View.INVISIBLE);
         signUp.setVisibility(View.VISIBLE);
     }
+
     public void registerNewUser(View view) {
         EditText firstNameET     = (EditText)findViewById(R.id.firstNameEditText);
         EditText lastNameET      = (EditText)findViewById(R.id.lastNameEditText);
