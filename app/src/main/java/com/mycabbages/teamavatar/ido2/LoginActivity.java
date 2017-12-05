@@ -157,7 +157,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * REGISTER NEW USER
      * Specific method that's called from sign up button on UI.
-     * @param view
+     * @param v
      */
 
     public void cancelButton(View v){
@@ -226,7 +226,11 @@ public class LoginActivity extends AppCompatActivity {
      */
     public void addUserToDatabase(String firstName, String lastName, final String coupleID, String email) {
         // create a user object.
-        final User user = new User(firstName, lastName, coupleID, email);
+        final User user = User.getInstance();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setCoupleID(coupleID);
+        user.setEmail(email);
 
         // create a couple object. Assume the user is always the husband for now...
 
