@@ -11,8 +11,11 @@ import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mycabbages.teamavatar.ido2.R;
 import com.mycabbages.teamavatar.ido2.TextMessage;
 
@@ -24,6 +27,9 @@ public class TextFragment extends BaseFragment {
 
     private DatabaseReference mDatabase;
     private FirebaseUser mUser;
+    private DatabaseReference coupleChatRef;
+    private String coupleID;
+    private String uUID;
 
     public static TextFragment create () { return new TextFragment(); }
 
@@ -36,50 +42,74 @@ public class TextFragment extends BaseFragment {
         FloatingActionButton fab = root.findViewById(R.id.sendFab);
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
-
-
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
-
-
-
-
         // get users uUID.
-        final String uUID = mUser.getUid();
+        uUID = mUser.getUid();
         Log.d("TextFragment", "uUID found: " + uUID);
-
 
         //TODO: use .getRef to get a reference to a location in a database...
 
-
-
-
+        coupleID = getCoupleID();
+        final DatabaseReference newChatMessageRef = mDatabase.child("couples").child(coupleID).child("chat").push();
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EditText input = getActivity().findViewById(R.id.messageBox);
 
-                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.
+                        SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
                 // Read the input field and push a new instance
                 // of TextMessage to the Firebase database
 
-
-
-                FirebaseDatabase.getInstance()
-                        .getReference()
-                        .push()
-                        .setValue(new TextMessage(input.getText().toString(),
-                                mUser.getEmail()));
-
-                //TODO: push to the child of a couple's chat
-
-
+                newChatMessageRef.setValue(new TextMessage(input.getText().toString(),
+                        mUser.getEmail()));
 
                 // clear the input
                 input.setText("");
             }
         });
     }
+
+    public void sendMessage(View view) {
+        EditText input = getActivity().findViewById(R.id.messageBox);
+        getActivity().getWindow().setSoftInputMode
+                (WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
+                        |WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+
+
+    }
+
+    public String getCoupleID() {
+        mDatabase.child("users").child(uUID).child("coupleID").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                try {
+                    if (dataSnapshot.getValue() != null) {
+                        try {
+                            coupleID = dataSnapshot.getValue().toString();
+                            Log.d("TextFragment", "coupleID found: " + coupleID);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Log.d("TextFragment", "no value present for " + mUser.getEmail() + "'s coupleID");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("TextFragment", "cancelled to read coupleID");
+            }
+        });
+
+        String theCoupleID = coupleID;
+        return theCoupleID;
+    }
+
+
 }
