@@ -11,6 +11,14 @@ import android.widget.Spinner;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+/**
+ * Allows for the user to add a new goal to be reminded of on a later date and time.
+ *
+ * Controls all the error handling and validating for the user to add goals to their app. This
+ * activity will handle all the validating to make sure it is passed the current date and time.
+ *
+ * @author Preston Higgins
+ */
 public class AddGoalActivity extends AppCompatActivity {
     static final String TAG = "Add_goal";
 
@@ -21,6 +29,7 @@ public class AddGoalActivity extends AppCompatActivity {
     }
 
     public void validate(View view) {
+        // Retrieve all the views that hold the users input
         EditText goalEditText   = (EditText) findViewById(R.id.GoalEditText);
         Spinner monthSpin       = (Spinner) findViewById(R.id.month_spinner);
         Spinner daySpin         = (Spinner) findViewById(R.id.day_spinner);
@@ -29,6 +38,7 @@ public class AddGoalActivity extends AppCompatActivity {
         Spinner minuteSpin      = (Spinner) findViewById(R.id.minute_spinner);
         Spinner ampmSpin        = (Spinner) findViewById(R.id.am_pm);
 
+        // Pull the users input out of each view component
         String goalTitle    = goalEditText.getText().toString();
         //Subtract 1 from the month for the calendar (Jan == 0 and Dec == 1) according to calendar
         int goalMonth    = Integer.parseInt(monthSpin.getSelectedItem().toString()) - 1;
@@ -38,7 +48,7 @@ public class AddGoalActivity extends AppCompatActivity {
         int goalMinute   = Integer.parseInt(minuteSpin.getSelectedItem().toString());
         String goalAmpm     = ampmSpin.getSelectedItem().toString();
 
-        // If the selection is PM add 12 hours so the calendar knows its PM
+        // If the selection is PM add 12 hours so the GregorianCalender class knows its PM
         if (goalAmpm.equals("PM")) {
             goalHour += 12;
         }
@@ -60,9 +70,12 @@ public class AddGoalActivity extends AppCompatActivity {
         Log.d(TAG, "C_Hour: " + String.valueOf(newGoal.get(Calendar.HOUR_OF_DAY)));
         Log.d(TAG, "C_Minute: " + String.valueOf(newGoal.get(Calendar.MINUTE)));
         Log.d(TAG, "C_AM or PM: " + String.valueOf(newGoal.get(Calendar.AM_PM)));
+
+        //TODO: Add the ability for all the info to be added into the users goals
     }
 
     public void cancel(View view) {
+        // Return to the MainActivity if the user cancels
         Intent intentToStartMainActivity = new Intent(AddGoalActivity.this,
                 MainActivity.class);
         startActivity(intentToStartMainActivity);
