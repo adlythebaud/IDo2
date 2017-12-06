@@ -67,15 +67,7 @@ public class TextFragment extends BaseFragment {
             }
         });
     }
-
-    public void sendMessage(View view) {
-        EditText input = getActivity().findViewById(R.id.messageBox);
-        getActivity().getWindow().setSoftInputMode
-                (WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
-                        |WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
-    }
-
+    
     /**
      * GET COUPLE ID
      *  Return coupleID of current user.
