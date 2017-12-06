@@ -39,19 +39,15 @@ public class TextFragment extends BaseFragment {
     @Override
     public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        FloatingActionButton fab = root.findViewById(R.id.sendFab);
-
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        // get users uUID.
-        uUID = mUser.getUid();
-        Log.d("TextFragment", "uUID found: " + uUID);
 
-        //TODO: use .getRef to get a reference to a location in a database...
+        uUID = mUser.getUid();
 
         coupleID = getCoupleID();
         final DatabaseReference newChatMessageRef = mDatabase.child("couples").child(coupleID).child("chat").push();
 
+        FloatingActionButton fab = root.findViewById(R.id.sendFab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,10 +74,12 @@ public class TextFragment extends BaseFragment {
                 (WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
                         |WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-
-
     }
 
+    /**
+     * GET COUPLE ID
+     *  Return coupleID of current user.
+     */
     public String getCoupleID() {
         mDatabase.child("users").child(uUID).child("coupleID").addValueEventListener(new ValueEventListener() {
             @Override
