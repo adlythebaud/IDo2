@@ -6,31 +6,47 @@ import java.util.Date;
  * Created by Preston on 11/17/2017.
  */
 
-public class TextMessage implements Message {
-    private String _messageText;
-    private String _messageUser;
-    private long _timeTextReceived;
-    private long _timeTextSent;
+public class TextMessage {
+    private String messageText;
+    private String messageUser;
+    private long messageTime;
 
-    TextMessage() {
-        _messageText = "";
-        _messageUser = "";
-        _timeTextReceived = (long) 0.0;
-        _timeTextSent = (long) 0.0;
+    // Constructors
+    public TextMessage() {
+        messageText = "";
+        messageUser = "";
+
+        // Initialize to current time
+        messageTime = 0;
     }
 
-    TextMessage(String messageText, String messageUser) {
-        _messageText = messageText;
-        _messageUser = messageUser;
-        _timeTextReceived = (long) 0.0;
-        _timeTextSent = (long) 0.0;
+    public TextMessage(String messageText, String messageUser) {
+        this.messageText = messageText;
+        this.messageUser = messageUser;
+
+        // Initialize to current time
+        messageTime = new Date().getTime();
     }
 
-    public void setDateReceived(Date dateReceived) { _timeTextReceived = dateReceived.getTime(); }
-    public Date getDateReceived() { return new Date(_timeTextReceived); }
+    // Getters and Setters
+    public String getMessageUser() {
+        return messageUser;
+    }
+    public void setMessageUser(String messageUser) {
+        this.messageText = messageUser;
+    }
 
-    public Date getDateSent() { return new Date(_timeTextSent); }
-    public void setDateSent(Date dateSent) { _timeTextSent = dateSent.getTime(); }
+    public String getMessageText() {
+        return messageText;
+    }
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
+    }
 
-    public void sendMessage(String message) {}
+    public long getMessageTime() {
+        return messageTime;
+    }
+    public void setMessageTime(long messageTime) {
+        this.messageTime = messageTime;
+    }
 }

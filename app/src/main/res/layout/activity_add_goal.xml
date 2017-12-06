@@ -8,107 +8,190 @@
     android:background="@color/light_blue"
     tools:context="com.mycabbages.teamavatar.ido2.AddGoalActivity">
 
-    <EditText
-        android:id="@+id/MonthEditText"
-        android:layout_width="80dp"
-        android:layout_height="42dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/month_hint"
-        android:inputType="date"
-        app:layout_constraintEnd_toStartOf="@+id/DayEditText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/MonthTextView"
-        app:layout_constraintTop_toBottomOf="@+id/MonthTextView" />
-
-    <TextView
-        android:id="@+id/MonthTextView"
-        android:layout_width="65dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="16dp"
-        android:text="@string/pick_month"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="244dp" />
-
-    <TextView
-        android:id="@+id/YearTextView"
-        android:layout_width="65dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginStart="64dp"
-        android:text="@string/pick_year"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/DayTextView"
-        tools:layout_editor_absoluteY="244dp" />
-
-    <EditText
-        android:id="@+id/YearEditText"
-        android:layout_width="80dp"
-        android:layout_height="42dp"
-        android:layout_marginEnd="124dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/year_hint"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/YearTextView"
-        app:layout_constraintTop_toBottomOf="@+id/YearTextView" />
-
-    <TextView
-        android:id="@+id/DayTextView"
-        android:layout_width="65dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="64dp"
-        android:text="@string/pick_day"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/MonthTextView"
-        tools:layout_editor_absoluteY="244dp" />
-
-    <EditText
-        android:id="@+id/DayEditText"
-        android:layout_width="80dp"
-        android:layout_height="42dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/day_hint"
-        android:inputType="date"
-        app:layout_constraintEnd_toStartOf="@+id/YearEditText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/DayTextView"
-        app:layout_constraintTop_toBottomOf="@+id/DayTextView" />
-
     <TextView
         android:id="@+id/GoalTextView"
         android:layout_width="77dp"
         android:layout_height="29dp"
+        android:layout_marginEnd="318dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/goal"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/GoalEditText"
         android:layout_width="370dp"
-        android:layout_height="wrap_content"
+        android:layout_height="42dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/goal_hint"
         android:inputType="textShortMessage"
+        android:maxLength="100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/GoalTextView"
         app:layout_constraintTop_toBottomOf="@+id/GoalTextView" />
+
+    <TextView
+        android:id="@+id/MonthTextView"
+        android:layout_width="65dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="68dp"
+        android:text="@string/pick_month"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/GoalEditText" />
+
+    <TextView
+        android:id="@+id/YearTextView"
+        android:layout_width="42dp"
+        android:layout_height="29dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="68dp"
+        android:text="@string/pick_year"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toEndOf="@+id/DayTextView"
+        app:layout_constraintTop_toBottomOf="@+id/GoalEditText" />
+
+    <TextView
+        android:id="@+id/DayTextView"
+        android:layout_width="39dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="68dp"
+        android:text="@string/pick_day"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/MonthTextView"
+        app:layout_constraintTop_toBottomOf="@+id/GoalEditText" />
+
+    <TextView
+        android:id="@+id/HourTextView"
+        android:layout_width="65dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/pick_hour"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/day_spinner" />
+
+    <TextView
+        android:id="@+id/MinuteTextView"
+        android:layout_width="67dp"
+        android:layout_height="29dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/pick_minute"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.251"
+        app:layout_constraintStart_toEndOf="@+id/HourTextView"
+        app:layout_constraintTop_toBottomOf="@+id/day_spinner" />
+
+    <Button
+        android:id="@+id/addGoal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="252dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="validate"
+        android:text="@string/add_goal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/minute_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/minute_spinner" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="252dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/cancel"
+        android:onClick="cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/hour_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/hour_spinner" />
+
+    <Spinner
+        android:id="@+id/month_spinner"
+        android:layout_width="90dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="8dp"
+        android:entries="@array/month_entries"
+        android:verticalScrollbarPosition="left"
+        app:layout_constraintEnd_toStartOf="@+id/day_spinner"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/MonthTextView"
+        app:layout_constraintTop_toBottomOf="@+id/MonthTextView" />
+
+    <Spinner
+        android:id="@+id/day_spinner"
+        android:layout_width="90dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="8dp"
+        android:entries="@array/day_entries1"
+        app:layout_constraintEnd_toStartOf="@+id/year_spinner"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/DayTextView"
+        app:layout_constraintTop_toBottomOf="@+id/DayTextView" />
+
+    <Spinner
+        android:id="@+id/year_spinner"
+        android:layout_width="110dp"
+        android:layout_height="27dp"
+        android:entries="@array/year_entries"
+        app:layout_constraintStart_toStartOf="@+id/YearTextView"
+        app:layout_constraintTop_toBottomOf="@+id/YearTextView" />
+
+    <Spinner
+        android:id="@+id/hour_spinner"
+        android:layout_width="90dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="8dp"
+        android:entries="@array/month_entries"
+        app:layout_constraintEnd_toStartOf="@+id/minute_spinner"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/HourTextView"
+        app:layout_constraintTop_toBottomOf="@+id/HourTextView" />
+
+    <Spinner
+        android:id="@+id/minute_spinner"
+        android:layout_width="90dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="8dp"
+        android:entries="@array/minute_entries"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/MinuteTextView"
+        app:layout_constraintTop_toBottomOf="@+id/MinuteTextView" />
+
+    <Spinner
+        android:id="@+id/am_pm"
+        android:layout_width="90dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="64dp"
+        android:entries="@array/am_pm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/MinuteTextView"
+        app:layout_constraintTop_toBottomOf="@+id/day_spinner" />
 
 </android.support.constraint.ConstraintLayout>

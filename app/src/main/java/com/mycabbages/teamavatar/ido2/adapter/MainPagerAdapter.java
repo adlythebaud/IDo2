@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
+import com.mycabbages.teamavatar.ido2.fragment.BaseFragment;
 import com.mycabbages.teamavatar.ido2.fragment.ChatFragment;
 import com.mycabbages.teamavatar.ido2.fragment.GoalsFragment;
 import com.mycabbages.teamavatar.ido2.fragment.MiscFragment;

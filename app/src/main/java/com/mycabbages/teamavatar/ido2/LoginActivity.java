@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth myAuth;
     public FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;        // this is our database reference.
+    private FirebaseUser mUser;
 
 
     @Override
@@ -100,6 +101,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(LOGINLOG, "signInWithEmail:success");
+
+//                          //TODO: make user object
+
                             goToHome();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -157,7 +161,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * REGISTER NEW USER
      * Specific method that's called from sign up button on UI.
-     * @param view
+     * @param v
      */
 
     public void cancelButton(View v){
@@ -195,6 +199,7 @@ public class LoginActivity extends AppCompatActivity {
         registerButton.setVisibility(View.INVISIBLE);
         signUp.setVisibility(View.VISIBLE);
     }
+
     public void registerNewUser(View view) {
         EditText firstNameET     = (EditText)findViewById(R.id.firstNameEditText);
         EditText lastNameET      = (EditText)findViewById(R.id.lastNameEditText);
@@ -225,16 +230,23 @@ public class LoginActivity extends AppCompatActivity {
      */
     public void addUserToDatabase(String firstName, String lastName, final String coupleID, String email) {
         // create a user object.
+//        final User user = User.getInstance();
+//        user.setFirstName(firstName);
+//        user.setLastName(lastName);
+//        user.setCoupleID(coupleID);
+//        user.setEmail(email);
+
         final User user = new User(firstName, lastName, coupleID, email);
 
         // create a couple object. Assume the user is always the husband for now...
-
-        final Chat chat = new Chat();
-
         final Couple couple = new Couple(user.getLastName(), user, null, null);
 
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
         // create a new reference under the users in FB, add the user to the database
-        DatabaseReference userRef = mDatabase.child("users").push();
+        DatabaseReference userRef = mDatabase.child("users").child(mUser.getUid());
+
+        // You can change the users ID to be their email address.
+        // DatabaseReference userRef = mDatabase.child("users").child(user.getEmail());
         userRef.setValue(user);
 
 
@@ -268,10 +280,16 @@ public class LoginActivity extends AppCompatActivity {
                     DatabaseReference chatRef =  coupleRef.child("chat");
 //                  DatabaseReference notifRef = coupleRef.child(coupleID).child("push notifications").push();
 
-                    Vector <String> v = new Vector<>();
-                    v.add("Hello! this is a space where you can chat with your boo thang.");
-                    v.add("Send messages to your spouse about whatever you'd like");
-                    v.add("Don't worry, this is a private space.");
+                    Vector <TextMessage> v = new Vector<>();
+
+//                    v.add("Hello! this is a space where you can chat with your boo thang.");
+//                    v.add("Send messages to your spouse about whatever you'd like");
+//                    v.add("Don't worry, this is a private space.");
+
+
+
+                    TextMessage tm = new TextMessage("test message", user.getFirstName());
+                    v.add(tm);
 
                     chatRef.setValue(v);
 
@@ -297,6 +315,8 @@ public class LoginActivity extends AppCompatActivity {
      * Start intent to go to next activity after successful login and sign up.
      */
     public void goToHome() {
+
+        // send coupleID and userID across activities.
         Intent intentToStartMainActivity = new Intent(LoginActivity.this,
                 MainActivity.class);
         startActivity(intentToStartMainActivity);

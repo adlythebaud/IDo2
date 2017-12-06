@@ -4,21 +4,114 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="sign_up">Sign Up</string>
+    <string name="message_hint">Message</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="couple_id">Couple ID (Optional)</string>
     <string name="request_permission">This sample needs camera permission</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 
+
     <string name="month_hint">1 &#8211; 12</string>
     <string name="pick_month">Month:</string>
     <string name="year_hint">2017</string>
     <string name="pick_year">Year:</string>
-    <string name="hour_hint">(1 &#8211; 12)</string>
+    <string name="hour_hint">1 &#8211; 12</string>
     <string name="pick_hour">Hour:</string>
+    <string name="pick_minute">Minute:</string>
+    <string name="minute_hint">00 &#8211; 59</string>
     <string name="pick_day">Day:</string>
     <string name="day_hint"> 1 &#8211; 31</string>
     <string name="goal">Goal:</string>
     <string name="goal_hint">Kiss your spouse</string>
+    <string name="add_goal">Add Goal</string>
+    <string name="cancel">Cancel</string>
+
+    <string-array name="month_entries">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
+    <string-array name="day_entries1">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+    </string-array>
+
+    <string-array name="year_entries">
+        <item>2017</item>
+        <item>2018</item>
+        <item>2019</item>
+        <item>2020</item>
+        <item>2021</item>
+        <item>2022</item>
+        <item>2023</item>
+        <item>2024</item>
+        <item>2025</item>
+        <item>2026</item>
+        <item>2027</item>
+        <item>2028</item>
+        <item>2029</item>
+        <item>2030</item>
+        <item>2031</item>
+        <item>2032</item>
+        <item>2033</item>
+        <item>2034</item>
+        <item>2035</item>
+        <item>2036</item>
+        <item>2037</item>
+    </string-array>
+
+    <string-array name="minute_entries">
+        <item>00</item>
+        <item>15</item>
+        <item>30</item>
+        <item>45</item>
+    </string-array>
+
+    <string-array name="am_pm">
+        <item>AM</item>
+        <item>PM</item>
+    </string-array>
+
+
 
 </resources>

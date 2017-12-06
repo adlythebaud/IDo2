@@ -10,6 +10,8 @@ import java.util.Calendar;
 
 public class Goal {
 
+    private long mStartDate;
+    private long mEndDate;
     private Date mDate;
     private String mTitle;
     private boolean mCompleted;
@@ -34,14 +36,17 @@ public class Goal {
     public Date getDate(){
         return mDate;
     }
-    public void setDate(Date date) {
-        this.mDate = date;
-    }
+    public void setDate(Date date) { this.mDate = date; }
+
+
     public long getStartDate(){
-        return startDate;
+        return mStartDate;
     }
-    public void setStartDate(long startDate) {
-        this.startDate = startDate;
+    public void setStartDate(long startDate){ this.mStartDate = startDate; }
+
+    public long getEndDate() {return mEndDate;}
+    public void setEndDate(long endDate) {
+        this.mEndDate = endDate;
     }
 
     public String getGoalTitle() { return mTitle; }
@@ -57,9 +62,4 @@ public class Goal {
         this.mDateAndTimeToComplete = dateAndTimeToComplete;
     }
 
-    public long getEndDate() {return endDate;}
-
-    public void setEndDate(long endDate) {
-        this.endDate = endDate;
-    }
 }
