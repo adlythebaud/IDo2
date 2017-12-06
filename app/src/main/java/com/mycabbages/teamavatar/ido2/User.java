@@ -18,21 +18,21 @@ import java.util.Vector;
 public class User {
     public static final String USERLOG = "User_log";
     private static User user = new User();
-    private String _email;
-    private Date _birthday;
-    private String _lastName;
-    private String _coupleID;
-    private List<Goal> _goals;
-    private String _firstName;
+    private String mEmail;
+    private Date mBirthday;
+    private String mLastName;
+    private String mCoupleID;
+    private List<Goal> mGoals;
+    private String mFirstName;
 
     //Default constructor
     private User() {
-        _email = "";
-        _birthday = null;
-        _lastName = "";
-        _coupleID = "";
-        _firstName = "";
-        _goals = new Vector<Goal>();
+        mEmail = "";
+        mBirthday = null;
+        mLastName = "";
+        mCoupleID = "";
+        mFirstName = "";
+        mGoals = new Vector<Goal>();
     }
 
     public static User getInstance() {
@@ -58,23 +58,23 @@ public class User {
     }*/
 
     //Getters and Setters
-    protected String getEmail() { return _email; }
-    protected void setEmail(String email) { _email = email; }
+    protected String getEmail() { return mEmail; }
+    protected void setEmail(String email) { mEmail = email; }
 
-    protected Date getBirthday() { return _birthday; }
-    protected void setBirthday(Date birthday) { _birthday = birthday; }
+    protected Date getBirthday() { return mBirthday; }
+    protected void setBirthday(Date birthday) { mBirthday = birthday; }
 
-    protected String getLastName() { return _lastName; }
-    protected void setLastName(String lastName) { _lastName = lastName; }
+    protected String getLastName() { return mLastName; }
+    protected void setLastName(String lastName) { mLastName = lastName; }
 
-    protected String getFirstName() { return _firstName; }
-    protected void setFirstName(String firstName) { _firstName = firstName; }
+    protected String getFirstName() { return mFirstName; }
+    protected void setFirstName(String firstName) { mFirstName = firstName; }
 
-    protected String getCoupleID() { return _coupleID; }
-    protected void setCoupleID(String coupleID) { _coupleID = coupleID; }
+    protected String getCoupleID() { return mCoupleID; }
+    protected void setCoupleID(String coupleID) { mCoupleID = coupleID; }
 
-    protected List<Goal> getGoals() { return _goals; }
-    protected void setGoals (List<Goal> goals) { _goals = goals; }
+    protected List<Goal> getGoals() { return mGoals; }
+    protected void setGoals (List<Goal> goals) { mGoals = goals; }
 
 
 }
