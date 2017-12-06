@@ -101,6 +101,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(LOGINLOG, "signInWithEmail:success");
+
+//                          //TODO: make user object
+
                             goToHome();
                         } else {
                             // If sign in fails, display a message to the user.
