@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth myAuth;
     public FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;        // this is our database reference.
+    private FirebaseUser mUser;
 
 
     @Override
@@ -100,6 +101,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(LOGINLOG, "signInWithEmail:success");
+
+//                          //TODO: make user object
+
                             goToHome();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -195,6 +199,7 @@ public class LoginActivity extends AppCompatActivity {
         registerButton.setVisibility(View.INVISIBLE);
         signUp.setVisibility(View.VISIBLE);
     }
+
     public void registerNewUser(View view) {
         EditText firstNameET     = (EditText)findViewById(R.id.firstNameEditText);
         EditText lastNameET      = (EditText)findViewById(R.id.lastNameEditText);
@@ -225,16 +230,20 @@ public class LoginActivity extends AppCompatActivity {
      */
     public void addUserToDatabase(String firstName, String lastName, final String coupleID, String email) {
         // create a user object.
+//        final User user = User.getInstance();
+//        user.setFirstName(firstName);
+//        user.setLastName(lastName);
+//        user.setCoupleID(coupleID);
+//        user.setEmail(email);
+
         final User user = new User(firstName, lastName, coupleID, email);
 
         // create a couple object. Assume the user is always the husband for now...
-
-        final Chat chat = new Chat();
-
         final Couple couple = new Couple(user.getLastName(), user, null, null);
 
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
         // create a new reference under the users in FB, add the user to the database
-        DatabaseReference userRef = mDatabase.child("users").push();
+        DatabaseReference userRef = mDatabase.child("users").child(mUser.getUid());
 
         // You can change the users ID to be their email address.
         // DatabaseReference userRef = mDatabase.child("users").child(user.getEmail());
@@ -283,6 +292,7 @@ public class LoginActivity extends AppCompatActivity {
                     v.add(tm);
 
                     chatRef.setValue(v);
+
                 }
             }
 

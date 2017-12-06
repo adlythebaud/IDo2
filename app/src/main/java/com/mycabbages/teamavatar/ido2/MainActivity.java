@@ -45,6 +45,26 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+//        final ListView goalList = (ListView) findViewById(R.id.goal_list);
+//        List<Goal> goals = new ArrayList<>();
+//        goals.add()
+
+
+//        final List<String> goal_list = new ArrayList<String>(Arrays.asList(goals));
+//
+//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
+//                (this, R.layout.goal_view , goal_list);
+
+        // Add a header to the ListView
+//        LayoutInflater inflater = getLayoutInflater();
+//        ViewGroup header = (ViewGroup)inflater.inflate(R.layout.header,goalList,false);
+        //goalList.addHeaderView(header);
+
+        //DataBind ListView with items from ArrayAdapter
+        //goalList.setAdapter(arrayAdapter);
+
+
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

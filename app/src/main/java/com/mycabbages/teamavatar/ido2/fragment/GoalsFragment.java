@@ -6,7 +6,10 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.ImageView;
+
 
 import com.mycabbages.teamavatar.ido2.AddGoalActivity;
 import com.mycabbages.teamavatar.ido2.MainActivity;
@@ -17,12 +20,15 @@ import com.mycabbages.teamavatar.ido2.R;
  */
 
 public class GoalsFragment extends BaseFragment {
+
     private final static String TAG = "Goals_Fragment";
     private ImageView mAddGoalButton;
     private ImageView mTextNotification;
 
+
     public static GoalsFragment create() {
         return new GoalsFragment();
+
     }
 
     @Override
