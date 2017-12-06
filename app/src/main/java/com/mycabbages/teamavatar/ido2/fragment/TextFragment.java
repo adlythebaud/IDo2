@@ -3,15 +3,12 @@ package com.mycabbages.teamavatar.ido2.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -82,6 +79,30 @@ public class TextFragment extends BaseFragment {
 
         uUID = mUser.getUid();
 
+        mDatabase.child("users").child(uUID).child("firstName").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                try {
+                    if (dataSnapshot.getValue() != null) {
+                        try {
+                            firstName = dataSnapshot.getValue().toString();
+                            Log.d("TextFragment", "firstName found: " + firstName);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Log.d("TextFragment", "no value present for " + mUser.getEmail() + "'s firstName");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("TextFragment", "cancelled to read firstName");
+            }
+        });
+        Log.d("TextFragment", "firstName found: " + firstName);
 
 
         // get the coupleID from the currently logged in user.
@@ -128,7 +149,7 @@ public class TextFragment extends BaseFragment {
                 // Read the input field and push a new instance
                 // of TextMessage to the Firebase database
 
-                newChatMessageRef.setValue(new TextMessage(input.getText().toString(), mUser.getEmail()));
+                newChatMessageRef.setValue(new TextMessage(input.getText().toString(), firstName));
 
                 // clear the input
                 input.setText("");
