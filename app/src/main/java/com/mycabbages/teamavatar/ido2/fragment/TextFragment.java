@@ -37,18 +37,21 @@ public class TextFragment extends BaseFragment {
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
 
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
 
-        //TODO: remove https://ido2-18f4f.firebaseio.com/users/ from the uUID variable
-        final String uUID = mDatabase.child("users").child(mUser.getUid()).toString();
-        Log.d("TextFragment", "firstName found: " + uUID);
-        // this will give you: https://ido2-18f4f.firebaseio.com/users/F5KkF3x5tnbGoUqp9XjHN78Cf4I2
 
 
+        // get users uUID.
+        final String uUID = mUser.getUid();
+        Log.d("TextFragment", "uUID found: " + uUID);
 
-//        final DatabaseReference coupleChatRef = mDatabase.child("couples").child(coupleID).child("chat").push();
+
+        //TODO: use .getRef to get a reference to a location in a database...
+
+
 
 
 
@@ -69,6 +72,8 @@ public class TextFragment extends BaseFragment {
                         .push()
                         .setValue(new TextMessage(input.getText().toString(),
                                 mUser.getEmail()));
+
+                //TODO: push to the child of a couple's chat
 
 
 
