@@ -230,9 +230,6 @@ public class LoginActivity extends AppCompatActivity {
         final User user = new User(firstName, lastName, coupleID, email);
 
         // create a couple object. Assume the user is always the husband for now...
-
-        final Chat chat = new Chat();
-
         final Couple couple = new Couple(user.getLastName(), user, null, null);
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
