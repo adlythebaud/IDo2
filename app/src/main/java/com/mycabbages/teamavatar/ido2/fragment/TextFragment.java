@@ -28,22 +28,22 @@ public class TextFragment extends BaseFragment {
 
     private DatabaseReference mDatabase;
     private FirebaseUser mUser;
-    //private ListAdapter adapter;
+    private ListAdapter adapter;
 
     public static TextFragment create () { return new TextFragment(); }
 
-    /*private void displayChatMessages(){
+    private void displayChatMessages(){
 
-        ListView listOfMessages = (ListView)findViewById(R.id.messageList);
+        /*ListView listOfMessages = (ListView)findViewById(R.id.messageList);
 
         adapter = new FirebaseListAdapter<TextMessage>(this, TextMessage.class,
                 R.layout.message, FirebaseDatabase.getInstance().getReference()) {
             @Override
             protected void populateView(View v, TextMessage model, int position) {
                 // Get references to the views of message.xml
-                TextView messageText = (TextView)v.findViewById(R.id.messageText);
-                TextView messageUser = (TextView)v.findViewById(R.id.messageUser);
-                TextView messageTime = (TextView)v.findViewById(R.id.messageTime);
+                TextView messageText = (TextView)v.findViewById(R.id.message_text);
+                TextView messageUser = (TextView)v.findViewById(R.id.message_user);
+                TextView messageTime = (TextView)v.findViewById(R.id.message_time);
 
                 // Set their text
                 messageText.setText(model.getMessageText());
@@ -55,9 +55,9 @@ public class TextFragment extends BaseFragment {
             }
         };
 
-        listOfMessages.setAdapter(adapter);
+        listOfMessages.setAdapter(adapter);*/
 
-    }*/
+    }
 
     @Override
     public int getLayoutResId() { return R.layout.fragment_text;}
@@ -65,7 +65,7 @@ public class TextFragment extends BaseFragment {
     @Override
     public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        //displayChatMessages();
+        displayChatMessages();
 
         FloatingActionButton fab = root.findViewById(R.id.sendFab);
 
