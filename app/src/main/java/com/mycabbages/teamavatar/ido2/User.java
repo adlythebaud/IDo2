@@ -47,27 +47,25 @@ public class User {
      *
      * @return The single instantiation of user
      */
-    public static User getInstance() {
-        return user;
-    }
+
 
     //Took out non-default constructor to get ready for singleton
-    /*//Non-default Constructor to initialize the email as user is made
+    //Non-default Constructor to initialize the email as user is made
     public User(String email) {
-        _email = email;
-        _birthday = null;
-        _lastName = "";
-        _coupleID = "";
-        _firstName = "";
-        _goals = new Vector<Goal>();
+        mEmail = email;
+        mBirthday = null;
+        mLastName = "";
+        mCoupleID = "";
+        mFirstName = "";
+        mGoals = new Vector<Goal>();
     }
 
     public User(String _firstName, String _lastName, String _coupleID, String _email) {
-        this._firstName = _firstName;
-        this._lastName = _lastName;
-        this._coupleID = _coupleID;
-        this._email = _email;
-    }*/
+        this.mFirstName = _firstName;
+        this.mLastName = _lastName;
+        this.mCoupleID = _coupleID;
+        this.mEmail = _email;
+    }
 
     //Getters and Setters
     protected String getEmail() { return mEmail; }

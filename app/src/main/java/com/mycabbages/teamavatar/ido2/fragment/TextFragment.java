@@ -27,7 +27,6 @@ public class TextFragment extends BaseFragment {
 
     private DatabaseReference mDatabase;
     private FirebaseUser mUser;
-    private DatabaseReference coupleChatRef;
     private String coupleID;
     private String uUID;
 
@@ -44,35 +43,7 @@ public class TextFragment extends BaseFragment {
 
         uUID = mUser.getUid();
 
-        coupleID = getCoupleID();
-        final DatabaseReference newChatMessageRef = mDatabase.child("couples").child(coupleID).child("chat").push();
-
-        FloatingActionButton fab = root.findViewById(R.id.sendFab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EditText input = getActivity().findViewById(R.id.messageBox);
-
-                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.
-                        SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
-                // Read the input field and push a new instance
-                // of TextMessage to the Firebase database
-
-                newChatMessageRef.setValue(new TextMessage(input.getText().toString(),
-                        mUser.getEmail()));
-
-                // clear the input
-                input.setText("");
-            }
-        });
-    }
-    
-    /**
-     * GET COUPLE ID
-     *  Return coupleID of current user.
-     */
-    public String getCoupleID() {
+        // get the coupleID from the currently logged in user.
         mDatabase.child("users").child(uUID).child("coupleID").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -97,9 +68,35 @@ public class TextFragment extends BaseFragment {
             }
         });
 
-        String theCoupleID = coupleID;
-        return theCoupleID;
-    }
+        // test that we still have the coupleID outside of the ValueEventListener
+        Log.d("TextFragment", "coupleID found: " + coupleID);
 
+
+
+        FloatingActionButton fab = root.findViewById(R.id.sendFab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText input = getActivity().findViewById(R.id.messageBox);
+
+                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.
+                        SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+
+
+
+                final DatabaseReference newChatMessageRef = mDatabase.child("couples").child(coupleID).child("chat").push();
+
+                // Read the input field and push a new instance
+                // of TextMessage to the Firebase database
+
+                newChatMessageRef.setValue(new TextMessage(input.getText().toString(), mUser.getEmail()));
+
+                // clear the input
+                input.setText("");
+            }
+        });
+    }
+    
 
 }
