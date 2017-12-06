@@ -34,13 +34,15 @@ public class Goal {
     public Date getDate(){
         return mDate;
     }
-    public void setDate(Date date){
+    public void setDate(Date date) {
         this.mDate = date;
+    }
     public long getStartDate(){
         return startDate;
     }
-    public void setStartDate(long startDate){
+    public void setStartDate(long startDate) {
         this.startDate = startDate;
+    }
 
     public String getGoalTitle() { return mTitle; }
     public void setGoalTitle(String title){
