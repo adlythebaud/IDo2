@@ -3,11 +3,15 @@ package com.mycabbages.teamavatar.ido2.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,15 +21,43 @@ import com.mycabbages.teamavatar.ido2.R;
 import com.mycabbages.teamavatar.ido2.TextMessage;
 
 /**
- * Created by Preston on 11/28/2017.
+ * Created by Madison on 11/29/2017.
  */
 
 public class TextFragment extends BaseFragment {
 
     private DatabaseReference mDatabase;
     private FirebaseUser mUser;
+    //private ListAdapter adapter;
 
     public static TextFragment create () { return new TextFragment(); }
+
+    /*private void displayChatMessages(){
+
+        ListView listOfMessages = (ListView)findViewById(R.id.messageList);
+
+        adapter = new FirebaseListAdapter<TextMessage>(this, TextMessage.class,
+                R.layout.message, FirebaseDatabase.getInstance().getReference()) {
+            @Override
+            protected void populateView(View v, TextMessage model, int position) {
+                // Get references to the views of message.xml
+                TextView messageText = (TextView)v.findViewById(R.id.messageText);
+                TextView messageUser = (TextView)v.findViewById(R.id.messageUser);
+                TextView messageTime = (TextView)v.findViewById(R.id.messageTime);
+
+                // Set their text
+                messageText.setText(model.getMessageText());
+                messageUser.setText(model.getMessageUser());
+
+                // Format the date before showing it
+                messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
+                        model.getMessageTime()));
+            }
+        };
+
+        listOfMessages.setAdapter(adapter);
+
+    }*/
 
     @Override
     public int getLayoutResId() { return R.layout.fragment_text;}
@@ -33,24 +65,15 @@ public class TextFragment extends BaseFragment {
     @Override
     public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        //displayChatMessages();
+
         FloatingActionButton fab = root.findViewById(R.id.sendFab);
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        /*final String uUID = mDatabase.child("users").child(mUser.getUid()).toString();
-        Log.d("TextFragment", "firstName found: " + uUID);*/
-
         final String firstName = mDatabase.child("users").child(mUser.getUid()).child("firstName").toString();
         Log.d("TextFragment", "firstName found: " + firstName);
-
-//        final String coupleID = mDatabase.child("users").child(mUser.getUid()).child("coupleID").toString();
-//        Log.d("TextFragment", "CoupleID found: " + coupleID);
-
-//        final DatabaseReference coupleChatRef = mDatabase.child("couples").child(coupleID).child("chat").push();
-        //final String coupleID = mDatabase.child("users").child(mUser.getEmail()).child("coupleID").toString();
-        //Log.d("TextFragment", "CoupleID found: " + coupleID);
-
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,9 +85,6 @@ public class TextFragment extends BaseFragment {
 
                 // Read the input field and push a new instance
                 // of TextMessage to the Firebase database
-
-
-
                 FirebaseDatabase.getInstance()
                         .getReference()
                         .push()
@@ -75,6 +95,5 @@ public class TextFragment extends BaseFragment {
                 input.setText("");
             }
         });
-
     }
 }
