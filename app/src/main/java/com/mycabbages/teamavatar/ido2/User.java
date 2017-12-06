@@ -8,7 +8,7 @@ import java.util.Vector;
  *  A class that holds the needed member variables and functions to allow consistently over the
  *  app for the user.
  *
- *  This class hols the Users name, coupleID, list of goals and some important dates. This class
+ *  This class holds the Users name, coupleID, list of goals and some important dates. This class
  *  will help with consistency over the whole application, giving easy access to needed data.
  *
  *  @author Preston Higgins
@@ -16,8 +16,13 @@ import java.util.Vector;
  */
 
 public class User {
+    // A tag for Log
     public static final String USERLOG = "User_log";
+
+    // The singletons instantiation
     private static User user = new User();
+
+    // The users fields
     private String mEmail;
     private Date mBirthday;
     private String mLastName;
@@ -25,7 +30,9 @@ public class User {
     private List<Goal> mGoals;
     private String mFirstName;
 
-    //Default constructor
+    /**
+     *  Sets all the Users fields to an empty value.
+     */
     private User() {
         mEmail = "";
         mBirthday = null;
@@ -35,6 +42,11 @@ public class User {
         mGoals = new Vector<Goal>();
     }
 
+    /**
+     * Returns the singletons instantiation, that can then be referenced
+     *
+     * @return The single instantiation of user
+     */
     public static User getInstance() {
         return user;
     }

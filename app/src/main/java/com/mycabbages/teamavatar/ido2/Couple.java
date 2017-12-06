@@ -2,12 +2,7 @@ package com.mycabbages.teamavatar.ido2;
 
 import android.app.Activity;
 import android.util.Log;
-
-
-
-
 import java.util.TreeMap;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,82 +10,119 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Created by Preston on 11/17/2017.
+ * Handles the data needed for the {@link User} to be connected to their spouse while using the app.
+ *
+ * Connects the {@link User} to their spouse through this object. The data needed to chat with
+ * the users spouse as well as the important dates the user needs to know about their spouse.
+ *
+ * @author Preston Higgins
  */
 
 public class Couple {
     public final String COUPLELOG = "Couple_log";
-    private User spouse1;
-    private User spouse2;
-    private Chat _coupleChat;
-    private Date _anniversary;
-    private Map<String, Goal> _importantDates;
-    private List<PushNotification> _pushNotifications;
-    private String _coupleID;
-    private String _lastName;
+    private User mSpouse1;
+    private User mSpouse2;
+    private Chat mCoupleChat;
+    private Date mAnniversary;
+    private Map<String, Goal> mImportantDates;
+    private List<PushNotification> mPushNotifications;
+    private String mCoupleID;
+    private String mLastName;
 
-    public Couple(Activity activity) {
-        spouse1 = null;
-        spouse2 = null;
-        _coupleChat = null;
-        _anniversary = null;
-        _importantDates = new TreeMap<String, Goal>();
-        _pushNotifications = new ArrayList<PushNotification>();
-        _coupleID = "";
+
+    /**
+     * Creates a Couple and sets all fields to an empty, or null value.
+     */
+    public Couple() {
+        mSpouse1 = null;
+        mSpouse2 = null;
+        mCoupleChat = null;
+        mAnniversary = null;
+        mImportantDates = new TreeMap<String, Goal>();
+        mPushNotifications = new ArrayList<PushNotification>();
+        mCoupleID = "";
     }
 
-    public Couple(Activity activity, User spouse1, User spouse2, Date anniversary, Chat coupleChat, String coupleID) {
-        this.spouse1 = spouse1;
-        this.spouse2 = spouse2;
-        _anniversary = anniversary;
-        _coupleChat = coupleChat;
-        _importantDates = new TreeMap<String, Goal>();
-        _pushNotifications = new ArrayList<PushNotification>();
-        _coupleID = coupleID;
+    /**
+     * Instantiates a class setting a value for the couples last name, each spouse, and their chat.
+     *
+     * Constructs a couple object giving a value to the couples last name, setting a value for both
+     * spouses, and setting up the couples chat. Normally, used when signing up a new user that
+     * gave information pertaining to their spouse.
+     *
+     * @param lastName
+     * @param spouse1
+     * @param spouse2
+     * @param coupleChat
+     */
+    public Couple(String lastName, User spouse1, User spouse2, Chat coupleChat) {
+        this.mSpouse1 = spouse1;
+        this.mSpouse2 = spouse2;
+        this.mLastName = lastName;
+        this.mCoupleChat = coupleChat;
     }
 
-    public Couple(String _lastName, User _spouse1, User _spouse2,
-                  Chat _coupleChat) {
-
-        this._lastName = _lastName;
-        this.spouse1 = _spouse1;
-        this.spouse2 = _spouse2;
-
-        this._coupleChat = _coupleChat;
+    /**
+     * Create a couple setting the values for their last name, each spouse, their anniversary,
+     * their own couple chat, and their coupleID.
+     *
+     * If their user has given a coupleID to create their account with this creates a couple object
+     * with their coupleID. This also sets the fields for each spouse, their anniversary, and their
+     * chat.
+     *
+     * @param spouse1
+     * @param spouse2
+     * @param anniversary
+     * @param coupleChat
+     * @param coupleID
+     */
+    public Couple(User spouse1, User spouse2, Date anniversary, Chat coupleChat, String coupleID) {
+        this.mSpouse1 = spouse1;
+        this.mSpouse2 = spouse2;
+        mAnniversary = anniversary;
+        mCoupleChat = coupleChat;
+        mImportantDates = new TreeMap<String, Goal>();
+        mPushNotifications = new ArrayList<PushNotification>();
+        mCoupleID = coupleID;
     }
 
-    public User getSpouse1() { return spouse1; }
-    public User getSpouse2() { return spouse2; }
+    public User getSpouse1() { return mSpouse1; }
+    public User getSpouse2() { return mSpouse2; }
 
-    public void setSpouse1(User spouse1) { this.spouse1 = spouse1; }
-    public void setSpouse2(User spouse2) { this.spouse2 = spouse2; }
+    public void setSpouse1(User spouse1) { this.mSpouse1 = spouse1; }
+    public void setSpouse2(User spouse2) { this.mSpouse2 = spouse2; }
 
-    public Chat getChat() { return _coupleChat;}
-    public void setChat(Chat coupleChat) { this._coupleChat = coupleChat; }
+    public Chat getChat() { return mCoupleChat;}
+    public void setChat(Chat coupleChat) { this.mCoupleChat = coupleChat; }
 
-    public Map<String, Goal> get_importantDates() {
-        return _importantDates;
+    public Map<String, Goal> getImportantDates() {
+        return mImportantDates;
+    }
+    public void setImportantDates(Map<String, Goal> importantDates) {
+        this.mImportantDates = mImportantDates;
     }
 
-    public void set_importantDates(Map<String, Goal> _importantDates) {
-        this._importantDates = _importantDates;
+
+    public List<PushNotification> getPushNotifications() { return mPushNotifications; }
+    public void setPushNotifications(List<PushNotification> pushNotifications) { this.mPushNotifications = pushNotifications; }
+
+    public Date getAnniversary() { return mAnniversary; }
+    public void setAnniversary(Date anniversary) { this.mAnniversary = anniversary; }
+
+    /**
+     * Creates a unique couple ID for the user
+     *
+     * @see UUID
+     */
+    public void createCoupleID () {
+        this.mCoupleID =  UUID.randomUUID().toString();
+        Log.d(COUPLELOG, mCoupleID);
     }
-
-
-    public List<PushNotification> getPushNotifications() { return _pushNotifications; }
-    public void setPushNotifications(List<PushNotification> pushNotifications) { this._pushNotifications = pushNotifications; }
-
-    public Date getAnniversary() { return _anniversary; }
-    public void setAnniversary(Date anniversary) { this._anniversary = anniversary; }
-
-    public void createCoupleID () { this._coupleID =  UUID.randomUUID().toString();
-        Log.d(COUPLELOG, _coupleID);}
 
     public String getLastName() {
-        return _lastName;
+        return mLastName;
     }
-
     public void setLastName(String _lastName) {
-        this._lastName = _lastName;
+        this.mLastName = _lastName;
     }
 }
