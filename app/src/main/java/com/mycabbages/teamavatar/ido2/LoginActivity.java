@@ -196,6 +196,7 @@ public class LoginActivity extends AppCompatActivity {
         registerButton.setVisibility(View.INVISIBLE);
         signUp.setVisibility(View.VISIBLE);
     }
+
     public void registerNewUser(View view) {
         EditText firstNameET     = (EditText)findViewById(R.id.firstNameEditText);
         EditText lastNameET      = (EditText)findViewById(R.id.lastNameEditText);
@@ -236,7 +237,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         // create a new reference under the users in FB, add the user to the database
-        DatabaseReference userRef = mDatabase.child("users").child(mUser.getUid().toString());
+        DatabaseReference userRef = mDatabase.child("users").child(mUser.getUid());
 
         // You can change the users ID to be their email address.
         // DatabaseReference userRef = mDatabase.child("users").child(user.getEmail());
