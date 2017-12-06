@@ -34,6 +34,7 @@ public class TextFragment extends BaseFragment {
     private ListAdapter adapter;
     private String coupleID;
     private String uUID;
+    private String firstName;
 
     public static TextFragment create () { return new TextFragment(); }
 
@@ -74,12 +75,14 @@ public class TextFragment extends BaseFragment {
 
         FloatingActionButton fab = root.findViewById(R.id.sendFab);
 
-        final String firstName = mDatabase.child("users").child(mUser.getUid()).child("firstName").toString();
+
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         uUID = mUser.getUid();
+
+
 
         // get the coupleID from the currently logged in user.
         mDatabase.child("users").child(uUID).child("coupleID").addValueEventListener(new ValueEventListener() {
@@ -125,7 +128,7 @@ public class TextFragment extends BaseFragment {
                 // Read the input field and push a new instance
                 // of TextMessage to the Firebase database
 
-                newChatMessageRef.setValue(new TextMessage(input.getText().toString(), firstName));
+                newChatMessageRef.setValue(new TextMessage(input.getText().toString(), mUser.getEmail()));
 
                 // clear the input
                 input.setText("");
