@@ -37,7 +37,7 @@ public class TextFragment extends BaseFragment {
 
     private void displayChatMessages(){
 
-        /*ListView listOfMessages = (ListView)findViewById(R.id.messageList);
+       /* ListView listOfMessages = (ListView)findViewById(R.id.messageList);
 
         adapter = new FirebaseListAdapter<TextMessage>(this, TextMessage.class,
                 R.layout.message, FirebaseDatabase.getInstance().getReference()) {
