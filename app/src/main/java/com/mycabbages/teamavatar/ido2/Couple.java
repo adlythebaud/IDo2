@@ -104,7 +104,9 @@ public class Couple {
 
 
     public List<PushNotification> getPushNotifications() { return mPushNotifications; }
-    public void setPushNotifications(List<PushNotification> pushNotifications) { this.mPushNotifications = pushNotifications; }
+    public void setPushNotifications(List<PushNotification> pushNotifications) {
+        this.mPushNotifications = pushNotifications;
+    }
 
     public Date getAnniversary() { return mAnniversary; }
     public void setAnniversary(Date anniversary) { this.mAnniversary = anniversary; }

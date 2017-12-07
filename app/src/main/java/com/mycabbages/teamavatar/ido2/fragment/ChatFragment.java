@@ -405,13 +405,32 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Acti
         }
     }
 
+    /**
+     * Sends a new ChatFragment to be displayed.
+     *
+     * @return A new ChatFragment to display
+     */
     public static ChatFragment create() { return new ChatFragment();  }
 
+    /**
+     *  Inflates the view for the ChatFragment to be displayed.
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return The inflated view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
         return  inflater.inflate(R.layout.fragment_empty, container, false);
     }
 
+    /**
+     * Do any work to the UI for this fragment here. This is called after the view in inflated.
+     *
+     * @param view
+     * @param savedInstance
+     */
     @Override
     public void onViewCreated(final View view,@Nullable Bundle savedInstance) {
         view.findViewById(R.id.camera_capture).setOnClickListener(this);
