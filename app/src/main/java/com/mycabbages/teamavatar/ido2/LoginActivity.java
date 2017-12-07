@@ -230,11 +230,8 @@ public class LoginActivity extends AppCompatActivity {
      */
     public void addUserToDatabase(String firstName, String lastName, final String coupleID, String email) {
 
-
         final User user = new User(firstName, lastName, coupleID, email);
 
-
-        // TODO: Add pushNotifications section to this Couple constructor
         // create a couple object. Assume the user is always the husband for now...
         final Couple couple = new Couple(user.getLastName(), user, null, null);
 
@@ -267,7 +264,6 @@ public class LoginActivity extends AppCompatActivity {
                         DatabaseReference spouse1Ref = couples.child(coupleID).child("spouse1");
                         spouse1Ref.setValue(user);
                     }
-
                 } else {
                     // coupleID does not exist. Add a couple to the database with initial chat and push notification info.
                     Log.d(LOGINLOG, "adding new couple to firebase");
@@ -290,13 +286,11 @@ public class LoginActivity extends AppCompatActivity {
                     notifRef.setValue(vPushNotif);
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // error handle here....
             }
         });
-
     }
 
     /**
