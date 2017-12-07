@@ -13,6 +13,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,18 +32,17 @@ public class TextFragment extends BaseFragment {
 
     private DatabaseReference mDatabase;
     private FirebaseUser mUser;
-    private ListAdapter adapter;
     private String coupleID;
     private String uUID;
     private String firstName;
+    private FirebaseListAdapter<TextMessage> adapter;
+    private ListView listOfMessages;
 
     public static TextFragment create () { return new TextFragment(); }
 
     private void displayChatMessages(){
 
-        /*ListView listOfMessages = (ListView)findViewById(R.id.messageList);
-
-        adapter = new FirebaseListAdapter<TextMessage>(this, TextMessage.class,
+        adapter = new FirebaseListAdapter<TextMessage>(super.getActivity(), TextMessage.class,
                 R.layout.message, FirebaseDatabase.getInstance().getReference()) {
             @Override
             protected void populateView(View v, TextMessage model, int position) {
@@ -61,7 +61,7 @@ public class TextFragment extends BaseFragment {
             }
         };
 
-        listOfMessages.setAdapter(adapter);*/
+        listOfMessages.setAdapter(adapter);
 
     }
 
@@ -71,18 +71,16 @@ public class TextFragment extends BaseFragment {
     @Override
     public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        listOfMessages = (ListView)root.findViewById(R.id.messageList);
+
         displayChatMessages();
 
         FloatingActionButton fab = root.findViewById(R.id.sendFab);
-
-
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         uUID = mUser.getUid();
-
-
 
         // get the coupleID from the currently logged in user.
         mDatabase.child("users").child(uUID).child("coupleID").addValueEventListener(new ValueEventListener() {
@@ -120,20 +118,18 @@ public class TextFragment extends BaseFragment {
                 getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.
                         SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-
-
-
                 final DatabaseReference newChatMessageRef = mDatabase.child("couples").child(coupleID).child("chat").push();
 
                 // Read the input field and push a new instance
                 // of TextMessage to the Firebase database
-
                 newChatMessageRef.setValue(new TextMessage(input.getText().toString(), mUser.getEmail()));
 
                 // clear the input
                 input.setText("");
             }
         });
+
+        displayChatMessages();
     }
     
 
