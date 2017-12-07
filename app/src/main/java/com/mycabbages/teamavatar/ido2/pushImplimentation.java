@@ -21,25 +21,21 @@ import java.util.List;
  */
 
 public class pushImplimentation extends Activity {
-    //private boolean sent;
+    private static final String TAG = "Push_Implementation";
     private Date timeToSend;
     private String message;
 
     private String saveNotification;
     public static String NOTIFICATION_ID = "notification-id";
-    public static String NOTIFICATION = "notification";
+    public static String NOTIFICATION   = "notification";
 
-    //private AlarmManager alarmMgr;
-    //private PendingIntent alarmIntent;
-    PendingIntent pendingIntent;
-    AlarmManager alarmMgr;
+    private PendingIntent pendingIntent;
+    private AlarmManager alarmMgr;
 
 
-
-    private static final String TAG = com.mycabbages.teamavatar.ido2.PushNotification.class.getSimpleName();
-
-
-
+    /*
+    * Sets the alarm to allow the notifications to be sent after the app closes.
+    */
     public void alarmSet(Context context) {
         Intent dialogIntent = new Intent(context, PushIt.class);
 
@@ -50,6 +46,9 @@ public class pushImplimentation extends Activity {
 
     }
 
+    /*
+    *
+    */
     public void checkNotifications(Context context) throws FileNotFoundException {
         ReadWrite read = new ReadWrite();
         List<PushNotification> notify = read.loadPushNotificationList(context);
