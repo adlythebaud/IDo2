@@ -13,12 +13,15 @@ import java.util.Calendar;
  * @author Conrad
  */
 public class Goal {
+
     private long mStartDate;
     private long mEndDate;
     private Date mDate;
     private String mTitle;
     private boolean mCompleted;
     private Calendar mDateAndTimeToComplete;
+    private long endDate;
+    private long startDate;
 
     /**
      * Contructs a new {@link Goal} with empty values
@@ -49,6 +52,7 @@ public class Goal {
         return mDate;
     }
     public void setDate(Date date) { this.mDate = date; }
+
 
     public long getStartDate(){
         return mStartDate;

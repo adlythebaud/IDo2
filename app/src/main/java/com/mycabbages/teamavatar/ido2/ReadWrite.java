@@ -35,18 +35,14 @@ import java.util.stream.Collectors;
 
 public class ReadWrite extends Activity {
 
-
-
     public String readFromFirebace(String key){
         return "String FB";
     }
     public void writeToFirebace(String key, String data){
 
     }
-    public String readFromPhone(String key){
 
-        return "String Phone";
-    }
+    public String readFromPhone(String key){ return "String Phone"; }
     public void writeToPhone(String key, String data){
 
     }
@@ -54,12 +50,13 @@ public class ReadWrite extends Activity {
     public void addNotification(Context context, String title, String message,long sendTime)throws FileNotFoundException{
         System.out.println("added new notification");
         List<PushNotification> newlist = loadPushNotificationList(context);
+
         PushNotification notification = new PushNotification();
-        //Calendar calendar = Calendar.getInstance();
         notification.setTimeToSend(sendTime);
         notification.setMessage(message);
         notification.setNotificationTitle(title);
         newlist.add(notification);
+
         savePushNotificationList(context, newlist);
     }
 
@@ -86,103 +83,4 @@ public class ReadWrite extends Activity {
         editor.putString("Notification list", json);
         editor.apply();
     }
-
-
-    //ObjectInputStream input = null;
-//        ArrayList<PushNotification> ReturnClass = null;
-//        File f = new File(this.getFilesDir(),"Notifications.srl");
-//        try {
-//
-//            input = new ObjectInputStream(new FileInputStream(f));
-//            ReturnClass = (ArrayList<PushNotification>) input.readObject();
-//            input.close();
-
-
-
-//
-//    public ArrayList<PushNotification> loadPushNotificationList() throws FileNotFoundException {
-//        System.out.println("Done4");
-//        FileInputStream loadFile = null;
-//        ObjectInputStream load = null;
-//        //MainActivity.getFilesDir();
-//        ArrayList<PushNotification> loadList = null;
-//        File f = new File (this.getFilesDir(),"Notifications.srl");
-//        try {
-//            load = new ObjectInputStream(new FileInputStream(f));
-//            loadList = (ArrayList<PushNotification>)load.readObject();
-//            load.close();
-//
-//            System.out.println("Don3");
-//
-//        } catch (Exception ex) {
-//
-//            ex.printStackTrace();
-//
-//        } finally {
-//
-//            if (loadFile != null) {
-//                try {
-//                    loadFile.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            if (load != null) {
-//                try {
-//                    load.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//        }
-//        return loadList;
-//    }
-
-//    public void savePushNotificationList(List<PushNotification> notification) throws FileNotFoundException{
-//        System.out.println("Done1");
-//        FileOutputStream saveFile = null;
-//        ObjectOutputStream save = null;
-//        File f = new File(getFilesDir()+"Notifications.srl");
-//        try {
-//            //saveFile = openFileOutput(f, Context.MODE_PRIVATE);
-//            saveFile = new FileOutputStream(f);
-//            save = new ObjectOutputStream(saveFile);
-//            save.writeObject(notification);
-//
-//            System.out.println("2");
-//
-//        } catch (Exception ex) {
-//
-//            ex.printStackTrace();
-//
-//        } finally {
-//
-//            if (saveFile != null) {
-//                try {
-//                    saveFile.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            if (save != null) {
-//                try {
-//                    save.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//        }
-//    }
-
-
-
-
-
-
-
-
 }

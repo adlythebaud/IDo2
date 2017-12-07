@@ -29,8 +29,6 @@ import java.util.Vector;
 /**
  * LOGIN ACTIVITY
  */
-
-
 public class LoginActivity extends AppCompatActivity {
     public final static String LOGINLOG = "Login_log";
 
@@ -81,20 +79,22 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-    /**
-     * SIGN IN EXISTING USER
-     * called from sign in button.
-     * @param view
-     */
+    /*
+    * Retrieves the information typed into the editTexts and uses these values to attempt a log in
+    * to the firebase authentication server.
+    */
     public void signInExistingUser(View view) {
-        EditText _email = findViewById(R.id.emailInput);
-        EditText _password = findViewById(R.id.passwordInput);
-        String email = _email.getText().toString();
-        String password = _password.getText().toString();
-        Log.d(LOGINLOG, email);
-        Log.d(LOGINLOG, password);
+        // Retrieve the editTexts and then put the values into Strings
+        EditText emailEditText = findViewById(R.id.emailInput);
+        EditText passwordEditText = findViewById(R.id.passwordInput);
+        String emailString = emailEditText.getText().toString();
+        String passwordString = passwordEditText.getText().toString();
 
-        myAuth.signInWithEmailAndPassword(email, password)
+        Log.d(LOGINLOG, emailString);
+        Log.d(LOGINLOG, passwordString);
+
+        // Send the user info to firebase to authenticate.
+        myAuth.signInWithEmailAndPassword(emailString, passwordString)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -116,16 +116,13 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    /**
-     * CREATE ACCOUNT
-     * Called from registerNewUser()
-     * @param firstName
-     * @param lastName
-     * @param coupleID
-     * @param email
-     * @param password
-     */
-    public void createAccount(final String firstName, final String lastName, final String coupleID, final String email, final String password) {
+    /*
+    * Retrieves the information typed by the user to register their account. Sends the retrieved
+    * values to fireBase to attempt registering to their authentication servers.
+    */
+    public void createAccount(final String firstName, final String lastName, final String coupleID,
+                              final String email, final String password) {
+        // Send data to fireBase to create a new user
         myAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -147,25 +144,21 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-                             addUserToDatabase(firstName, lastName, coupleID, email);
+                            addUserToDatabase(firstName, lastName, coupleID, email);
 
-                             // start a new intent
-                             goToHome();
+                            // start a new intent
+                            goToHome();
                         }
-
-                        // ...
                     }
                 });
     }
 
-    /**
-     * REGISTER NEW USER
-     * Specific method that's called from sign up button on UI.
-     * @param v
-     */
-
-    public void cancelButton(View v){
-
+    /*
+    * Called when the user clicks the cancel button, this button appears after the user clicks the
+    * register button. When clicked it reverts the UI to the sign-up screen.
+    */
+    public void cancelButton(View view){
+        //Get each of the EditText views and Buttons
         EditText firstNameET     = (EditText)findViewById(R.id.firstNameEditText);
         EditText lastNameET      = (EditText)findViewById(R.id.lastNameEditText);
         EditText coupleIDET      = (EditText)findViewById(R.id.coupleIDEditText);
@@ -173,6 +166,8 @@ public class LoginActivity extends AppCompatActivity {
         Button signUp      = (Button)findViewById(R.id.signUp);
         Button cancel      = (Button)findViewById(R.id.CancelButton);
         Button signin      = (Button)findViewById(R.id.signIn);
+
+        //Make correct buttons and texts visible and set correct buttons and texts invisible
         signin.setVisibility(View.VISIBLE);
         cancel.setVisibility(View.INVISIBLE);
         firstNameET.setVisibility(View.INVISIBLE);
@@ -182,8 +177,12 @@ public class LoginActivity extends AppCompatActivity {
         signUp.setVisibility(View.INVISIBLE);
 
     }
-    public void registerButton(View v){
 
+    /*
+    * When clicked it makes the the First and Last name editTexts visible and changes the buttons
+    */
+    public void registerButton(View v){
+        // Retrieve the necessary EditTexts and Buttons
         EditText firstNameET     = (EditText)findViewById(R.id.firstNameEditText);
         EditText lastNameET      = (EditText)findViewById(R.id.lastNameEditText);
         EditText coupleIDET      = (EditText)findViewById(R.id.coupleIDEditText);
@@ -191,6 +190,8 @@ public class LoginActivity extends AppCompatActivity {
         Button signUp      = (Button)findViewById(R.id.signUp);
         Button cancel      = (Button)findViewById(R.id.CancelButton);
         Button signin      = (Button)findViewById(R.id.signIn);
+
+        // Set the correct EditTexts and Buttons visible and invisible
         signin.setVisibility(View.INVISIBLE);
         cancel.setVisibility(View.VISIBLE);
         firstNameET.setVisibility(View.VISIBLE);
@@ -200,13 +201,18 @@ public class LoginActivity extends AppCompatActivity {
         signUp.setVisibility(View.VISIBLE);
     }
 
+    /*
+    * Controls the UI to display the needed EditsTexts and Buttons to register a new user
+    */
     public void registerNewUser(View view) {
+        //Retrieve all the EditTexts and Buttons
         EditText firstNameET     = (EditText)findViewById(R.id.firstNameEditText);
         EditText lastNameET      = (EditText)findViewById(R.id.lastNameEditText);
         EditText coupleIDET      = (EditText)findViewById(R.id.coupleIDEditText);
         EditText emailTextBox    = (EditText)findViewById(R.id.emailInput);
         EditText passwordTextBox = (EditText)findViewById(R.id.passwordInput);
 
+        //Set all EditTexts and Buttons invisible or visible as needed
         String firstName = firstNameET.getText().toString();
         String lastName = lastNameET.getText().toString();
         String coupleID = coupleIDET.getText().toString();
@@ -217,31 +223,34 @@ public class LoginActivity extends AppCompatActivity {
             coupleID = UUID.randomUUID().toString();
         }
 
+        //Send the info to the createAccount function to call the firebase code
         createAccount(firstName, lastName, coupleID, email, password);
 
     }
 
-    /**
-     * ADD USER TO DATABASE
-     * @param firstName
-     * @param lastName
-     * @param coupleID
-     * @param email
-     */
+    /*
+    * Calls the Firebase code to add the user in to the correct place in the Realtime Firebase data
+    * base
+    */
     public void addUserToDatabase(String firstName, String lastName, final String coupleID, String email) {
+
+
+
+        // Create a User object to store in the database
 
         final User user = new User(firstName, lastName, coupleID, email);
 
         // create a couple object. Assume the user is always the husband for now...
         final Couple couple = new Couple(user.getLastName(), user, null, null);
 
+
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         // create a new reference under the users in FB, add the user to the database
         DatabaseReference userRef = mDatabase.child("users").child(mUser.getUid());
 
-        // You can change the users ID to be their email address.
-        // DatabaseReference userRef = mDatabase.child("users").child(user.getEmail());
+        // save this new user in firebase database tree under "users" child tree.
         userRef.setValue(user);
+        // create a new couple in "couples" tree, add user to it.
 
 
         // handle for if coupleID is found in database
@@ -273,6 +282,15 @@ public class LoginActivity extends AppCompatActivity {
                     // Add a chat child to each couple. This is where their text messages will reside.
                     DatabaseReference chatRef =  coupleRef.child("chat");
                     Vector <TextMessage> v = new Vector<>();
+
+
+//                    v.add("Hello! This is a space where you can chat with your boo thang.");
+//                    v.add("Send messages to your spouse about whatever you'd like.");
+//                    v.add("Don't worry, this is a private space.");
+
+
+
+
                     TextMessage tm = new TextMessage("test message", user.getFirstName());
                     v.add(tm);
                     chatRef.setValue(v);
@@ -293,8 +311,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * GO TO HOME
+    /*
      * Start intent to go to next activity after successful login and sign up.
      */
     public void goToHome() {
