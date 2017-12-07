@@ -25,9 +25,15 @@ import com.mycabbages.teamavatar.ido2.R;
 import com.mycabbages.teamavatar.ido2.TextMessage;
 
 /**
- * Created by Madison on 11/29/2017.
+ * This class inflates the UI for the texting fragment. Contains the business logic for sending
+ * Text Messages to the Users connected spouse.
+ *
+ * Uses Firebase to store the messages sent between the User and their spouse. This also inflates
+ * the UI necessary for the User to see they messages they sent to their spouse and the messages
+ * recieved from their spouse.
+ *
+ * @author Madison
  */
-
 public class TextFragment extends BaseFragment {
 
     private DatabaseReference mDatabase;
@@ -38,6 +44,9 @@ public class TextFragment extends BaseFragment {
     private FirebaseListAdapter<TextMessage> firebaseAdapter;
     private ListView listOfMessages;
 
+    /*
+    * Creates a new TextFragment and returns it
+    */
     public static TextFragment create () { return new TextFragment(); }
 
     /*
@@ -46,9 +55,9 @@ public class TextFragment extends BaseFragment {
     private void displayChatMessages(){
 
         // Retrieve the list of messages from the Couple section in Firebase.
-        firebaseAdapter = new FirebaseListAdapter<TextMessage>(super.getActivity(), TextMessage.class,
-
-                R.layout.message, FirebaseDatabase.getInstance().getReference()) {
+        firebaseAdapter = new FirebaseListAdapter<TextMessage>(super.getActivity(),
+                TextMessage.class, R.layout.message,
+                FirebaseDatabase.getInstance().getReference()) {
             @Override
             protected void populateView(View v, TextMessage model, int position) {
                 // Get references to the views of message.xml
@@ -70,9 +79,15 @@ public class TextFragment extends BaseFragment {
 
     }
 
+    /*
+    * Returns the layout resource ID for the TextFragment
+    */
     @Override
     public int getLayoutResId() { return R.layout.fragment_text;}
 
+    /*
+    * Used to do any work related to the UI. This function is called after the UI is inflated.
+    */
     @Override
     public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -115,11 +130,13 @@ public class TextFragment extends BaseFragment {
         // test that we still have the coupleID outside of the ValueEventListener
         Log.d("TextFragment", "coupleID found: " + coupleID);
 
+        // Add a listener for a click or tap onto the message box.
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EditText input = getActivity().findViewById(R.id.messageBox);
 
+                // This allows the message box to move up with the keyboard pop-up
                 getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.
                         SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
