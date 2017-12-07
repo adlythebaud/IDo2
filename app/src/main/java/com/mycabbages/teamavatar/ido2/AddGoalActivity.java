@@ -28,6 +28,15 @@ public class AddGoalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_goal);
     }
 
+    /**
+     * Validates the retrieved {@link User} information before creating the {@link Goal}.
+     *
+     * Checks the {@link Goal} String to make sure information was entered. Puts the time into
+     * 24 hour time to be correctly recieved by a {@link GregorianCalendar}. Also removes one from
+     * the month to be correctly indexed by the {@link GregorianCalendar}.
+     *
+     * @param view
+     */
     public void validate(View view) {
         // Retrieve all the views that hold the users input
         EditText goalEditText   = (EditText) findViewById(R.id.GoalEditText);

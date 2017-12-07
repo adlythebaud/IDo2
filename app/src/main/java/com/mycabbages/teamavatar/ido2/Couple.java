@@ -110,7 +110,7 @@ public class Couple {
     public void setAnniversary(Date anniversary) { this.mAnniversary = anniversary; }
 
     /**
-     * Creates a unique couple ID for the user
+     * Creates a unique couple ID for the user using the {@link UUID} library.
      *
      * @see UUID
      */

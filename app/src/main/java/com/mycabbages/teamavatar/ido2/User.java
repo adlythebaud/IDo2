@@ -19,9 +19,6 @@ public class User {
     // A tag for Log
     public static final String USERLOG = "User_log";
 
-    // The singletons instantiation
-    private static User user = new User();
-
     // The users fields
     private String mEmail;
     private Date mBirthday;
