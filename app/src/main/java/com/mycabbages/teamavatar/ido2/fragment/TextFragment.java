@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -57,7 +56,7 @@ public class TextFragment extends BaseFragment {
         // Retrieve the list of messages from the Couple section in Firebase.
         firebaseAdapter = new FirebaseListAdapter<TextMessage>(super.getActivity(),
                 TextMessage.class, R.layout.message,
-                FirebaseDatabase.getInstance().getReference()) {
+                FirebaseDatabase.getInstance().getReferenceFromUrl("https://ido2-18f4f.firebaseio.com/couples/theb12345/chat")) {
             @Override
             protected void populateView(View v, TextMessage model, int position) {
                 // Get references to the views of message.xml
@@ -101,6 +100,8 @@ public class TextFragment extends BaseFragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         uUID = mUser.getUid();
+
+
 
         // get the coupleID from the currently logged in user.
         mDatabase.child("users").child(uUID).child("coupleID").addValueEventListener(new ValueEventListener() {
