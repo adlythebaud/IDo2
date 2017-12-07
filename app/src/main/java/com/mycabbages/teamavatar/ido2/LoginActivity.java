@@ -229,15 +229,12 @@ public class LoginActivity extends AppCompatActivity {
      * @param email
      */
     public void addUserToDatabase(String firstName, String lastName, final String coupleID, String email) {
-        // create a user object.
-//        final User user = User.getInstance();
-//        user.setFirstName(firstName);
-//        user.setLastName(lastName);
-//        user.setCoupleID(coupleID);
-//        user.setEmail(email);
+
 
         final User user = new User(firstName, lastName, coupleID, email);
 
+
+        // TODO: Add pushNotifications section to this Couple constructor
         // create a couple object. Assume the user is always the husband for now...
         final Couple couple = new Couple(user.getLastName(), user, null, null);
 
@@ -272,27 +269,25 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                 } else {
-                    // coupleID does not exist...
+                    // coupleID does not exist. Add a couple to the database with initial chat and push notification info.
                     Log.d(LOGINLOG, "adding new couple to firebase");
                     DatabaseReference coupleRef = mDatabase.child("couples").child(coupleID);
                     coupleRef.setValue(couple);
 
+                    // Add a chat child to each couple. This is where their text messages will reside.
                     DatabaseReference chatRef =  coupleRef.child("chat");
-//                  DatabaseReference notifRef = coupleRef.child(coupleID).child("push notifications").push();
-
                     Vector <TextMessage> v = new Vector<>();
-
-//                    v.add("Hello! this is a space where you can chat with your boo thang.");
-//                    v.add("Send messages to your spouse about whatever you'd like");
-//                    v.add("Don't worry, this is a private space.");
-
-
-
                     TextMessage tm = new TextMessage("test message", user.getFirstName());
                     v.add(tm);
-
                     chatRef.setValue(v);
 
+                    // Add a push notifications child to each couple. This is where their text messages will reside.
+                    DatabaseReference notifRef = coupleRef.child("push_notifications");
+                    Vector <PushNotification> vPushNotif = new Vector<>();
+                    PushNotification firstNotif = new PushNotification("Hey " + user.getFirstName() +
+                            "! Go get your spouse to download our app!", "Welcome!", 6000);
+                    vPushNotif.add(firstNotif);
+                    notifRef.setValue(vPushNotif);
                 }
             }
 
@@ -301,12 +296,6 @@ public class LoginActivity extends AppCompatActivity {
                 // error handle here....
             }
         });
-
-
-        // save this new user in firebase database tree under "users" child tree.
-
-        // create a new couple in "couples" tree, add user to it.
-
 
     }
 

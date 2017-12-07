@@ -1,10 +1,7 @@
 package com.mycabbages.teamavatar.ido2;
 
 
-import android.app.Activity;
-
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by Preston on 11/17/2017.
@@ -16,9 +13,15 @@ public class PushNotification implements Serializable {
     private String message;
     private String notificationTitle;
     private boolean sent;
-
-    PushNotification(){
+    public PushNotification(){
         sent = false;
+    }
+
+    public PushNotification(String message, String notificationTitle, long timeToSend) {
+        this.message = message;
+        this.notificationTitle = notificationTitle;
+        this.timeToSend = timeToSend;
+        this.sent = false;
     }
 
     public long getTimeToSend() {
