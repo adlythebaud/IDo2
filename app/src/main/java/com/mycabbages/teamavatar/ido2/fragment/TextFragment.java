@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -46,6 +47,7 @@ public class TextFragment extends BaseFragment {
 
         // Retrieve the list of messages from the Couple section in Firebase.
         firebaseAdapter = new FirebaseListAdapter<TextMessage>(super.getActivity(), TextMessage.class,
+
                 R.layout.message, FirebaseDatabase.getInstance().getReference()) {
             @Override
             protected void populateView(View v, TextMessage model, int position) {
@@ -125,7 +127,9 @@ public class TextFragment extends BaseFragment {
 
                 // Read the input field and push a new instance
                 // of TextMessage to the Firebase database
+
                 newChatMessageRef.setValue(new TextMessage(input.getText().toString(), mUser.getEmail()));
+
 
                 // clear the input
                 input.setText("");

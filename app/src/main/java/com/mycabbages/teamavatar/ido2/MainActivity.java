@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ListView;
 import android.view.WindowManager;
+
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -14,12 +16,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.mycabbages.teamavatar.ido2.View.MenuTabsView;
 import com.mycabbages.teamavatar.ido2.adapter.MainPagerAdapter;
 
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+
 public class MainActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private FirebaseUser user;
 
+    public static ArrayList<Goal> goals;
+    ListView listView;
 
+    Date date;
+    Calendar calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,23 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//        final ListView goalList = (ListView) findViewById(R.id.goal_list);
-//        List<Goal> goals = new ArrayList<>();
-//        goals.add()
-
-
-//        final List<String> goal_list = new ArrayList<String>(Arrays.asList(goals));
-//
-//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
-//                (this, R.layout.goal_view , goal_list);
-
-        // Add a header to the ListView
-//        LayoutInflater inflater = getLayoutInflater();
-//        ViewGroup header = (ViewGroup)inflater.inflate(R.layout.header,goalList,false);
-        //goalList.addHeaderView(header);
-
-        //DataBind ListView with items from ArrayAdapter
-        //goalList.setAdapter(arrayAdapter);
+        //listView = new ListView(findViewById(R.id.goal_list));
 
 
 
