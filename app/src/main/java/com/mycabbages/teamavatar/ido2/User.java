@@ -43,14 +43,10 @@ public class User {
     }
 
     /**
-     * Returns the singletons instantiation, that can then be referenced
+     * Constructs a new User with the given email
      *
-     * @return The single instantiation of user
+     * @param email
      */
-
-
-    //Took out non-default constructor to get ready for singleton
-    //Non-default Constructor to initialize the email as user is made
     public User(String email) {
         mEmail = email;
         mBirthday = null;
@@ -60,11 +56,19 @@ public class User {
         mGoals = new Vector<Goal>();
     }
 
-    public User(String _firstName, String _lastName, String _coupleID, String _email) {
-        this.mFirstName = _firstName;
-        this.mLastName = _lastName;
-        this.mCoupleID = _coupleID;
-        this.mEmail = _email;
+    /**
+     * Constructs a new {@link User} with the given name, coupleID, and email.
+     *
+     * @param firstName
+     * @param lastName
+     * @param coupleID
+     * @param email
+     */
+    public User(String firstName, String lastName, String coupleID, String email) {
+        this.mFirstName = firstName;
+        this.mLastName = lastName;
+        this.mCoupleID = coupleID;
+        this.mEmail = email;
     }
 
     //Getters and Setters
