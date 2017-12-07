@@ -11,13 +11,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by Preston on 11/17/2017.
+ * A Base class for the fragments we will be using.
+ *
+ * @author Preston
  */
 
 public abstract class BaseFragment extends Fragment {
     private View mRoot;
 
-
+    /**
+     * Creates the fragment recieved by inflating its view.
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -26,6 +35,11 @@ public abstract class BaseFragment extends Fragment {
         return mRoot;
     }
 
+    /**
+     * Sends the Layout Resource ID.
+     *
+     * @return The layout resource ID
+     */
     @LayoutRes
     public abstract int getLayoutResId();
 
