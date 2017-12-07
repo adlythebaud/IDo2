@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,14 +34,18 @@ public class TextFragment extends BaseFragment {
     private String coupleID;
     private String uUID;
     private String firstName;
-    private FirebaseListAdapter<TextMessage> adapter;
+    private FirebaseListAdapter<TextMessage> firebaseAdapter;
     private ListView listOfMessages;
 
     public static TextFragment create () { return new TextFragment(); }
 
+    /*
+    * Displays the list of messages retrieved from Firebase
+    */
     private void displayChatMessages(){
 
-        adapter = new FirebaseListAdapter<TextMessage>(super.getActivity(), TextMessage.class,
+        // Retrieve the list of messages from the Couple section in Firebase.
+        firebaseAdapter = new FirebaseListAdapter<TextMessage>(super.getActivity(), TextMessage.class,
                 R.layout.message, FirebaseDatabase.getInstance().getReference()) {
             @Override
             protected void populateView(View v, TextMessage model, int position) {
@@ -61,7 +64,7 @@ public class TextFragment extends BaseFragment {
             }
         };
 
-        listOfMessages.setAdapter(adapter);
+        listOfMessages.setAdapter(firebaseAdapter);
 
     }
 
