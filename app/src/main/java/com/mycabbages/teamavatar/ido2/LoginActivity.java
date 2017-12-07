@@ -145,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "auth success!",
                                     Toast.LENGTH_SHORT).show();
 
-                            //TODO: need to add last name, first name, coupleID. You don't need password.
+
 
                              addUserToDatabase(firstName, lastName, coupleID, email);
 
