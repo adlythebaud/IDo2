@@ -144,13 +144,11 @@ public class LoginActivity extends AppCompatActivity {
 
                             //TODO: need to add last name, first name, coupleID. You don't need password.
 
-                             addUserToDatabase(firstName, lastName, coupleID, email);
+                            addUserToDatabase(firstName, lastName, coupleID, email);
 
-                             // start a new intent
-                             goToHome();
+                            // start a new intent
+                            goToHome();
                         }
-
-                        // ...
                     }
                 });
     }
@@ -246,9 +244,9 @@ public class LoginActivity extends AppCompatActivity {
         // create a new reference under the users in FB, add the user to the database
         DatabaseReference userRef = mDatabase.child("users").child(mUser.getUid());
 
-        // You can change the users ID to be their email address.
-        // DatabaseReference userRef = mDatabase.child("users").child(user.getEmail());
+        // save this new user in firebase database tree under "users" child tree.
         userRef.setValue(user);
+        // create a new couple in "couples" tree, add user to it.
 
 
         // handle for if coupleID is found in database
@@ -302,13 +300,6 @@ public class LoginActivity extends AppCompatActivity {
                 // error handle here....
             }
         });
-
-
-        // save this new user in firebase database tree under "users" child tree.
-
-        // create a new couple in "couples" tree, add user to it.
-
-
     }
 
     /*
