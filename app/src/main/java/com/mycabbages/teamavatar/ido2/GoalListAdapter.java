@@ -1,20 +1,27 @@
 package com.mycabbages.teamavatar.ido2;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 //import static com.mycabbages.teamavatar.ido2.MainActivity.goals;
@@ -27,7 +34,8 @@ public class GoalListAdapter extends ArrayAdapter<Goal> {
     ArrayList<Goal> goal ;
     private Context context;
     int resource = 0;
-    Calendar calendar;
+    int index;
+    //Calendar calendar;
 
 
     public GoalListAdapter(@NonNull Context context, int resource, ArrayList<Goal> data) {
@@ -49,89 +57,56 @@ public class GoalListAdapter extends ArrayAdapter<Goal> {
         if (view == null) {
             view = layoutInflater.inflate(R.layout.goal_view, null, false);
         }
-            //calendar.getTimeInMillis();
 
-            TextView textViewName = view.findViewById(R.id.goal);
-            //TextView textViewTeam = view.findViewById(R.id.textViewTeam);
-        ProgressBar progressBar = view.findViewById(R.id.timeLeft);
+        TextView textViewName = view.findViewById(R.id.goal);
 
-        calendar = Calendar.getInstance();
-        float timeleft =  (((float)calendar.getTimeInMillis()- goal.get(position).getStartDate())/
-                (goal.get(position).getStartDate() - goal.get(position).getEndDate())) * 100;
-        progressBar.setProgress((int)timeleft);
+        TextView textViewTime = view.findViewById(R.id.time_left_text);
+        Calendar calendar = new GregorianCalendar();
+        long timeNow = calendar.getTimeInMillis();
 
+        Calendar calendar1 = new GregorianCalendar();
+        calendar1 = goal.get(position).getDateAndTimeToComplete();
+        long timeFinish = calendar1.getTimeInMillis();
+        timeFinish = timeFinish - timeNow;
+        textViewName.setText(DateFormat.format("dd-HH-MM",
+                timeFinish));
 
-            Button checkBox = view.findViewById(R.id.checkBox);
+        ImageButton checkBox = view.findViewById(R.id.checkBox);
 
-            Goal goals = goal.get(position);
-            //System.out.println(position);
+        Goal goals = goal.get(position);
+        textViewName.setText(goals.getGoalTitle());
 
-            //adding values to the list item
-
-            textViewName.setText(goals.getGoalTitle());
-
-        //adding a click listener to the button to remove item from the list
-//        checkBox.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                System.out.println("button pushed");
 //                //we will call this method to remove the selected value from the list
 //                //we are passing the position which is to be removed in the method
-//                removeHero(position);
+//              removeGoal(position);
+                goal.remove(position);
+                //reloading the list
+                notifyDataSetChanged();
+            }
+        });
+        return view;
+    }
+
+
+
+//    private void removeGoal(final int position) {
+//        //Creating an alert dialog to confirm the deletion
+//        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//        builder.setTitle("Are you sure you want to delete this?");
+//
+//        //if the response is positive in the alert
+//        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                //removing the item
+//                goal.remove(position);
+//                //reloading the list
+//                notifyDataSetChanged();
 //            }
 //        });
-
-
-        return view;
-
-
-
-//    private class GoalHolder{
-//        TextView  textGoal;
 //    }
-//
-//
-//    public int getCount() {
-//
-//        if(goal.size()<=0)
-//            return 1;
-//        return data.size();
-//    }
-//
-//    public Goal getItem(int position) {
-//        return position;
-//    }
-//
-//    public long getItemId(int position) {
-//        return position;
-//    }
-//
-//    @Override
-//    public View getView(int position, View convertView, ViewGroup parent){
-//        RecyclerView.ViewHolder holder =
-//    //GoalHolder holder = null;
-//    //LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-//        if (convertView == null) {
-//            convertView =  inflater.inflate(R.layout.goal_view, parent, false);
-//            holder = new GoalHolder();
-//            holder.textGoal = (TextView) convertView.findViewById(R.id.goal);
-//            convertView.setTag(holder);
-//
-//
-////            Goal goals = getItem(postition);
-////            TextView goalText = (TextView) customView.findViewById(R.id.goal_list);
-////            goalText.setText(goals.getGoalTitle());
-//
-//        }
-//        else {
-//            holder = (GoalHolder) convertView.getTag();
-//        }
-//
-//
-//        Goal goals = goal.get(position);
-
-
-
-        //return convertView;
-
-    }
 }

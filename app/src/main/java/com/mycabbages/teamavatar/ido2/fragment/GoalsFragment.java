@@ -69,9 +69,10 @@ public class GoalsFragment extends BaseFragment {
             }
         });
 
-
+        //this is to display the goals in the listview
         date = new Date();
         calendar =  Calendar.getInstance();
+        calendar.getTimeInMillis();
         goals = new ArrayList<>();
         goals.add(new Goal(date,"kiss your wife"    , false,calendar));
         goals.add(new Goal(date,"go hunting"        , false,calendar));

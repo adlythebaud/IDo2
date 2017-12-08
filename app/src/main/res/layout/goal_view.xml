@@ -9,39 +9,31 @@
     android:orientation="vertical">
 
 
-    <CheckBox
+    <ImageButton
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_alignParentTop="true"
 
+        android:layout_marginStart="8dp"
+        android:background="@drawable/com_facebook_auth_dialog_cancel_background"
         app:layout_constraintEnd_toStartOf="@+id/goal"
         app:layout_constraintHorizontal_bias="0.307"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_alignParentTop="true"/>
+        app:srcCompat="@android:drawable/checkbox_off_background" />
 
     <TextView
         android:id="@+id/goal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/checkBox"
+        android:layout_toEndOf="@+id/checkBox "
         android:gravity="center_vertical|left"
         android:paddingBottom="10dp"
         android:text="text goes here"
-        tools:textSize="20sp" />
-
-    <ProgressBar
-        android:id="@+id/timeLeft"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="280dp"
-        android:layout_height="13dp"
-        android:layout_marginLeft="75dp"
-        android:layout_marginTop="33dp" />
+        tools:textSize="25sp" />
 
     <TextView
         android:id="@+id/time_left"
@@ -57,4 +49,12 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goal" />
+
+    <TextView
+        android:id="@+id/time_left_text"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@+id/time_left" />
+
 </RelativeLayout>

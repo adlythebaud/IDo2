@@ -327,12 +327,4 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void testnotification(View v)throws FileNotFoundException{
-        ReadWrite data = new ReadWrite();
-        pushImplimentation check = new pushImplimentation();
-        Calendar calendar = Calendar.getInstance();
-        data.addNotification(getApplicationContext(),"TEST3", "YIPPY3!!!!!!", calendar.getTimeInMillis()+ 200000);
-        check.alarmSet(getApplicationContext());
-       //check.checkNotifications(getApplicationContext());
-    }
 }

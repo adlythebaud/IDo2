@@ -12,10 +12,10 @@ import java.io.FileNotFoundException;
  */
 
 public class PushIt extends BroadcastReceiver {
-
+    // this listens to the phones alarm to activate the push notifications and sets new alarm
     @Override
 public void onReceive(final Context context, Intent intent) {
-        pushImplimentation push = new pushImplimentation();
+        PushImplimentation push = new PushImplimentation();
             push.alarmSet(context);
             try {
             push.checkNotifications(context);

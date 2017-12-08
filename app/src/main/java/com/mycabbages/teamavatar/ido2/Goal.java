@@ -14,20 +14,14 @@ import java.util.Calendar;
  */
 public class Goal {
 
-    private long mStartDate;
-    private long mEndDate;
-    private Date mDate;
     private String mTitle;
     private boolean mCompleted;
     private Calendar mDateAndTimeToComplete;
-    private long endDate;
-    private long startDate;
 
     /**
      * Contructs a new {@link Goal} with empty values
      */
     public Goal() {
-        mDate = null;
         mTitle = "";
         mCompleted = false;
         mDateAndTimeToComplete = null;
@@ -36,32 +30,15 @@ public class Goal {
     /**
      * Constructs a new {@link Goal} with a end {@link Date}, goal String, a boolean for completion.
      *
-     * @param date
      * @param title
      * @param completed
      * @param DateAndTimeToComplete
      */
-    public Goal(Date date, String title, boolean completed, Calendar DateAndTimeToComplete) {
-        mDate = date;
+    public Goal(String title, boolean completed, Calendar DateAndTimeToComplete) {
         mTitle = title;
         mCompleted = completed;
         mDateAndTimeToComplete = DateAndTimeToComplete;
-    }
 
-    public Date getDate(){
-        return mDate;
-    }
-    public void setDate(Date date) { this.mDate = date; }
-
-
-    public long getStartDate(){
-        return mStartDate;
-    }
-    public void setStartDate(long startDate){ this.mStartDate = startDate; }
-
-    public long getEndDate() {return mEndDate;}
-    public void setEndDate(long endDate) {
-        this.mEndDate = endDate;
     }
 
     public String getGoalTitle() { return mTitle; }

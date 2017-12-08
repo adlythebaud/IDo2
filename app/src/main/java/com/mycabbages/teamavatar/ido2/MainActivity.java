@@ -57,12 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-        //listView = new ListView(findViewById(R.id.goal_list));
-
-
-
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
