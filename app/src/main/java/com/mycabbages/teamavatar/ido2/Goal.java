@@ -29,9 +29,9 @@ public class Goal {
     /**
      * Constructs a new {@link Goal} with a end {@link Date}, goal String, a boolean for completion.
      *
-     * @param title
-     * @param completed
-     * @param DateAndTimeToComplete
+     * @param title The title to the displayed
+     * @param completed is the goal completed
+     * @param DateAndTimeToComplete Holds the date (mm-dd-yyyy) and time (hh-mm-ss) to be completed
      */
     public Goal(String title, boolean completed, Calendar DateAndTimeToComplete) {
         mTitle = title;

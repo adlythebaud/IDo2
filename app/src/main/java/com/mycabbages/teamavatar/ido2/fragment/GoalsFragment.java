@@ -80,10 +80,10 @@ public class GoalsFragment extends BaseFragment {
         date = new Date();
         calendar =  new GregorianCalendar();
         goals = new ArrayList<>();
-        goals.add(new Goal(date,"kiss your wife"    , false, calendar));
-        goals.add(new Goal(date,"go hunting"        , false, calendar));
-        goals.add(new Goal(date,"jump off bridge"   , false, calendar));
-        goals.add(new Goal(date,"sky diving"        , false, calendar));
+        goals.add(new Goal("kiss your wife"    , false, calendar));
+        goals.add(new Goal("go hunting"        , false, calendar));
+        goals.add(new Goal("jump off bridge"   , false, calendar));
+        goals.add(new Goal("sky diving"        , false, calendar));
         GoalListAdapter goaladapter = new GoalListAdapter(getContext(), R.id.goal_list, goals);
 
         //getActivity().setContentView(R.layout.fragment_goal);
