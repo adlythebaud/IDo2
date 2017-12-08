@@ -144,7 +144,6 @@ public class TextFragment extends BaseFragment {
 
                 // Read the input field and push a new instance
                 // of TextMessage to the Firebase database
-
                 newChatMessageRef.setValue(new TextMessage(input.getText().toString(), mUser.getEmail()));
 
 
@@ -153,6 +152,7 @@ public class TextFragment extends BaseFragment {
             }
         });
 
+        // Update our displayed chat messages
         displayChatMessages();
     }
     
