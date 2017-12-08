@@ -22,7 +22,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mycabbages.teamavatar.ido2.R;
 import com.mycabbages.teamavatar.ido2.TextMessage;
-import com.mycabbages.teamavatar.ido2.User;
 
 /**
  * This class inflates the UI for the texting fragment. Contains the business logic for sending
@@ -36,6 +35,7 @@ import com.mycabbages.teamavatar.ido2.User;
  */
 public class TextFragment extends BaseFragment {
 
+    public final static String TEXTLOG = "Text_log";
     private DatabaseReference mDatabase;
     private DatabaseReference mCoupleDatabase;
     private DatabaseReference mUserDatabase;
@@ -53,13 +53,14 @@ public class TextFragment extends BaseFragment {
 
     /*
     * Displays the list of messages retrieved from Firebase
+    * try to pass in mCoupleDatabase into here.
     */
     private void displayChatMessages(){
-
+        Log.d("Text Fragment", "mCoupleDatabase from within displayChatMessages: " + mCoupleDatabase);
         // Retrieve the list of messages from the Couple section in Firebase.
         firebaseAdapter = new FirebaseListAdapter<TextMessage>(super.getActivity(),
                 TextMessage.class, R.layout.message,
-                FirebaseDatabase.getInstance().getReferenceFromUrl("https://ido2-18f4f.firebaseio.com/couples/theb12345/chat")) {
+                FirebaseDatabase.getInstance().getReferenceFromUrl("https://ido2-18f4f.firebaseio.com/couples/pyan12345/chat")) {
             @Override
             protected void populateView(View v, TextMessage model, int position) {
                 // Get references to the views of message.xml
@@ -94,10 +95,9 @@ public class TextFragment extends BaseFragment {
     public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         listOfMessages = (ListView)root.findViewById(R.id.messageList);
+        FloatingActionButton fab = root.findViewById(R.id.sendFab);
 
         displayChatMessages();
-
-        FloatingActionButton fab = root.findViewById(R.id.sendFab);
 
         //Find all the dataBase references
         mUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -107,16 +107,16 @@ public class TextFragment extends BaseFragment {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mUserDatabase = mDatabase.child("users").child(uUID);
+        Log.d(TEXTLOG, "mUserDatabase: " + mUserDatabase.toString());
 
         // get the coupleID from the currently logged in user.
-        mDatabase.child("users").child(uUID).child("coupleID").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("users").child(uUID).child("coupleID").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 try {
                     if (dataSnapshot.getValue() != null) {
                         try {
                             coupleID = dataSnapshot.getValue().toString();
-                            mCoupleDatabase = mDatabase.child("couples").child(coupleID);
                             Log.d("TextFragment", "coupleID found: " + coupleID);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -134,7 +134,10 @@ public class TextFragment extends BaseFragment {
             }
         });
 
-        mUserDatabase.child("firstName").addValueEventListener(new ValueEventListener() {
+
+
+
+        mUserDatabase.child("firstName").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 try {
@@ -159,9 +162,19 @@ public class TextFragment extends BaseFragment {
             }
         });
 
-        // test that we still have the coupleID outside of the ValueEventListener
-        Log.d("TextFragment", "coupleID found: " + coupleID);
+        // once we have database info, let's display it to the UI.
+//        Log.d(TEXTLOG, "looking for " + coupleID + "'s chat ref...");
+//
+//        // test that we have the ID's...
+        Log.d(TEXTLOG, "coupleID Outside of listeners: " + coupleID);
+//        mCoupleDatabase = mDatabase.child("couples").child(coupleID).child("chat");
+//        Log.d(TEXTLOG, "mCoupleDatabase's chat ref: " + mCoupleDatabase.toString());
+//
+//        // test that we still have the coupleID outside of the ValueEventListener
+//        Log.d("TextFragment", "coupleID found: " + coupleID);
         // Test that we still have the first name outside of the ValueEventListener
+
+
 
         // Add a listener for a click or tap onto the message box.
         fab.setOnClickListener(new View.OnClickListener() {
@@ -188,9 +201,7 @@ public class TextFragment extends BaseFragment {
                 input.setText("");
             }
         });
-
         displayChatMessages();
     }
-    
 
 }
