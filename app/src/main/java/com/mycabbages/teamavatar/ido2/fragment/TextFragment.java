@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mycabbages.teamavatar.ido2.R;
 import com.mycabbages.teamavatar.ido2.TextMessage;
+import com.mycabbages.teamavatar.ido2.User;
 
 /**
  * This class inflates the UI for the texting fragment. Contains the business logic for sending
@@ -36,6 +37,8 @@ import com.mycabbages.teamavatar.ido2.TextMessage;
 public class TextFragment extends BaseFragment {
 
     private DatabaseReference mDatabase;
+    private DatabaseReference mCoupleDatabase;
+    private DatabaseReference mUserDatabase;
     private FirebaseUser mUser;
     private String coupleID;
     private String uUID;
@@ -96,12 +99,14 @@ public class TextFragment extends BaseFragment {
 
         FloatingActionButton fab = root.findViewById(R.id.sendFab);
 
+        //Find all the dataBase references
         mUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (mUser != null)
+            uUID = mUser.getUid();
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        uUID = mUser.getUid();
-
-
+        mUserDatabase = mDatabase.child("users").child(uUID);
 
         // get the coupleID from the currently logged in user.
         mDatabase.child("users").child(uUID).child("coupleID").addValueEventListener(new ValueEventListener() {
@@ -111,6 +116,7 @@ public class TextFragment extends BaseFragment {
                     if (dataSnapshot.getValue() != null) {
                         try {
                             coupleID = dataSnapshot.getValue().toString();
+                            mCoupleDatabase = mDatabase.child("couples").child(coupleID);
                             Log.d("TextFragment", "coupleID found: " + coupleID);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -128,8 +134,34 @@ public class TextFragment extends BaseFragment {
             }
         });
 
+        mUserDatabase.child("firstName").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                try {
+                    if (dataSnapshot.getValue() != null) {
+                        try {
+                            firstName = dataSnapshot.getValue().toString();
+                            Log.d("TextFragment", "firstName found: " + firstName);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Log.d("TextFragment", "no value present for " + mUser.getEmail() + "'s firstName");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("TextFragment", "Cancelled the read for Users first name.");
+            }
+        });
+
         // test that we still have the coupleID outside of the ValueEventListener
         Log.d("TextFragment", "coupleID found: " + coupleID);
+        // Test that we still have the first name outside of the ValueEventListener
 
         // Add a listener for a click or tap onto the message box.
         fab.setOnClickListener(new View.OnClickListener() {
@@ -141,12 +173,15 @@ public class TextFragment extends BaseFragment {
                 getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.
                         SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-                final DatabaseReference newChatMessageRef = mDatabase.child("couples").child(coupleID).child("chat").push();
+                final DatabaseReference newChatMessageRef = mCoupleDatabase.child("chat").push();
 
                 // Read the input field and push a new instance
                 // of TextMessage to the Firebase database
 
-                newChatMessageRef.setValue(new TextMessage(input.getText().toString(), mUser.getEmail()));
+                if (!firstName.equals("") && firstName != null)
+                    newChatMessageRef.setValue(new TextMessage(input.getText().toString(), firstName));
+                else
+                    newChatMessageRef.setValue(new TextMessage(input.getText().toString(), mUser.getEmail()));
 
 
                 // clear the input
