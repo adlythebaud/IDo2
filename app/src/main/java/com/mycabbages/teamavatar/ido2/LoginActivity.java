@@ -234,10 +234,7 @@ public class LoginActivity extends AppCompatActivity {
     */
     public void addUserToDatabase(String firstName, String lastName, final String coupleID, String email) {
 
-
-
         // Create a User object to store in the database
-
         final User user = new User(firstName, lastName, coupleID, email);
 
         // create a couple object. Assume the user is always the husband for now...
@@ -247,9 +244,9 @@ public class LoginActivity extends AppCompatActivity {
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         // create a new reference under the users in FB, add the user to the database
         DatabaseReference userRef = mDatabase.child("users").child(mUser.getUid());
-
         // save this new user in firebase database tree under "users" child tree.
         userRef.setValue(user);
+
         // create a new couple in "couples" tree, add user to it.
 
 
@@ -261,14 +258,14 @@ public class LoginActivity extends AppCompatActivity {
                 if (dataSnapshot.child(coupleID).exists()) {
                     // The coupleID already exists, add this user to the couple...
                     // To determine whether husband or wife needs to be created,
-                    // check if the child of this child exists.
+                    // check if the spouse1 of the couple exists
                     if (dataSnapshot.child(coupleID).child("spouse1").exists()) {
-                        // add wife child.
+                        // add wife to the couple.
                         Log.d(LOGINLOG, "adding spouse2 to " + coupleID);
                         DatabaseReference spouse2Ref = couples.child(coupleID).child("spouse2");
                         spouse2Ref.setValue(user);
                     } else {
-                        // add husband child.
+                        // add husband to the couple.
                         Log.d(LOGINLOG, "adding spouse1 to " + coupleID);
                         DatabaseReference spouse1Ref = couples.child(coupleID).child("spouse1");
                         spouse1Ref.setValue(user);
@@ -287,8 +284,6 @@ public class LoginActivity extends AppCompatActivity {
 //                    v.add("Hello! This is a space where you can chat with your boo thang.");
 //                    v.add("Send messages to your spouse about whatever you'd like.");
 //                    v.add("Don't worry, this is a private space.");
-
-
 
 
                     TextMessage tm = new TextMessage("test message", user.getFirstName());
