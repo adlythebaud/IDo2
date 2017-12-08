@@ -28,6 +28,15 @@ public class AddGoalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_goal);
     }
 
+    /**
+     * Validates the retrieved {@link User} information before creating the {@link Goal}.
+     *
+     * Checks the {@link Goal} String to make sure information was entered. Puts the time into
+     * 24 hour time to be correctly recieved by a {@link GregorianCalendar}. Also removes one from
+     * the month to be correctly indexed by the {@link GregorianCalendar}.
+     *
+     * @param view
+     */
     public void validate(View view) {
         // Retrieve all the views that hold the users input
         EditText goalEditText   = (EditText) findViewById(R.id.GoalEditText);
@@ -40,6 +49,7 @@ public class AddGoalActivity extends AppCompatActivity {
 
         // Pull the users input out of each view component
         String goalTitle    = goalEditText.getText().toString();
+
         //Subtract 1 from the month for the calendar (Jan == 0 and Dec == 1) according to calendar
         int goalMonth    = Integer.parseInt(monthSpin.getSelectedItem().toString()) - 1;
         int goalDay      = Integer.parseInt(daySpin.getSelectedItem().toString());
@@ -72,8 +82,16 @@ public class AddGoalActivity extends AppCompatActivity {
         Log.d(TAG, "C_AM or PM: " + String.valueOf(newGoal.get(Calendar.AM_PM)));
 
         //TODO: Add the ability for all the info to be added into the users goals
+        /* Send these two variables to your goal location;
+        newGoal - GregorianCalendar class, can be stored in a Calender abstract class
+        goalTitle - String class, holds the literal string of the goal.
+         */
     }
 
+    /*
+    * If the cancel button is clicked this function is called. This will return the user back
+    * to the MainActvity.
+    */
     public void cancel(View view) {
         // Return to the MainActivity if the user cancels
         Intent intentToStartMainActivity = new Intent(AddGoalActivity.this,

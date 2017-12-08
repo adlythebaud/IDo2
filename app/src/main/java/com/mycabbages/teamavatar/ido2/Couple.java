@@ -104,13 +104,15 @@ public class Couple {
 
 
     public List<PushNotification> getPushNotifications() { return mPushNotifications; }
-    public void setPushNotifications(List<PushNotification> pushNotifications) { this.mPushNotifications = pushNotifications; }
+    public void setPushNotifications(List<PushNotification> pushNotifications) {
+        this.mPushNotifications = pushNotifications;
+    }
 
     public Date getAnniversary() { return mAnniversary; }
     public void setAnniversary(Date anniversary) { this.mAnniversary = anniversary; }
 
     /**
-     * Creates a unique couple ID for the user
+     * Creates a unique couple ID for the user using the {@link UUID} library.
      *
      * @see UUID
      */

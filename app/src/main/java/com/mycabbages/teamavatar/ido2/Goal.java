@@ -5,17 +5,27 @@ import java.util.Date;
 import java.util.Calendar;
 
 /**
- * Created by Conrad on 11/3/2017.
+ * Holds the goal information needed to set, retrieve, and handle goal setting and reminders.
+ *
+ * Holds the start time of the goals as well as the end time when the user needs to be reminded
+ * of it. Holds the goal string, it cam be set or retrieved by the client.
+ *
+ * @author Conrad
  */
-
 public class Goal {
+
     private long mStartDate;
     private long mEndDate;
     private Date mDate;
     private String mTitle;
     private boolean mCompleted;
     private Calendar mDateAndTimeToComplete;
+    private long endDate;
+    private long startDate;
 
+    /**
+     * Contructs a new {@link Goal} with empty values
+     */
     public Goal() {
         mDate = null;
         mTitle = "";
@@ -23,6 +33,14 @@ public class Goal {
         mDateAndTimeToComplete = null;
     }
 
+    /**
+     * Constructs a new {@link Goal} with a end {@link Date}, goal String, a boolean for completion.
+     *
+     * @param date
+     * @param title
+     * @param completed
+     * @param DateAndTimeToComplete
+     */
     public Goal(Date date, String title, boolean completed, Calendar DateAndTimeToComplete) {
         mDate = date;
         mTitle = title;
@@ -34,6 +52,7 @@ public class Goal {
         return mDate;
     }
     public void setDate(Date date) { this.mDate = date; }
+
 
     public long getStartDate(){
         return mStartDate;
