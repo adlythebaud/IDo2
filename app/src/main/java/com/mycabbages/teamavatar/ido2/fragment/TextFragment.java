@@ -162,6 +162,7 @@ public class TextFragment extends BaseFragment {
         // test that we still have the coupleID outside of the ValueEventListener
         Log.d("TextFragment", "coupleID found: " + coupleID);
         // Test that we still have the first name outside of the ValueEventListener
+        Log.d("TextFragment", "FirstName found: " + firstName);
 
         // Add a listener for a click or tap onto the message box.
         fab.setOnClickListener(new View.OnClickListener() {
