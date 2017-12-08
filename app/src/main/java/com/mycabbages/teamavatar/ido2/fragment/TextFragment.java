@@ -65,6 +65,9 @@ public class TextFragment extends BaseFragment {
                 TextView messageUser = (TextView)v.findViewById(R.id.message_user);
                 TextView messageTime = (TextView)v.findViewById(R.id.message_time);
 
+                // Test that we have the correct text messaage content
+                //Log.d("messageText", "content it: " + messageText);
+
                 // Set their text
                 messageText.setText(model.getMessageText());
                 messageUser.setText(model.getMessageUser());
