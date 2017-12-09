@@ -22,7 +22,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mycabbages.teamavatar.ido2.R;
 import com.mycabbages.teamavatar.ido2.TextMessage;
-import com.mycabbages.teamavatar.ido2.User;
 
 /**
  * This class inflates the UI for the texting fragment. Contains the business logic for sending
@@ -36,8 +35,9 @@ import com.mycabbages.teamavatar.ido2.User;
  */
 public class TextFragment extends BaseFragment {
 
+    public final static String TEXTLOG = "Text_log";
     private DatabaseReference mDatabase;
-    private DatabaseReference mCoupleDatabase;
+    private DatabaseReference mCoupleChatDatabase;
     private DatabaseReference mUserDatabase;
     private FirebaseUser mUser;
     private String coupleID;
@@ -51,15 +51,91 @@ public class TextFragment extends BaseFragment {
     */
     public static TextFragment create () { return new TextFragment(); }
 
+
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        getFirebaseData();
+//        Log.d("TextFragment", "coupleID from onCreate found: " + coupleID);
+//        Log.d("TextFragment", "firstName from onCreate found: " + firstName);
+    }
+
     /*
-    * Displays the list of messages retrieved from Firebase
-    */
+            * Returns the layout resource ID for the TextFragment
+            */
+    @Override
+    public int getLayoutResId() { return R.layout.fragment_text;}
+
+    /******************************************************************************
+     * IN ON CREATE VIEW
+     * Used to do any work related to the UI.
+     * This function is called after the UI is inflated.
+     ******************************************************************************/
+    @Override
+    public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        listOfMessages = (ListView)root.findViewById(R.id.messageList);
+        FloatingActionButton fab = root.findViewById(R.id.sendFab);
+
+        getFirebaseData();
+
+
+        /************************
+         * ON CLICK LISTENER
+         * Send text message to
+         * firebase.
+         ************************/
+        // Add a listener for a click or tap onto the message box.
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText input = getActivity().findViewById(R.id.messageBox);
+
+                // This allows the message box to move up with the keyboard pop-up
+                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.
+                        SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+                Log.d("TextFragment", "coupleID from on click listener found: " + coupleID);
+                Log.d("TextFragment", "firstName from on click listener found: " + firstName);
+
+                final DatabaseReference newChatMessageRef = mCoupleChatDatabase.push();
+
+                // Read the input field and push a new instance
+                // of TextMessage to the Firebase database
+
+                if (input.getText().toString() != "") {
+                    if (!firstName.equals("") && firstName != null)
+                        newChatMessageRef.setValue(new TextMessage(input.getText().toString(), firstName));
+                    else
+                        newChatMessageRef.setValue(new TextMessage(input.getText().toString(), mUser.getEmail()));
+                }
+
+                // clear the input
+                input.setText("");
+                displayChatMessages();
+            }
+        });
+//        displayChatMessages(); // if the UI isn't updating, uncomment this line and comment the code two lines above.
+    }
+
+
+    /******************************************************************************
+     * DISPLAY CHAT MESSAGES
+     * Display the chat messages from firebase.
+     ******************************************************************************/
     private void displayChatMessages(){
+
+
+        // when this is called a second time from onClickListener, the values are there.
+        Log.d("TextFragment", "coupleID from displayChatMessages found: " + coupleID);
+        Log.d("TextFragment", "firstName from displayChatMessages found: " + firstName);
 
         // Retrieve the list of messages from the Couple section in Firebase.
         firebaseAdapter = new FirebaseListAdapter<TextMessage>(super.getActivity(),
                 TextMessage.class, R.layout.message,
-                FirebaseDatabase.getInstance().getReferenceFromUrl("https://ido2-18f4f.firebaseio.com/couples/theb12345/chat")) {
+                mCoupleChatDatabase/*FirebaseDatabase.getInstance().getReferenceFromUrl("https://ido2-18f4f.firebaseio.com/couples/pyan12345/chat")*/) {
             @Override
             protected void populateView(View v, TextMessage model, int position) {
                 // Get references to the views of message.xml
@@ -81,75 +157,63 @@ public class TextFragment extends BaseFragment {
 
     }
 
-    /*
-    * Returns the layout resource ID for the TextFragment
-    */
-    @Override
-    public int getLayoutResId() { return R.layout.fragment_text;}
-
-    /*
-    * Used to do any work related to the UI. This function is called after the UI is inflated.
-    */
-    @Override
-    public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        listOfMessages = (ListView)root.findViewById(R.id.messageList);
-
-        displayChatMessages();
-
-        FloatingActionButton fab = root.findViewById(R.id.sendFab);
-
+    /******************************************************************************
+     * GET FIREBASE DATA
+     * Get the data from firebase
+     ******************************************************************************/
+    private void getFirebaseData() {
         //Find all the dataBase references
         mUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (mUser != null)
             uUID = mUser.getUid();
 
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mUserDatabase = mDatabase.child("users").child(uUID);
 
+        Log.d(TEXTLOG, "mUserDatabase: " + mUserDatabase.toString());
+
+        /************************
+         * GET COUPLE ID
+         ************************/
         // get the coupleID from the currently logged in user.
         mDatabase.child("users").child(uUID).child("coupleID").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                try {
-                    if (dataSnapshot.getValue() != null) {
-                        try {
-                            coupleID = dataSnapshot.getValue().toString();
-                            mCoupleDatabase = mDatabase.child("couples").child(coupleID);
-                            Log.d("TextFragment", "coupleID found: " + coupleID);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Log.d("TextFragment", "no value present for " + mUser.getEmail() + "'s coupleID");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if (dataSnapshot.getValue() != null) {
+                    coupleID = dataSnapshot.getValue().toString();
+                    mCoupleChatDatabase = mDatabase.child("couples").child(coupleID).child("chat");
+                    Log.d("TextFragment", "coupleID found: " + coupleID);
+                    Log.d(TEXTLOG, "mCoupleChatDatabase found: " + mCoupleChatDatabase);
+                } else {
+                    Log.d("TextFragment", "no value present for " + mUser.getEmail() + "'s coupleID");
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.d("TextFragment", "cancelled to read coupleID");
             }
+
+
+
         });
 
+        /************************
+         * GET FIRST NAME
+         ************************/
         mUserDatabase.child("firstName").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                try {
-                    if (dataSnapshot.getValue() != null) {
-                        try {
-                            firstName = dataSnapshot.getValue().toString();
-                            Log.d("TextFragment", "firstName found: " + firstName);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Log.d("TextFragment", "no value present for " + mUser.getEmail() + "'s firstName");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if (dataSnapshot.getValue() != null) {
+                    firstName = dataSnapshot.getValue().toString();
+                    Log.d("TextFragment", "firstName found: " + firstName);
+
+                    // call displayChatMessages because we have all the firebase info we need.
+                    displayChatMessages();
+                } else {
+                    Log.d("TextFragment", "no value present for " + mUser.getEmail() + "'s firstName");
                 }
             }
 
@@ -159,39 +223,10 @@ public class TextFragment extends BaseFragment {
             }
         });
 
-        // test that we still have the coupleID outside of the ValueEventListener
-        Log.d("TextFragment", "coupleID found: " + coupleID);
-        // Test that we still have the first name outside of the ValueEventListener
-        Log.d("TextFragment", "FirstName found: " + firstName);
-
-        // Add a listener for a click or tap onto the message box.
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EditText input = getActivity().findViewById(R.id.messageBox);
-
-                // This allows the message box to move up with the keyboard pop-up
-                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.
-                        SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
-                final DatabaseReference newChatMessageRef = mCoupleDatabase.child("chat").push();
-
-                // Read the input field and push a new instance
-                // of TextMessage to the Firebase database
-
-                if (!firstName.equals("") && firstName != null)
-                    newChatMessageRef.setValue(new TextMessage(input.getText().toString(), firstName));
-                else
-                    newChatMessageRef.setValue(new TextMessage(input.getText().toString(), mUser.getEmail()));
-
-
-                // clear the input
-                input.setText("");
-            }
-        });
-
-        displayChatMessages();
+        // once we have database info, let's display it to the UI.
+        // check for values outside of listener.
+        Log.d("TextFragment", "coupleID outside listener found: " + coupleID);
+        Log.d("TextFragment", "firstName outside listener found: " + firstName);
     }
-    
-
 }
+    

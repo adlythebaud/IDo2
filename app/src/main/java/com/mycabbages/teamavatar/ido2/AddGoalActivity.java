@@ -99,4 +99,7 @@ public class AddGoalActivity extends AppCompatActivity {
                 MainActivity.class);
         startActivity(intentToStartMainActivity);
     }
+    public void addGoal(View view){
+
+    }
 }

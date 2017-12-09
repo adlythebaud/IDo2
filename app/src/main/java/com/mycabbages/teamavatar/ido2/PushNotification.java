@@ -4,7 +4,12 @@ package com.mycabbages.teamavatar.ido2;
 import java.io.Serializable;
 
 /**
+<<<<<<< HEAD
  * Allows for easy access to the phone to push notifications onto the Users phone from the app
+=======
+ * Holds the information needed for a push notification. This includes the title and the message to
+ * be displayed, the time to send it, and whether or not it has been sent or not.
+>>>>>>> master
  *
  * @author Preston
  */
@@ -15,21 +20,22 @@ public class PushNotification implements Serializable {
     private boolean sent;
 
     /**
-     * Initializes all fields to an "empty" value
+     * Default constructor fills the object with empty variables
      */
     public PushNotification(){
-        notificationTitle = "";
         timeToSend = 0;
         message = "";
+        notificationTitle = "";
         sent = false;
     }
 
     /**
-     * Sets the {@link PushNotification}s message, title, and time to send to the received values.
+     * Recieves a message, title, and time to send. Will construct the object with the given
+     * variables.
      *
-     * @param message The message of the notification to the user
-     * @param notificationTitle The title of the push notification
-     * @param timeToSend The time to send the notification to the user
+     * @param message Message to the user
+     * @param notificationTitle Title to let the user know where the notification is coming from
+     * @param timeToSend The time the app will send the notification
      */
     public PushNotification(String message, String notificationTitle, long timeToSend) {
         this.message = message;
