@@ -228,10 +228,13 @@ public class TextFragment extends BaseFragment {
         Log.d("TextFragment", "coupleID outside listener found: " + coupleID);
         Log.d("TextFragment", "firstName outside listener found: " + firstName);
 
+
     }
 
 
 
 
 
+
 }
+    
