@@ -24,6 +24,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
 //import static com.mycabbages.teamavatar.ido2.MainActivity.goals;
 
 /**
@@ -35,7 +37,7 @@ public class GoalListAdapter extends ArrayAdapter<Goal> {
     private Context context;
     int resource = 0;
     int index;
-    //Calendar calendar;
+    Calendar calendar;
 
 
     public GoalListAdapter(@NonNull Context context, int resource, ArrayList<Goal> data) {
@@ -61,15 +63,28 @@ public class GoalListAdapter extends ArrayAdapter<Goal> {
         TextView textViewName = view.findViewById(R.id.goal);
 
         TextView textViewTime = view.findViewById(R.id.time_left_text);
-        Calendar calendar = new GregorianCalendar();
-        long timeNow = calendar.getTimeInMillis();
+        Date date = new Date();
+       // long timeNow = date.getTime();
 
-        Calendar calendar1 = new GregorianCalendar();
+        //calendar.setTime(date);
+        Calendar calendar1;
+        Calendar cal = new GregorianCalendar();
         calendar1 = goal.get(position).getDateAndTimeToComplete();
+        //calendar1 = calendar - calendar1;
         long timeFinish = calendar1.getTimeInMillis();
-        timeFinish = timeFinish - timeNow;
-        textViewName.setText(DateFormat.format("dd-HH-MM",
-                timeFinish));
+        //timeFinish = timeFinish - timeNow;
+
+
+        System.out.println("Time in millsec. till 18:30 = "
+                + (cal.getTimeInMillis() - System.currentTimeMillis()));
+        long timeLeft = (cal.getTimeInMillis() - System.currentTimeMillis());
+
+
+        int hrs = (int) (MILLISECONDS.toHours(timeLeft) % 24);
+        int min = (int) (MILLISECONDS.toMinutes(timeLeft) % 60);
+        int days = (int) (MILLISECONDS.toDays(timeLeft) % 31);
+
+        textViewTime.setText(days+" days "+hrs+" hours "+min+" minutes ");
 
         ImageButton checkBox = view.findViewById(R.id.checkBox);
 
@@ -90,6 +105,7 @@ public class GoalListAdapter extends ArrayAdapter<Goal> {
         });
         return view;
     }
+
 
 
 

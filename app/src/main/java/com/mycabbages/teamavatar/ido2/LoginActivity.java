@@ -298,7 +298,7 @@ public class LoginActivity extends AppCompatActivity {
                     // Add a push notifications child to each couple. This is where their text messages will reside.
                     DatabaseReference notifRef = coupleRef.child("push_notifications");
                     Vector <PushNotification> vPushNotif = new Vector<>();
-                    PushNotification firstNotif = new PushNotification("Hey " + user.getFirstName() +
+                    PushNotification firstNotif = new PushNotification(getBaseContext().getApplicationContext(),"Hey " + user.getFirstName() +
                             "! Go get your spouse to download our app!", "Welcome!", 6000);
                     vPushNotif.add(firstNotif);
                     notifRef.setValue(vPushNotif);

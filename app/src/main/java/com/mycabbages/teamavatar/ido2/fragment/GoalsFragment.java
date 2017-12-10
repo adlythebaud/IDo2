@@ -22,10 +22,12 @@ import com.mycabbages.teamavatar.ido2.Goal;
 import com.mycabbages.teamavatar.ido2.GoalListAdapter;
 import com.mycabbages.teamavatar.ido2.MainActivity;
 import com.mycabbages.teamavatar.ido2.R;
+import com.mycabbages.teamavatar.ido2.User;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -37,16 +39,15 @@ public class GoalsFragment extends BaseFragment {
     private final static String TAG = "Goals_Fragment";
     private ImageView mAddGoalButton;
     private ImageView mTextNotification;
-     public static ArrayList<Goal> goals;
-     ListView listView;
+    public static ArrayList<Goal> goals;
+    ListView listView;
+    User user;
 
-     Date date;
-     Calendar calendar;
+    Date date;
+    Calendar calendar;
 
     public static GoalsFragment create() {
         return new GoalsFragment();
-
-
 
     }
 
@@ -70,8 +71,9 @@ public class GoalsFragment extends BaseFragment {
         });
 
         //this is to display the goals in the listView
-        calendar =  Calendar.getInstance();
-        calendar.getTimeInMillis();
+        calendar = new GregorianCalendar();
+        date = new Date();
+        calendar.setTime(date);
         goals = new ArrayList<>();
         goals.add(new Goal("kiss your wife"    , false,calendar));
         goals.add(new Goal("go hunting"        , false,calendar));
@@ -79,7 +81,6 @@ public class GoalsFragment extends BaseFragment {
         goals.add(new Goal("sky diving"        , false,calendar));
         GoalListAdapter goaladapter = new GoalListAdapter(getContext(), R.id.goal_list, goals);
 
-        //getActivity().setContentView(R.layout.fragment_goal);
         listView = (ListView) root.findViewById(R.id.goal_list);
 
         if (listView ==null){

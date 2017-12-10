@@ -52,7 +52,7 @@
 
     <TextView
         android:id="@+id/time_left_text"
-        android:layout_width="100dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_toEndOf="@+id/time_left" />
