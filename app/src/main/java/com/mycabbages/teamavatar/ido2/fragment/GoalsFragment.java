@@ -64,7 +64,6 @@ public class GoalsFragment extends BaseFragment {
     public void inOnCreateView(View root, @Nullable ViewGroup container,
                                @Nullable Bundle savedInstanceState) {
         mAddGoalButton = root.findViewById(R.id.add_goal_button);
-        mTextNotification = root.findViewById(R.id.text_notification_button);
 
         mAddGoalButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -297,6 +297,8 @@ public class LoginActivity extends AppCompatActivity {
      * Start intent to go to next activity after successful login and sign up.
      */
     public void goToHome() {
+        EditText passwordTextBox = findViewById(R.id.passwordInput);
+        passwordTextBox.setText("");
 
         // send coupleID and userID across activities.
         Intent intentToStartMainActivity = new Intent(LoginActivity.this,
