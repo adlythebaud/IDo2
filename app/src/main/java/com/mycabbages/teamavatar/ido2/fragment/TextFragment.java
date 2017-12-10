@@ -34,7 +34,6 @@ import com.mycabbages.teamavatar.ido2.TextMessage;
  * @author Madison
  */
 public class TextFragment extends BaseFragment {
-
     public final static String TEXTLOG = "Text_log";
     private DatabaseReference mDatabase;
     private DatabaseReference mCoupleChatDatabase;
@@ -126,22 +125,23 @@ public class TextFragment extends BaseFragment {
      * Display the chat messages from firebase.
      ******************************************************************************/
     private void displayChatMessages(){
-
-
         // when this is called a second time from onClickListener, the values are there.
         Log.d("TextFragment", "coupleID from displayChatMessages found: " + coupleID);
         Log.d("TextFragment", "firstName from displayChatMessages found: " + firstName);
 
         // Retrieve the list of messages from the Couple section in Firebase.
-        firebaseAdapter = new FirebaseListAdapter<TextMessage>(super.getActivity(),
+        firebaseAdapter = new FirebaseListAdapter<TextMessage>(this.getActivity(),
                 TextMessage.class, R.layout.message,
                 mCoupleChatDatabase/*FirebaseDatabase.getInstance().getReferenceFromUrl("https://ido2-18f4f.firebaseio.com/couples/pyan12345/chat")*/) {
             @Override
             protected void populateView(View v, TextMessage model, int position) {
                 // Get references to the views of message.xml
-                TextView messageText = (TextView)v.findViewById(R.id.message_text);
-                TextView messageUser = (TextView)v.findViewById(R.id.message_user);
-                TextView messageTime = (TextView)v.findViewById(R.id.message_time);
+                TextView messageText = (TextView)v.findViewById(R.id.messageText);
+                TextView messageUser = (TextView)v.findViewById(R.id.messageUser);
+                TextView messageTime = (TextView)v.findViewById(R.id.messageTime);
+
+                Log.d(TEXTLOG, "The text message: " + model.getMessageText());
+                Log.d(TEXTLOG, "The user: " + model.getMessageUser());
 
                 // Set their text
                 messageText.setText(model.getMessageText());
@@ -227,14 +227,6 @@ public class TextFragment extends BaseFragment {
         // check for values outside of listener.
         Log.d("TextFragment", "coupleID outside listener found: " + coupleID);
         Log.d("TextFragment", "firstName outside listener found: " + firstName);
-
-
     }
-
-
-
-
-
-
 }
     

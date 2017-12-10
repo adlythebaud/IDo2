@@ -62,6 +62,7 @@ public class GoalListAdapter extends ArrayAdapter<Goal> {
 
         TextView textViewName = view.findViewById(R.id.goal);
 
+
         TextView textViewTime = view.findViewById(R.id.time_left_text);
         Date date = new Date();
        // long timeNow = date.getTime();
@@ -125,4 +126,5 @@ public class GoalListAdapter extends ArrayAdapter<Goal> {
 //            }
 //        });
 //    }
+
 }

@@ -13,7 +13,6 @@ import java.util.Calendar;
  * @author Conrad
  */
 public class Goal {
-
     private String mTitle;
     private boolean mCompleted;
     private Calendar mDateAndTimeToComplete;
@@ -30,15 +29,20 @@ public class Goal {
     /**
      * Constructs a new {@link Goal} with a end {@link Date}, goal String, a boolean for completion.
      *
+<<<<<<< HEAD
      * @param title
      * @param completed
      * @param DateAndTimeToComplete
+=======
+     * @param title The title to the displayed
+     * @param completed is the goal completed
+     * @param DateAndTimeToComplete Holds the date (mm-dd-yyyy) and time (hh-mm-ss) to be completed
+>>>>>>> master
      */
     public Goal(String title, boolean completed, Calendar DateAndTimeToComplete) {
         mTitle = title;
         mCompleted = completed;
         mDateAndTimeToComplete = DateAndTimeToComplete;
-
     }
 
     public String getGoalTitle() { return mTitle; }
@@ -53,5 +57,4 @@ public class Goal {
     public void setDateAndTimeToComplete (Calendar dateAndTimeToComplete) {
         this.mDateAndTimeToComplete = dateAndTimeToComplete;
     }
-
 }

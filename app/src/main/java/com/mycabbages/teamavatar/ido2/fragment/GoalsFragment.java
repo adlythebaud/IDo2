@@ -46,18 +46,32 @@ public class GoalsFragment extends BaseFragment {
     Date date;
     Calendar calendar;
 
+<<<<<<< HEAD
     public static GoalsFragment create() {
         return new GoalsFragment();
 
     }
+=======
+     /*
+     * Returns the GoalFragment
+      */
+    public static GoalsFragment create() { return new GoalsFragment();  }
+>>>>>>> master
 
+    /*
+    * Returns the Layout resource id to the XML
+     */
     @Override
     public int getLayoutResId() {
         return R.layout.fragment_goal;
     }
 
+    /*
+    * The space there all UI interactions should take place. This is called after the UI is inflated
+     */
     @Override
-    public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public void inOnCreateView(View root, @Nullable ViewGroup container,
+                               @Nullable Bundle savedInstanceState) {
         mAddGoalButton = root.findViewById(R.id.add_goal_button);
         mTextNotification = root.findViewById(R.id.text_notification_button);
 
@@ -65,7 +79,8 @@ public class GoalsFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Inside Onclick");
-                Intent intentToCallAddGoalActivity = new Intent(getActivity(), AddGoalActivity.class);
+                Intent intentToCallAddGoalActivity =
+                        new Intent(getActivity(), AddGoalActivity.class);
                 startActivity(intentToCallAddGoalActivity);
             }
         });
@@ -73,12 +88,14 @@ public class GoalsFragment extends BaseFragment {
         //this is to display the goals in the listView
         calendar = new GregorianCalendar();
         date = new Date();
-        calendar.setTime(date);
+
+        calendar =  new GregorianCalendar();
         goals = new ArrayList<>();
-        goals.add(new Goal("kiss your wife"    , false,calendar));
-        goals.add(new Goal("go hunting"        , false,calendar));
-        goals.add(new Goal("jump off bridge"   , false,calendar));
-        goals.add(new Goal("sky diving"        , false,calendar));
+        goals.add(new Goal("kiss your wife"    , false, calendar));
+        goals.add(new Goal("go hunting"        , false, calendar));
+        goals.add(new Goal("jump off bridge"   , false, calendar));
+        goals.add(new Goal("sky diving"        , false, calendar));
+
         GoalListAdapter goaladapter = new GoalListAdapter(getContext(), R.id.goal_list, goals);
 
         listView = (ListView) root.findViewById(R.id.goal_list);
