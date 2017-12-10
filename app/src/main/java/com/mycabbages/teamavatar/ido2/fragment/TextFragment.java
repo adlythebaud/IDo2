@@ -1,5 +1,7 @@
 package com.mycabbages.teamavatar.ido2.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -49,9 +52,6 @@ public class TextFragment extends BaseFragment {
     * Creates a new TextFragment and returns it
     */
     public static TextFragment create () { return new TextFragment(); }
-
-
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -100,7 +100,6 @@ public class TextFragment extends BaseFragment {
 
                 // Read the input field and push a new instance
                 // of TextMessage to the Firebase database
-
                 if (input.getText().toString() != "") {
                     if (!firstName.equals("") && firstName != null)
                         newChatMessageRef.setValue(new TextMessage(input.getText().toString(), firstName));
@@ -110,6 +109,7 @@ public class TextFragment extends BaseFragment {
 
                 // clear the input
                 input.setText("");
+
                 displayChatMessages();
             }
         });
@@ -229,4 +229,5 @@ public class TextFragment extends BaseFragment {
         Log.d("TextFragment", "firstName outside listener found: " + firstName);
     }
 }
+
     

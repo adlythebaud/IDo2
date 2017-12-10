@@ -3,23 +3,30 @@ package com.mycabbages.teamavatar.ido2;
 import java.util.Date;
 
 /**
- * Created by Preston on 11/17/2017.
+ * @author Madison
  */
-
 public class TextMessage {
     private String messageText;
     private String messageUser;
     private long messageTime;
 
-    // Constructors
+    /**
+     * Default constructor to set all variables to their default values
+     */
     public TextMessage() {
         messageText = "";
         messageUser = "";
 
-        // Initialize to current time
+        // Initialize to time zero
         messageTime = 0;
     }
 
+    /**
+     * Non-default constructor to create a TextMessage object initialized to the current time.
+     *
+     * @param messageText String to be put into messageText variable.
+     * @param messageUser String to be put into the messageUser varibale.
+     */
     public TextMessage(String messageText, String messageUser) {
         this.messageText = messageText;
         this.messageUser = messageUser;
@@ -38,7 +45,6 @@ public class TextMessage {
     public String getMessageUser() {
         return messageUser;
     }
-
     public void setMessageUser(String messageUser) { this.messageUser = messageUser; }
 
     public String getMessageText() {
