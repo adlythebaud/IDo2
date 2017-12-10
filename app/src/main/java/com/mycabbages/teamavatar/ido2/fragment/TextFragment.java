@@ -48,27 +48,11 @@ public class TextFragment extends BaseFragment {
     private FirebaseListAdapter<TextMessage> firebaseAdapter;
     private ListView listOfMessages;
 
-    /*
-    * Creates a new TextFragment and returns it
-    */
     public static TextFragment create () { return new TextFragment(); }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    /*
-     * Returns the layout resource ID for the TextFragment
-     */
-    @Override
     public int getLayoutResId() { return R.layout.fragment_text;}
 
-    /******************************************************************************
-     * IN ON CREATE VIEW
-     * Used to do any work related to the UI.
-     * This function is called after the UI is inflated.
-     ******************************************************************************/
     @Override
     public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -80,11 +64,10 @@ public class TextFragment extends BaseFragment {
 
         /*
          * ON CLICK LISTENER
-         * Send text message to
-         * firebase.
+         * Add a listener for a click or tap onto the message box.
          */
-        // Add a listener for a click or tap onto the message box.
         fab.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 EditText input = getActivity().findViewById(R.id.messageBox);
@@ -98,8 +81,7 @@ public class TextFragment extends BaseFragment {
 
                 final DatabaseReference newChatMessageRef = mCoupleChatDatabase.push();
 
-                // Read the input field and push a new instance
-                // of TextMessage to the Firebase database
+                // convert input to TextMessage object and send to correct couple's chat.
                 if (input.getText().toString() != "") {
                     if (!firstName.equals("") && firstName != null)
                         newChatMessageRef.setValue(new TextMessage(input.getText().toString(), firstName));
@@ -110,6 +92,8 @@ public class TextFragment extends BaseFragment {
                 // clear the input
                 input.setText("");
 
+
+                // update the UI.
                 displayChatMessages();
             }
         });
@@ -118,17 +102,18 @@ public class TextFragment extends BaseFragment {
 
     /*
      * DISPLAY CHAT MESSAGES
-     * Display the chat messages from firebase.
+     * Display the chat messages from coupleID's chat child.
      */
     private void displayChatMessages(){
-        // when this is called a second time from onClickListener, the values are there.
+
+        // make sure we have these values.
         Log.d("TextFragment", "coupleID from displayChatMessages found: " + coupleID);
         Log.d("TextFragment", "firstName from displayChatMessages found: " + firstName);
 
         // Retrieve the list of messages from the Couple section in Firebase.
         firebaseAdapter = new FirebaseListAdapter<TextMessage>(this.getActivity(),
                 TextMessage.class, R.layout.message,
-                mCoupleChatDatabase/*FirebaseDatabase.getInstance().getReferenceFromUrl("https://ido2-18f4f.firebaseio.com/couples/pyan12345/chat")*/) {
+                mCoupleChatDatabase) {
             @Override
             protected void populateView(View v, TextMessage model, int position) {
                 // Get references to the views of message.xml
@@ -136,14 +121,11 @@ public class TextFragment extends BaseFragment {
                 TextView messageUser = (TextView)v.findViewById(R.id.messageUser);
                 TextView messageTime = (TextView)v.findViewById(R.id.messageTime);
 
-                Log.d(TEXTLOG, "The text message: " + model.getMessageText());
-                Log.d(TEXTLOG, "The user: " + model.getMessageUser());
-
                 // Test that we have the correct text messaage content
                 Log.d("messageText", "Text: " + model.getMessageText());
                 Log.d("messageText", "User: " + model.getMessageUser());
 
-                // Set their text
+                // Set the text
                 messageText.setText(model.getMessageText());
                 messageUser.setText(model.getMessageUser());
 
@@ -153,6 +135,7 @@ public class TextFragment extends BaseFragment {
             }
         };
 
+        // update the list of messages by querying the order in Firebase.
         listOfMessages.setAdapter(firebaseAdapter);
 
     }
@@ -162,13 +145,13 @@ public class TextFragment extends BaseFragment {
      * Get the data from firebase
      */
     private void getFirebaseData() {
-        //Find all the dataBase references
-        mUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        // get the uUID from the currently logged in user. Used to access the children in DB.
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
         if (mUser != null)
             uUID = mUser.getUid();
 
-
+        // get instance of database and reference to current user in database.
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mUserDatabase = mDatabase.child("users").child(uUID);
 
@@ -177,7 +160,6 @@ public class TextFragment extends BaseFragment {
         /*
          * GET COUPLE ID
          */
-        // get the coupleID from the currently logged in user.
         mDatabase.child("users").child(uUID).child("coupleID").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -190,14 +172,10 @@ public class TextFragment extends BaseFragment {
                     Log.d("TextFragment", "no value present for " + mUser.getEmail() + "'s coupleID");
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.d("TextFragment", "cancelled to read coupleID");
             }
-
-
-
         });
 
         /*
@@ -216,17 +194,11 @@ public class TextFragment extends BaseFragment {
                     Log.d("TextFragment", "no value present for " + mUser.getEmail() + "'s firstName");
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.d("TextFragment", "Cancelled the read for Users first name.");
             }
         });
-
-        // once we have database info, let's display it to the UI.
-        // check for values outside of listener.
-        Log.d("TextFragment", "coupleID outside listener found: " + coupleID);
-        Log.d("TextFragment", "firstName outside listener found: " + firstName);
     }
 }
 

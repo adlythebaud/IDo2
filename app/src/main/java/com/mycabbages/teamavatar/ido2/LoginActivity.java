@@ -20,10 +20,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.FileNotFoundException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.UUID;
 import java.util.Vector;
 
@@ -231,9 +227,9 @@ public class LoginActivity extends AppCompatActivity {
         // save this new user in firebase database tree under "users" child tree.
         userRef.setValue(user);
 
+        
+
         // create a new couple in "couples" tree, add user to it.
-
-
         // handle for if coupleID is found in database
         final DatabaseReference couples = mDatabase.child("couples");
         couples.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -264,26 +260,14 @@ public class LoginActivity extends AppCompatActivity {
                     DatabaseReference chatRef =  coupleRef.child("chat");
                     Vector <TextMessage> v = new Vector<>();
 
-
 //                    v.add("Hello! This is a space where you can chat with your boo thang.");
 //                    v.add("Send messages to your spouse about whatever you'd like.");
 //                    v.add("Don't worry, this is a private space.");
-
 
                     TextMessage tm = new TextMessage("test message", user.getFirstName());
                     v.add(tm);
                     chatRef.setValue(v);
 
-                    // Add a push notifications child to each couple. This is where their text messages will reside.
-                    Goal newGoal = new Goal("Buy flowers for spouse", false, new GregorianCalendar());
-                    DatabaseReference goalRef = userRef.child("goals").push();
-                    goalRef.setValue(newGoal);
-                    DatabaseReference notifRef = coupleRef.child("push_notifications");
-                    Vector <PushNotification> vPushNotif = new Vector<>();
-                    PushNotification firstNotif = new PushNotification(getBaseContext().getApplicationContext(),"Hey " + user.getFirstName() +
-                            "! Go get your spouse to download our app!", "Welcome!", 6000);
-                    vPushNotif.add(firstNotif);
-                    notifRef.setValue(vPushNotif);
                 }
             }
             @Override
@@ -291,6 +275,13 @@ public class LoginActivity extends AppCompatActivity {
                 // error handle here....
             }
         });
+
+        // Add a push notifications child to each user. This is where their text messages will reside.
+        DatabaseReference goalRef = userRef.child("goals");
+        Vector <Goal> vPushNotif = new Vector<>();
+        Goal goal = new Goal("Get your spouse to download our app!", false, 250000);
+        vPushNotif.add(goal);
+        goalRef.setValue(vPushNotif);
     }
 
     /*
