@@ -72,7 +72,7 @@ public class GoalListAdapter extends ArrayAdapter<Goal> {
         calendar1 = goal.get(position).getDateAndTimeToComplete();
         //calendar1 = calendar - calendar1;
         long timeFinish = calendar1.getTimeInMillis();
-        //timeFinish = timeFinish - timeNow;
+
 
 
         System.out.println("Time in millsec. till 18:30 = "
