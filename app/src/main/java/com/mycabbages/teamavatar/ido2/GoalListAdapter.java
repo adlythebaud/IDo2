@@ -33,14 +33,15 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
  */
 
 public class GoalListAdapter extends ArrayAdapter<Goal> {
-    ArrayList<Goal> goal ;
+    List<Goal> goal ;
     private Context context;
     int resource = 0;
     int index;
     Calendar calendar;
 
 
-    public GoalListAdapter(@NonNull Context context, int resource, ArrayList<Goal> data) {
+
+    public GoalListAdapter(@NonNull Context context, int resource, List<Goal> data) {
         super(context, resource, data);
         this.context = context;
         this.goal = data;
@@ -65,20 +66,19 @@ public class GoalListAdapter extends ArrayAdapter<Goal> {
 
         TextView textViewTime = view.findViewById(R.id.time_left_text);
         Date date = new Date();
-       // long timeNow = date.getTime();
 
-        //calendar.setTime(date);
         Calendar calendar1;
         Calendar cal = new GregorianCalendar();
         calendar1 = goal.get(position).getDateAndTimeToComplete();
         //calendar1 = calendar - calendar1;
         long timeFinish = calendar1.getTimeInMillis();
 
-
+        User user = new User();
+        goal = user.getGoals();
 
         System.out.println("Time in millsec. till 18:30 = "
                 + (cal.getTimeInMillis() - System.currentTimeMillis()));
-        long timeLeft = (cal.getTimeInMillis() - System.currentTimeMillis());
+        long timeLeft = (goal.get(position).getDateAndTimeToComplete().getTimeInMillis() - System.currentTimeMillis());
 
 
         int hrs = (int) (MILLISECONDS.toHours(timeLeft) % 24);
