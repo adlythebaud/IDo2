@@ -24,19 +24,18 @@ public class User {
     private Date mBirthday;
     private String mLastName;
     private String mCoupleID;
-    private List<Goal> mGoals;
+    static private List<Goal> mGoals = new Vector<Goal>();
     private String mFirstName;
 
     /**
      *  Sets all the Users fields to an empty value.
      */
-    private User() {
+    public User() {
         mEmail = "";
         mBirthday = null;
         mLastName = "";
         mCoupleID = "";
         mFirstName = "";
-        mGoals = new Vector<Goal>();
     }
 
     /**
@@ -50,7 +49,6 @@ public class User {
         mLastName = "";
         mCoupleID = "";
         mFirstName = "";
-        mGoals = new Vector<Goal>();
     }
 
     /**
@@ -69,23 +67,22 @@ public class User {
     }
 
     //Getters and Setters
-    protected String getEmail() { return mEmail; }
-    protected void setEmail(String email) { mEmail = email; }
+    public String getEmail() { return mEmail; }
+    public void setEmail(String email) { mEmail = email; }
 
-    protected Date getBirthday() { return mBirthday; }
-    protected void setBirthday(Date birthday) { mBirthday = birthday; }
+    public Date getBirthday() { return mBirthday; }
+    public void setBirthday(Date birthday) { mBirthday = birthday; }
 
-    protected String getLastName() { return mLastName; }
-    protected void setLastName(String lastName) { mLastName = lastName; }
+    public String getLastName() { return mLastName; }
+    public void setLastName(String lastName) { mLastName = lastName; }
 
-    protected String getFirstName() { return mFirstName; }
-    protected void setFirstName(String firstName) { mFirstName = firstName; }
+    public String getFirstName() { return mFirstName; }
+    public void setFirstName(String firstName) { mFirstName = firstName; }
 
-    protected String getCoupleID() { return mCoupleID; }
-    protected void setCoupleID(String coupleID) { mCoupleID = coupleID; }
+    public String getCoupleID() { return mCoupleID; }
+    public void setCoupleID(String coupleID) { mCoupleID = coupleID; }
 
-    protected List<Goal> getGoals() { return mGoals; }
-    protected void setGoals (List<Goal> goals) { mGoals = goals; }
-
-
+    public List<Goal> getGoals() { return mGoals; }
+    public void setGoals (List<Goal> goals) { mGoals = goals; }
+    public void addGoal (Goal newGoal) { mGoals.add(newGoal); }
 }

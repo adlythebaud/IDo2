@@ -49,89 +49,22 @@ public class GoalListAdapter extends ArrayAdapter<Goal> {
         if (view == null) {
             view = layoutInflater.inflate(R.layout.goal_view, null, false);
         }
-            //calendar.getTimeInMillis();
 
-            TextView textViewName = view.findViewById(R.id.goal);
-            //TextView textViewTeam = view.findViewById(R.id.textViewTeam);
+        TextView textViewName = view.findViewById(R.id.goal);
         ProgressBar progressBar = view.findViewById(R.id.timeLeft);
 
         calendar = Calendar.getInstance();
-        float timeleft =  (((float)calendar.getTimeInMillis()- goal.get(position).getStartDate())/
-                (goal.get(position).getStartDate() - goal.get(position).getEndDate())) * 100;
+        float timeleft =  (float)calendar.getTimeInMillis()- 0/ (0 - 100) * 100;
         progressBar.setProgress((int)timeleft);
 
 
-            Button checkBox = view.findViewById(R.id.checkBox);
+        Button checkBox = view.findViewById(R.id.checkBox);
 
-            Goal goals = goal.get(position);
-            //System.out.println(position);
+        Goal goals = goal.get(position);
 
-            //adding values to the list item
-
-            textViewName.setText(goals.getGoalTitle());
-
-        //adding a click listener to the button to remove item from the list
-//        checkBox.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //we will call this method to remove the selected value from the list
-//                //we are passing the position which is to be removed in the method
-//                removeHero(position);
-//            }
-//        });
-
+        //adding values to the list item
+        textViewName.setText(goals.getGoalTitle());
 
         return view;
-
-
-
-//    private class GoalHolder{
-//        TextView  textGoal;
-//    }
-//
-//
-//    public int getCount() {
-//
-//        if(goal.size()<=0)
-//            return 1;
-//        return data.size();
-//    }
-//
-//    public Goal getItem(int position) {
-//        return position;
-//    }
-//
-//    public long getItemId(int position) {
-//        return position;
-//    }
-//
-//    @Override
-//    public View getView(int position, View convertView, ViewGroup parent){
-//        RecyclerView.ViewHolder holder =
-//    //GoalHolder holder = null;
-//    //LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-//        if (convertView == null) {
-//            convertView =  inflater.inflate(R.layout.goal_view, parent, false);
-//            holder = new GoalHolder();
-//            holder.textGoal = (TextView) convertView.findViewById(R.id.goal);
-//            convertView.setTag(holder);
-//
-//
-////            Goal goals = getItem(postition);
-////            TextView goalText = (TextView) customView.findViewById(R.id.goal_list);
-////            goalText.setText(goals.getGoalTitle());
-//
-//        }
-//        else {
-//            holder = (GoalHolder) convertView.getTag();
-//        }
-//
-//
-//        Goal goals = goal.get(position);
-
-
-
-        //return convertView;
-
     }
 }

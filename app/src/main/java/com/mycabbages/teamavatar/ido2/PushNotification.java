@@ -4,12 +4,15 @@ package com.mycabbages.teamavatar.ido2;
 import java.io.Serializable;
 
 /**
+<<<<<<< HEAD
+ * Allows for easy access to the phone to push notifications onto the Users phone from the app
+=======
  * Holds the information needed for a push notification. This includes the title and the message to
  * be displayed, the time to send it, and whether or not it has been sent or not.
+>>>>>>> master
  *
  * @author Preston
  */
-
 public class PushNotification implements Serializable {
     private long timeToSend;
     private String message;

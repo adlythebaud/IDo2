@@ -72,27 +72,28 @@ public class AddGoalActivity extends AppCompatActivity {
         Log.d(TAG, goalAmpm);
 
         // GregorianCalendar(int year, int month, int dayOfMonth, int hourOfDay, int minute)
-        Calendar newGoal = new GregorianCalendar(goalYear, goalMonth, goalDay, goalHour, goalMinute);
+        Calendar goalCompletionTimeAndDate = new GregorianCalendar(goalYear, goalMonth, goalDay, goalHour, goalMinute);
 
-        Log.d(TAG, "C_Month: " + String.valueOf(newGoal.get(Calendar.MONTH)));
-        Log.d(TAG, "C_Day: " + String.valueOf(newGoal.get(Calendar.DAY_OF_MONTH)));
-        Log.d(TAG, "C_Year: " + String.valueOf(newGoal.get(Calendar.YEAR)));
-        Log.d(TAG, "C_Hour: " + String.valueOf(newGoal.get(Calendar.HOUR_OF_DAY)));
-        Log.d(TAG, "C_Minute: " + String.valueOf(newGoal.get(Calendar.MINUTE)));
-        Log.d(TAG, "C_AM or PM: " + String.valueOf(newGoal.get(Calendar.AM_PM)));
+        Log.d(TAG, "C_Month: " + String.valueOf(goalCompletionTimeAndDate.get(Calendar.MONTH)));
+        Log.d(TAG, "C_Day: " + String.valueOf(goalCompletionTimeAndDate.get(Calendar.DAY_OF_MONTH)));
+        Log.d(TAG, "C_Year: " + String.valueOf(goalCompletionTimeAndDate.get(Calendar.YEAR)));
+        Log.d(TAG, "C_Hour: " + String.valueOf(goalCompletionTimeAndDate.get(Calendar.HOUR_OF_DAY)));
+        Log.d(TAG, "C_Minute: " + String.valueOf(goalCompletionTimeAndDate.get(Calendar.MINUTE)));
+        Log.d(TAG, "C_AM or PM: " + String.valueOf(goalCompletionTimeAndDate.get(Calendar.AM_PM)));
 
         //TODO: Add the ability for all the info to be added into the users goals
-        /* Send these two variables to your goal location;
-        newGoal - GregorianCalendar class, can be stored in a Calender abstract class
-        goalTitle - String class, holds the literal string of the goal.
-         */
+        Goal newGoal = new Goal(goalTitle, false, goalCompletionTimeAndDate);
+        User user = new User();
+        user.addGoal(newGoal);
+
+        returnToMainActivity(view);
     }
 
     /*
     * If the cancel button is clicked this function is called. This will return the user back
     * to the MainActvity.
     */
-    public void cancel(View view) {
+    public void returnToMainActivity(View view) {
         // Return to the MainActivity if the user cancels
         Intent intentToStartMainActivity = new Intent(AddGoalActivity.this,
                 MainActivity.class);

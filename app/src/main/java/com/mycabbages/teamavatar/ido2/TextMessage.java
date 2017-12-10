@@ -28,13 +28,18 @@ public class TextMessage {
         messageTime = new Date().getTime();
     }
 
+    public TextMessage(String messageText, long messageTime, String messageUser) {
+        this.messageText = messageText;
+        this.messageTime = messageTime;
+        this.messageUser = messageUser;
+    }
+
     // Getters and Setters
     public String getMessageUser() {
         return messageUser;
     }
-    public void setMessageUser(String messageUser) {
-        this.messageUser = messageUser;
-    }
+
+    public void setMessageUser(String messageUser) { this.messageUser = messageUser; }
 
     public String getMessageText() {
         return messageText;
