@@ -22,7 +22,6 @@ public class Couple {
     public final String COUPLELOG = "Couple_log";
     private User mSpouse1;
     private User mSpouse2;
-    private Chat mCoupleChat;
     private Date mAnniversary;
     private Map<String, Goal> mImportantDates;
     private List<PushNotification> mPushNotifications;
@@ -36,7 +35,6 @@ public class Couple {
     public Couple() {
         mSpouse1 = null;
         mSpouse2 = null;
-        mCoupleChat = null;
         mAnniversary = null;
         mImportantDates = new TreeMap<String, Goal>();
         mPushNotifications = new ArrayList<PushNotification>();
@@ -53,13 +51,11 @@ public class Couple {
      * @param lastName
      * @param spouse1
      * @param spouse2
-     * @param coupleChat
      */
-    public Couple(String lastName, User spouse1, User spouse2, Chat coupleChat) {
+    public Couple(String lastName, User spouse1, User spouse2) {
         this.mSpouse1 = spouse1;
         this.mSpouse2 = spouse2;
         this.mLastName = lastName;
-        this.mCoupleChat = coupleChat;
     }
 
     /**
@@ -73,14 +69,12 @@ public class Couple {
      * @param spouse1
      * @param spouse2
      * @param anniversary
-     * @param coupleChat
      * @param coupleID
      */
-    public Couple(User spouse1, User spouse2, Date anniversary, Chat coupleChat, String coupleID) {
+    public Couple(User spouse1, User spouse2, Date anniversary, String coupleID) {
         this.mSpouse1 = spouse1;
         this.mSpouse2 = spouse2;
         mAnniversary = anniversary;
-        mCoupleChat = coupleChat;
         mImportantDates = new TreeMap<String, Goal>();
         mPushNotifications = new ArrayList<PushNotification>();
         mCoupleID = coupleID;
@@ -91,10 +85,6 @@ public class Couple {
 
     public void setSpouse1(User spouse1) { this.mSpouse1 = spouse1; }
     public void setSpouse2(User spouse2) { this.mSpouse2 = spouse2; }
-
-    public Chat getChat() { return mCoupleChat;}
-    public void setChat(Chat coupleChat) { this.mCoupleChat = coupleChat;
-    }
 
     public Map<String, Goal> getImportantDates() {
         return mImportantDates;
@@ -126,7 +116,7 @@ public class Couple {
     public String getLastName() {
         return mLastName;
     }
-    public void setLastName(String _lastName) {
-        this.mLastName = _lastName;
+    public void setLastName(String lastName) {
+        this.mLastName = lastName;
     }
 }
