@@ -245,7 +245,7 @@ public class LoginActivity extends AppCompatActivity {
         // save this new user in firebase database tree under "users" child tree.
         userRef.setValue(user);
 
-
+        
 
         // create a new couple in "couples" tree, add user to it.
         // handle for if coupleID is found in database
@@ -297,12 +297,11 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Add a push notifications child to each user. This is where their text messages will reside.
-//        DatabaseReference notifRef = userRef.child("push_notifications");
-//        Vector <PushNotification> vPushNotif = new Vector<>();
-//        PushNotification firstNotif = new PushNotification(getBaseContext().getApplicationContext(),"Hey " + user.getFirstName() +
-//                "! Go get your spouse to download our app!", "Welcome!", 6000);
-//        vPushNotif.add(firstNotif);
-//        notifRef.setValue(vPushNotif);
+        DatabaseReference goalRef = userRef.child("goals");
+        Vector <Goal> vPushNotif = new Vector<>();
+        Goal goal = new Goal("Get your spouse to download our app!", false, 250000);
+        vPushNotif.add(goal);
+        goalRef.setValue(vPushNotif);
     }
 
     /*

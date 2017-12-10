@@ -82,7 +82,7 @@ public class AddGoalActivity extends AppCompatActivity {
         Log.d(TAG, "C_AM or PM: " + String.valueOf(goalCompletionTimeAndDate.get(Calendar.AM_PM)));
 
         //TODO: Add the ability for all the info to be added into the users goals
-        Goal newGoal = new Goal(goalTitle, false, goalCompletionTimeAndDate);
+        Goal newGoal = new Goal(goalTitle, false, goalCompletionTimeAndDate.getTimeInMillis());
         User user = new User();
         user.addGoal(newGoal);
 

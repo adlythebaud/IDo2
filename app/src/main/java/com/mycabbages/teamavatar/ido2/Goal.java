@@ -16,6 +16,7 @@ public class Goal {
     private String mTitle;
     private boolean mCompleted;
     private Calendar mDateAndTimeToComplete;
+    private long mLongCalendar;
 
     /**
      * Contructs a new {@link Goal} with empty values
@@ -24,25 +25,34 @@ public class Goal {
         mTitle = "";
         mCompleted = false;
         mDateAndTimeToComplete = null;
+        mLongCalendar = 200000;
     }
 
     /**
      * Constructs a new {@link Goal} with a end {@link Date}, goal String, a boolean for completion.
      *
-<<<<<<< HEAD
-     * @param title
-     * @param completed
-     * @param DateAndTimeToComplete
-=======
      * @param title The title to the displayed
      * @param completed is the goal completed
      * @param DateAndTimeToComplete Holds the date (mm-dd-yyyy) and time (hh-mm-ss) to be completed
->>>>>>> master
      */
-    public Goal(String title, boolean completed, Calendar DateAndTimeToComplete) {
+//    public Goal(String title, boolean completed, Calendar DateAndTimeToComplete) {
+//        mTitle = title;
+//        mCompleted = completed;
+//        mDateAndTimeToComplete = DateAndTimeToComplete;
+//    }
+
+
+    /**
+     * Constructs a new {@link Goal} with a end {@link Date}, goal String, a boolean for completion.
+     *
+     * @param title The title to the displayed
+     * @param completed is the goal completed
+     * @param mLongCalendar Holds the date (mm-dd-yyyy) and time (hh-mm-ss) to be completed
+     */
+    public Goal(String title, boolean completed, long mLongCalendar) {
         mTitle = title;
         mCompleted = completed;
-        mDateAndTimeToComplete = DateAndTimeToComplete;
+        this.mLongCalendar = mLongCalendar;
     }
 
     public String getGoalTitle() { return mTitle; }
@@ -56,5 +66,13 @@ public class Goal {
     public Calendar getDateAndTimeToComplete () { return mDateAndTimeToComplete; }
     public void setDateAndTimeToComplete (Calendar dateAndTimeToComplete) {
         this.mDateAndTimeToComplete = dateAndTimeToComplete;
+    }
+
+    public Long getmLongCalendar() {
+        return mLongCalendar;
+    }
+
+    public void setmLongCalendar(Long mLongCalendar) {
+        this.mLongCalendar = mLongCalendar;
     }
 }
