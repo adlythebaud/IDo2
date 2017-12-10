@@ -143,6 +143,10 @@ public class TextFragment extends BaseFragment {
                 Log.d(TEXTLOG, "The text message: " + model.getMessageText());
                 Log.d(TEXTLOG, "The user: " + model.getMessageUser());
 
+                // Test that we have the correct text messaage content
+                Log.d("messageText", "Text: " + model.getMessageText());
+                Log.d("messageText", "User: " + model.getMessageUser());
+
                 // Set their text
                 messageText.setText(model.getMessageText());
                 messageUser.setText(model.getMessageUser());

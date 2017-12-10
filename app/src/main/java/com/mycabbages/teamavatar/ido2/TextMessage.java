@@ -38,6 +38,7 @@ public class TextMessage {
     public String getMessageUser() {
         return messageUser;
     }
+
     public void setMessageUser(String messageUser) { this.messageUser = messageUser; }
 
     public String getMessageText() {
