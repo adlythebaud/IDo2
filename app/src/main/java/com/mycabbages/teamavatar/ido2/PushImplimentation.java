@@ -47,14 +47,14 @@ public class PushImplimentation extends Activity {
     }
 
     /*
-    *
+    * this loads the code from shared prefrences and checks to see if any of the notifications
+    * are ready to be pushed
     */
     public void checkNotifications(Context context) throws FileNotFoundException {
         ReadWrite read = new ReadWrite();
         List<PushNotification> notify = read.loadPushNotificationList(context);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        System.out.println(System.currentTimeMillis());
         int notifyId = 0;
 
         for (int i = 0; i < notify.size(); i++){

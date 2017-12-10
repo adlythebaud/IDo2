@@ -8,8 +8,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.io.FileNotFoundException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * Allows for the user to add a new goal to be reminded of on a later date and time.
@@ -82,10 +84,12 @@ public class AddGoalActivity extends AppCompatActivity {
         Log.d(TAG, "C_AM or PM: " + String.valueOf(goalCompletionTimeAndDate.get(Calendar.AM_PM)));
 
         //TODO: Add the ability for all the info to be added into the users goals
-        Goal newGoal = new Goal(goalTitle, false, goalCompletionTimeAndDate);
-        User user = new User();
-        user.addGoal(newGoal);
 
+        User user = new User();
+        Goal newGoal = new Goal(goalTitle, false, goalCompletionTimeAndDate);
+        user.addGoal(newGoal);
+        PushNotification push = new PushNotification(this ,newGoal.getGoalTitle(),
+                "IDo Goal",newGoal.getDateAndTimeToComplete().getTimeInMillis() - 18000000);
         returnToMainActivity(view);
     }
 

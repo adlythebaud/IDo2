@@ -29,12 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private FirebaseUser user;
 
-    public static ArrayList<Goal> goals;
-    ListView listView;
-
     Date date;
-    Calendar calendar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // To ensure the editText is not covered up by the soft keyboard in the TextFragment
@@ -53,9 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-//        String firstName = mDatabase.child("users").child(user.getUid()).child("firstName").getKey();
-
-
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

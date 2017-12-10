@@ -37,7 +37,8 @@
 
         <receiver android:name=".PushIt" />
 
-        <activity android:name=".AddGoalActivity"></activity>
+        <activity android:name=".AddGoalActivity" />
+        <activity android:name=".View.CoupleQuiz"></activity>
     </application>
 
 </manifest>

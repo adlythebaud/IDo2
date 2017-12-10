@@ -24,10 +24,7 @@ import com.mycabbages.teamavatar.ido2.MainActivity;
 import com.mycabbages.teamavatar.ido2.R;
 import com.mycabbages.teamavatar.ido2.User;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+
 import java.util.List;
 
 /**
@@ -41,10 +38,6 @@ public class GoalsFragment extends BaseFragment {
     private ImageView mTextNotification;
 
     ListView listView;
-    User user;
-
-    Date date;
-    Calendar calendar;
 
      /*
      * Returns the GoalFragment
@@ -78,16 +71,8 @@ public class GoalsFragment extends BaseFragment {
             }
         });
         User user = new User();
-        //this is to display the goals in the listView
 
-//        calendar = new GregorianCalendar();
-//        date = new Date();
-//        calendar =  new GregorianCalendar();
-//        user.addGoal(new Goal("kiss your wife"    , false, calendar));
-//        user.addGoal(new Goal("go hunting"        , false, calendar));
-//        user.addGoal(new Goal("jump off bridge"   , false, calendar));
-//        user.addGoal(new Goal("sky diving"        , false, calendar));
-        List<Goal> goal = new ArrayList<Goal>();
+        List<Goal> goal;
         goal = user.getGoals();
         GoalListAdapter goaladapter = new GoalListAdapter(getContext(), R.id.goal_list, goal);
 
@@ -101,8 +86,6 @@ public class GoalsFragment extends BaseFragment {
             System.out.println("listview is not null ------------------------------------------------------------------------------------------------------------------");
             listView.setAdapter(goaladapter);
         }
-
-
     }
 
 }

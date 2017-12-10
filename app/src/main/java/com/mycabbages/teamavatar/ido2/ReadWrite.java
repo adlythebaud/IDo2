@@ -82,4 +82,26 @@ public class ReadWrite extends Activity {
         editor.putString("Notification list", json);
         editor.apply();
     }
+    public List<Goal> loadGoals(Context context) throws FileNotFoundException {
+        List<Goal> loadList;
+        SharedPreferences sharedPreferences = context.getSharedPreferences("goals2", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("Goal list2",null);
+        Type type = new TypeToken<ArrayList<PushNotification>>() {}.getType();
+        loadList = gson.fromJson(json,type);
+
+        if (loadList == null){
+            loadList = new ArrayList<>();
+        }
+        return loadList;
+    }
+    //this saves all the new notifications that need to be pushed later onto the phone
+    public void saveGoals(Context context , List<Goal> goals) throws FileNotFoundException{
+        SharedPreferences sharedPreferences = context.getSharedPreferences("goals2", MODE_PRIVATE);
+        SharedPreferences.Editor editor  = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(goals);
+        editor.putString("Goal list2", json);
+        editor.apply();
+    }
 }

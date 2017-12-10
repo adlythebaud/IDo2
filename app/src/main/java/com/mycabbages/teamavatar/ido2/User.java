@@ -26,6 +26,7 @@ public class User {
     private String mCoupleID;
     static private List<Goal> mGoals = new Vector<Goal>();
     private String mFirstName;
+    static private int mQuizScore = 0;
 
     /**
      *  Sets all the Users fields to an empty value.
@@ -85,4 +86,7 @@ public class User {
     public List<Goal> getGoals() { return mGoals; }
     public void setGoals (List<Goal> goals) { mGoals = goals; }
     public void addGoal (Goal newGoal) { mGoals.add(newGoal); }
+
+    public int getmQuizScore() { return mQuizScore;    }
+    public void setmQuizScore(int mQuizScore) { this.mQuizScore = mQuizScore; }
 }
