@@ -20,16 +20,22 @@ import java.util.List;
 //import static com.mycabbages.teamavatar.ido2.MainActivity.goals;
 
 /**
- * Created by Conrad on 12/2/2017.
+ * An adapter for a ListView that displays the goals for the user to see.
+ *
+ * @author Conrad
  */
-
 public class GoalListAdapter extends ArrayAdapter<Goal> {
-    ArrayList<Goal> goal ;
+    private ArrayList<Goal> goal ;
     private Context context;
-    int resource = 0;
-    Calendar calendar;
+    private int resource = 0;
+    private Calendar calendar;
 
-
+    /**
+     *
+     * @param context The context running on the app currently
+     * @param resource The resource ID for the goal to be displayed
+     * @param data The data to be displayed on the LstView
+     */
     public GoalListAdapter(@NonNull Context context, int resource, ArrayList<Goal> data) {
         super(context, resource, data);
         this.context = context;
@@ -40,6 +46,9 @@ public class GoalListAdapter extends ArrayAdapter<Goal> {
     }
 
 
+    /**
+    * Gets the view to display the ListView for the goals
+    */
     @SuppressLint("ResourceType")
     @NonNull
     @Override

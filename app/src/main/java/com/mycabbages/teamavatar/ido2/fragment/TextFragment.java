@@ -56,14 +56,11 @@ public class TextFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getFirebaseData();
-//        Log.d("TextFragment", "coupleID from onCreate found: " + coupleID);
-//        Log.d("TextFragment", "firstName from onCreate found: " + firstName);
     }
 
     /*
-            * Returns the layout resource ID for the TextFragment
-            */
+     * Returns the layout resource ID for the TextFragment
+     */
     @Override
     public int getLayoutResId() { return R.layout.fragment_text;}
 
@@ -81,11 +78,11 @@ public class TextFragment extends BaseFragment {
         getFirebaseData();
 
 
-        /************************
+        /*
          * ON CLICK LISTENER
          * Send text message to
          * firebase.
-         ************************/
+         */
         // Add a listener for a click or tap onto the message box.
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,14 +113,13 @@ public class TextFragment extends BaseFragment {
                 displayChatMessages();
             }
         });
-//        displayChatMessages(); // if the UI isn't updating, uncomment this line and comment the code two lines above.
     }
 
 
-    /******************************************************************************
+    /*
      * DISPLAY CHAT MESSAGES
      * Display the chat messages from firebase.
-     ******************************************************************************/
+     */
     private void displayChatMessages(){
         // when this is called a second time from onClickListener, the values are there.
         Log.d("TextFragment", "coupleID from displayChatMessages found: " + coupleID);
@@ -161,10 +157,10 @@ public class TextFragment extends BaseFragment {
 
     }
 
-    /******************************************************************************
+    /*
      * GET FIREBASE DATA
      * Get the data from firebase
-     ******************************************************************************/
+     */
     private void getFirebaseData() {
         //Find all the dataBase references
         mUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -178,9 +174,9 @@ public class TextFragment extends BaseFragment {
 
         Log.d(TEXTLOG, "mUserDatabase: " + mUserDatabase.toString());
 
-        /************************
+        /*
          * GET COUPLE ID
-         ************************/
+         */
         // get the coupleID from the currently logged in user.
         mDatabase.child("users").child(uUID).child("coupleID").addValueEventListener(new ValueEventListener() {
             @Override
@@ -204,9 +200,9 @@ public class TextFragment extends BaseFragment {
 
         });
 
-        /************************
+        /*
          * GET FIRST NAME
-         ************************/
+         */
         mUserDatabase.child("firstName").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

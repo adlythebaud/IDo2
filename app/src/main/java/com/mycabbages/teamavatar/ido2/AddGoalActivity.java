@@ -11,13 +11,11 @@ import android.widget.Spinner;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-/**
+/*
  * Allows for the user to add a new goal to be reminded of on a later date and time.
  *
  * Controls all the error handling and validating for the user to add goals to their app. This
  * activity will handle all the validating to make sure it is passed the current date and time.
- *
- * @author Preston Higgins
  */
 public class AddGoalActivity extends AppCompatActivity {
     static final String TAG = "Add_goal";
@@ -28,14 +26,12 @@ public class AddGoalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_goal);
     }
 
-    /**
-     * Validates the retrieved {@link User} information before creating the {@link Goal}.
+    /*
+     * Validates the retrieved User information before creating the Goal.
      *
-     * Checks the {@link Goal} String to make sure information was entered. Puts the time into
-     * 24 hour time to be correctly recieved by a {@link GregorianCalendar}. Also removes one from
-     * the month to be correctly indexed by the {@link GregorianCalendar}.
-     *
-     * @param view
+     * Checks the Goal String to make sure information was entered. Puts the time into
+     * 24 hour time to be correctly recieved by a GregorianCalendar. Also removes one from
+     * the month to be correctly indexed by the GregorianCalendar.
      */
     public void validate(View view) {
         // Retrieve all the views that hold the users input
@@ -98,8 +94,5 @@ public class AddGoalActivity extends AppCompatActivity {
         Intent intentToStartMainActivity = new Intent(AddGoalActivity.this,
                 MainActivity.class);
         startActivity(intentToStartMainActivity);
-    }
-    public void addGoal(View view){
-
     }
 }
