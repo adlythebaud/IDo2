@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.FileNotFoundException;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.UUID;
 import java.util.Vector;
 
@@ -46,35 +47,20 @@ public class LoginActivity extends AppCompatActivity {
 
 
         FirebaseUser currentUser = myAuth.getCurrentUser();
-        updateUI(currentUser);
 
         // set your DatabaseReference object to our current database.
         mDatabase = FirebaseDatabase.getInstance().getReference();
-//        EditText firstNameET     = (EditText)findViewById(R.id.firstNameEditText);
-//        EditText lastNameET      = (EditText)findViewById(R.id.lastNameEditText);
-//        EditText coupleIDET      = (EditText)findViewById(R.id.coupleIDEditText);
-//        firstNameET.setVisibility(View.INVISIBLE);
-//        lastNameET.setVisibility(View.INVISIBLE);
-//        coupleIDET.setVisibility(View.INVISIBLE);
         // now all calls to FirebaseDatabase are called with mDatabase.
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        // add listener for auth state changes.
-//        myAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
-        // when we log out, remove listener for authorizations.
-//        if (mAuthListener != null) {
-//            myAuth.removeAuthStateListener(mAuthListener);
-//        }
     }
 
 
@@ -101,8 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(LOGINLOG, "signInWithEmail:success");
-
-//                          //TODO: make user object
+                            //TODO: make user object
 
                             goToHome();
                         } else {
@@ -110,7 +95,6 @@ public class LoginActivity extends AppCompatActivity {
                             Log.w(LOGINLOG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_LONG).show();
-                            updateUI(null);
                         }
                     }
                 });
@@ -238,12 +222,12 @@ public class LoginActivity extends AppCompatActivity {
         final User user = new User(firstName, lastName, coupleID, email);
 
         // create a couple object. Assume the user is always the husband for now...
-        final Couple couple = new Couple(user.getLastName(), user, null, null);
+        final Couple couple = new Couple(user.getLastName(), user, null);
 
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         // create a new reference under the users in FB, add the user to the database
-        DatabaseReference userRef = mDatabase.child("users").child(mUser.getUid());
+        final DatabaseReference userRef = mDatabase.child("users").child(mUser.getUid());
         // save this new user in firebase database tree under "users" child tree.
         userRef.setValue(user);
 
@@ -291,6 +275,9 @@ public class LoginActivity extends AppCompatActivity {
                     chatRef.setValue(v);
 
                     // Add a push notifications child to each couple. This is where their text messages will reside.
+                    Goal newGoal = new Goal("Buy flowers for spouse", false, new GregorianCalendar());
+                    DatabaseReference goalRef = userRef.child("goals").push();
+                    goalRef.setValue(newGoal);
                     DatabaseReference notifRef = coupleRef.child("push_notifications");
                     Vector <PushNotification> vPushNotif = new Vector<>();
                     PushNotification firstNotif = new PushNotification(getBaseContext().getApplicationContext(),"Hey " + user.getFirstName() +
@@ -316,10 +303,4 @@ public class LoginActivity extends AppCompatActivity {
                 MainActivity.class);
         startActivity(intentToStartMainActivity);
     }
-
-    private void updateUI(FirebaseUser user) {
-
-    }
-
-
 }

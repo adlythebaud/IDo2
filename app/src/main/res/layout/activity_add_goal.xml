@@ -116,7 +116,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/minute_spinner"
-        app:layout_constraintTop_toBottomOf="@+id/minute_spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/minute_spinner"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/cancel"
@@ -124,11 +125,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="252dp"
         android:layout_marginTop="8dp"
-        android:text="@string/cancel"
         android:onClick="returnToMainActivity"
+        android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/hour_spinner"
-        app:layout_constraintTop_toBottomOf="@+id/hour_spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/hour_spinner"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/month_spinner"

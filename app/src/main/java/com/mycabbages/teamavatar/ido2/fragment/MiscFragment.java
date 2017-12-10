@@ -14,9 +14,8 @@ import com.mycabbages.teamavatar.ido2.User;
 import com.mycabbages.teamavatar.ido2.View.CoupleQuiz;
 
 /**
- * Created by Preston on 11/17/2017.
+ * Created by Preston on 11/17/2017
  */
-
 public class MiscFragment extends BaseFragment {
     static final String TAG = "quiz_log";
     private Button mCuppleQuiz;
