@@ -19,9 +19,10 @@ import android.widget.ImageView;
 import com.mycabbages.teamavatar.ido2.R;
 
 /**
- * Created by Preston on 11/17/2017.
+ * Controller for the MenuTabs on the main three fragments.
+ *
+ * @author Preston
  */
-
 public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeListener{
     final static String cameraLog = "Camera_log";
 
@@ -39,23 +40,45 @@ public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeL
 
     private ArgbEvaluator argbEvaluator;
 
+    /**
+     * Initializes the menu tabs
+     *
+     * @param context The context view which is currently displayed
+     */
     public MenuTabsView(@NonNull Context context) {
         this(context, null);
     }
 
+    /**
+     * Allows access to XML Layout attributes and context that is currently displayed
+     *
+     * @param context The context view which is currently displayed
+     * @param attrs Allows you to pull Attributes from the XML Layouts
+     */
     public MenuTabsView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
+    /**
+     *
+     *
+     * @param context The context view which is currently displayed
+     * @param attrs Allows you to pull Attributes from the XML Layouts
+     * @param defStyleAttr
+     */
     public MenuTabsView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         init();
     }
 
+    /**
+     * Sets up the Menu Tabs with the page viewer to synchronize the two.
+     * @param viewPager
+     */
     public void setUpWithViewPager(final ViewPager viewPager) {
         viewPager.addOnPageChangeListener(this);
-
+        // Add an on click listener for the left button
         mStartImage.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +88,7 @@ public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeL
             }
         });
 
+        // Add an on click listener for the middle button
         mBottomImage.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +98,7 @@ public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeL
             }
         });
 
+        // Add an on click listener for the right button
         mEndImage.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,6 +109,9 @@ public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeL
         });
     }
 
+    /**
+     * Initializes the Menu Tabs
+     */
     private void init() {
         LayoutInflater.from(getContext()).inflate(R.layout.view_menu_tabs,this, true);
         mCenterImage = findViewById(R.id.vmt_center_image);
@@ -108,6 +136,14 @@ public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeL
         });
     }
 
+    /**
+     * Is called after the fragment has been scrolled. Calls the code to set the background color
+     * and translate the view menu tabs
+     *
+     * @param position of the Fragments
+     * @param positionOffset The offset the page is moved from the settled position
+     * @param positionOffsetPixels The offset the page is moved from the settled position in pixels
+     */
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         if (position == 0) {
@@ -140,6 +176,12 @@ public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeL
 
     }
 
+    /**
+     * Scales the view menu tabs according to the fractional offset
+     *
+     * @param fractionFromCenter The fractional offset from the center the page is
+     * @param position The fragment position we are currently in
+     */
     private void scaleSelection(float fractionFromCenter, int position) {
         float scale = .8f + ((1 - fractionFromCenter) * .2f);
 
@@ -147,11 +189,20 @@ public class MenuTabsView extends FrameLayout implements ViewPager.OnPageChangeL
         mBottomImage.setScaleX(scale);
     }
 
+    /**
+     * Moves the views according to the fractional offset from the center.
+     * @param fractionFromCenter The fractional offset from the center the page is
+     */
     private void moveViews(float fractionFromCenter) {
         mStartImage.setTranslationX(fractionFromCenter * endViewsTranslationX);
         mEndImage.setTranslationX(-fractionFromCenter * endViewsTranslationX);
     }
 
+    /**
+     * Changes the color of your view items according to the fractional offset from the center
+     * the page is.
+     * @param fractionFromCenter The fractional offset from the center the page is
+     */
     private void setColor(float fractionFromCenter) {
         int color = (int) argbEvaluator.evaluate(fractionFromCenter, centerColor, siderColor);
         mCenterImage.setColorFilter(color);
