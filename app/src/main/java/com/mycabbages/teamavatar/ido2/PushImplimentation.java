@@ -19,7 +19,7 @@ import java.util.List;
  * Creates and handles the AlarmManager needed to push notifications to the Users phone.
  * @author Conrad
  */
-public class pushImplimentation extends Activity {
+public class PushImplimentation extends Activity {
     private static final String TAG = "Push_Implementation";
     private Date timeToSend;
     private String message;
@@ -41,7 +41,7 @@ public class pushImplimentation extends Activity {
         alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         pendingIntent = PendingIntent.getBroadcast(context, 0, dialogIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 10000, pendingIntent);
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 21600000, pendingIntent);
 
     }
 
@@ -57,7 +57,6 @@ public class pushImplimentation extends Activity {
         int notifyId = 0;
 
         for (int i = 0; i < notify.size(); i++){
-            //System.out.println("notification " + i);
             if(notify.get(i).getTimeToSend() >= System.currentTimeMillis() - 100000000
                     && notify.get(i).getTimeToSend() <= System.currentTimeMillis() + 100000
                     && !notify.get(i).isSent()){
@@ -74,7 +73,6 @@ public class pushImplimentation extends Activity {
                }
             }
             read.savePushNotificationList(context, notify);
-           //i System.out.println("notification size" + notify.size());
         }
 
 
@@ -85,7 +83,6 @@ public class pushImplimentation extends Activity {
                 .setContentText(text)
                 .setAutoCancel(true)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                //.setLargeIcon(R.mipmap.ic_launcher_round)
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 
         Notification notification = builder.build();

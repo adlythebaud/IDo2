@@ -22,6 +22,7 @@ import com.mycabbages.teamavatar.ido2.Goal;
 import com.mycabbages.teamavatar.ido2.GoalListAdapter;
 import com.mycabbages.teamavatar.ido2.MainActivity;
 import com.mycabbages.teamavatar.ido2.R;
+import com.mycabbages.teamavatar.ido2.User;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,11 +39,12 @@ public class GoalsFragment extends BaseFragment {
     private final static String TAG = "Goals_Fragment";
     private ImageView mAddGoalButton;
     private ImageView mTextNotification;
-     public static ArrayList<Goal> goals;
-     ListView listView;
 
-     Date date;
-     Calendar calendar;
+    ListView listView;
+    User user;
+
+    Date date;
+    Calendar calendar;
 
      /*
      * Returns the GoalFragment
@@ -75,18 +77,20 @@ public class GoalsFragment extends BaseFragment {
                 startActivity(intentToCallAddGoalActivity);
             }
         });
+        User user = new User();
+        //this is to display the goals in the listView
 
+//        calendar = new GregorianCalendar();
+//        date = new Date();
+//        calendar =  new GregorianCalendar();
+//        user.addGoal(new Goal("kiss your wife"    , false, calendar));
+//        user.addGoal(new Goal("go hunting"        , false, calendar));
+//        user.addGoal(new Goal("jump off bridge"   , false, calendar));
+//        user.addGoal(new Goal("sky diving"        , false, calendar));
+        List<Goal> goal = new ArrayList<Goal>();
+        goal = user.getGoals();
+        GoalListAdapter goaladapter = new GoalListAdapter(getContext(), R.id.goal_list, goal);
 
-        date = new Date();
-        calendar =  new GregorianCalendar();
-        goals = new ArrayList<>();
-        goals.add(new Goal("kiss your wife"    , false, calendar));
-        goals.add(new Goal("go hunting"        , false, calendar));
-        goals.add(new Goal("jump off bridge"   , false, calendar));
-        goals.add(new Goal("sky diving"        , false, calendar));
-        GoalListAdapter goaladapter = new GoalListAdapter(getContext(), R.id.goal_list, goals);
-
-        //getActivity().setContentView(R.layout.fragment_goal);
         listView = (ListView) root.findViewById(R.id.goal_list);
 
         if (listView ==null){

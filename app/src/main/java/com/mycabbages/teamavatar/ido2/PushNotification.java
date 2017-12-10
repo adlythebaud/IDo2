@@ -1,7 +1,12 @@
 package com.mycabbages.teamavatar.ido2;
 
 
+import android.content.Context;
+
+import java.io.FileNotFoundException;
 import java.io.Serializable;
+
+import static java.security.AccessController.getContext;
 
 /**
 <<<<<<< HEAD
@@ -17,6 +22,7 @@ public class PushNotification implements Serializable {
     private long timeToSend;
     private String message;
     private String notificationTitle;
+    Context context;
     private boolean sent;
 
     /**
@@ -37,11 +43,18 @@ public class PushNotification implements Serializable {
      * @param notificationTitle Title to let the user know where the notification is coming from
      * @param timeToSend The time the app will send the notification
      */
-    public PushNotification(String message, String notificationTitle, long timeToSend) {
+ public PushNotification(Context context,String message, String notificationTitle, long timeToSend) {
         this.message = message;
         this.notificationTitle = notificationTitle;
         this.timeToSend = timeToSend;
         this.sent = false;
+        this.context = context;
+        ReadWrite push = new ReadWrite();
+        try {
+            push.addNotification(this.context, this.getMessage(), this.getNotificationTitle(), this.getTimeToSend());
+        }catch(Exception e){
+            new FileNotFoundException();
+        }
     }
 
     public long getTimeToSend() {

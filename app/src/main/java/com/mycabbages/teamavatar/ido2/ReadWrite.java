@@ -46,7 +46,7 @@ public class ReadWrite extends Activity {
     public void writeToPhone(String key, String data){
 
     }
-
+    // this adds a new nodification to the arraylist and saves the list to the phone
     public void addNotification(Context context, String title, String message,long sendTime)throws FileNotFoundException{
         System.out.println("added new notification");
         List<PushNotification> newlist = loadPushNotificationList(context);
@@ -59,7 +59,7 @@ public class ReadWrite extends Activity {
 
         savePushNotificationList(context, newlist);
     }
-
+    // this loads the push notifications saved to the phone to memory
     public List<PushNotification> loadPushNotificationList(Context context) throws FileNotFoundException {
         List<PushNotification> loadList;
         SharedPreferences sharedPreferences = context.getSharedPreferences("notifications", MODE_PRIVATE);
@@ -73,8 +73,7 @@ public class ReadWrite extends Activity {
         }
         return loadList;
     }
-
-
+    //this saves all the new notifications that need to be pushed later onto the phone
     public void savePushNotificationList(Context context , List<PushNotification> notification) throws FileNotFoundException{
         SharedPreferences sharedPreferences = context.getSharedPreferences("notifications", MODE_PRIVATE);
         SharedPreferences.Editor editor  = sharedPreferences.edit();

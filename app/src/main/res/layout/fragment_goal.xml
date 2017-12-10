@@ -14,7 +14,6 @@
     <!--android:background="@drawable/card_background" />-->
 
 
-
     <ImageButton
         android:id="@+id/add_goal_button"
         android:layout_width="wrap_content"
@@ -26,7 +25,7 @@
         app:layout_constraintEnd_toStartOf="@+id/text_notification_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_menu_add" />
 
     <ImageButton
         android:id="@+id/text_notification_button"
@@ -43,16 +42,25 @@
     <ListView
         android:id="@+id/goal_list"
         android:layout_width="359dp"
-        android:layout_height="439dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="100dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Goals"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/add_goal_button"
+        tools:layout_editor_absoluteX="16dp" />
 
 </android.support.constraint.ConstraintLayout>
 
