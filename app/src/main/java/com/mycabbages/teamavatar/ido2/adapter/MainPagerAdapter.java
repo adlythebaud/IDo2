@@ -30,9 +30,9 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return GoalsFragment.create();
             case 2:
-                return ChatFragment.create();
-            case 3:
                 return TextFragment.create();
+            case 3:
+                return ChatFragment.create();
         }
         return null;
     }
