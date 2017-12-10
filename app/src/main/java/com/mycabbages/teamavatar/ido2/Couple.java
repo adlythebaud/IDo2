@@ -93,7 +93,8 @@ public class Couple {
     public void setSpouse2(User spouse2) { this.mSpouse2 = spouse2; }
 
     public Chat getChat() { return mCoupleChat;}
-    public void setChat(Chat coupleChat) { this.mCoupleChat = coupleChat; }
+    public void setChat(Chat coupleChat) { this.mCoupleChat = coupleChat;
+    }
 
     public Map<String, Goal> getImportantDates() {
         return mImportantDates;
@@ -119,6 +120,7 @@ public class Couple {
     public void createCoupleID () {
         this.mCoupleID =  UUID.randomUUID().toString();
         Log.d(COUPLELOG, mCoupleID);
+
     }
 
     public String getLastName() {
