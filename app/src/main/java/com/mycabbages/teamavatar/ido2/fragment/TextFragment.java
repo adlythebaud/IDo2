@@ -1,5 +1,7 @@
 package com.mycabbages.teamavatar.ido2.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -58,6 +61,7 @@ public class TextFragment extends BaseFragment {
 
         getFirebaseData();
 
+
         /*
          * ON CLICK LISTENER
          * Add a listener for a click or tap onto the message box.
@@ -87,6 +91,7 @@ public class TextFragment extends BaseFragment {
 
                 // clear the input
                 input.setText("");
+
 
                 // update the UI.
                 displayChatMessages();
@@ -152,7 +157,9 @@ public class TextFragment extends BaseFragment {
 
         Log.d(TEXTLOG, "mUserDatabase: " + mUserDatabase.toString());
 
-        // get the coupleID from the currently logged in user.
+        /*
+         * GET COUPLE ID
+         */
         mDatabase.child("users").child(uUID).child("coupleID").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -171,7 +178,9 @@ public class TextFragment extends BaseFragment {
             }
         });
 
-        // get the first name from the currently logged in user from firebase database.
+        /*
+         * GET FIRST NAME
+         */
         mUserDatabase.child("firstName").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -192,4 +201,5 @@ public class TextFragment extends BaseFragment {
         });
     }
 }
+
     

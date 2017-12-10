@@ -20,7 +20,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.UUID;
 import java.util.Vector;
 
@@ -44,35 +43,20 @@ public class LoginActivity extends AppCompatActivity {
 
 
         FirebaseUser currentUser = myAuth.getCurrentUser();
-        updateUI(currentUser);
 
         // set your DatabaseReference object to our current database.
         mDatabase = FirebaseDatabase.getInstance().getReference();
-//        EditText firstNameET     = (EditText)findViewById(R.id.firstNameEditText);
-//        EditText lastNameET      = (EditText)findViewById(R.id.lastNameEditText);
-//        EditText coupleIDET      = (EditText)findViewById(R.id.coupleIDEditText);
-//        firstNameET.setVisibility(View.INVISIBLE);
-//        lastNameET.setVisibility(View.INVISIBLE);
-//        coupleIDET.setVisibility(View.INVISIBLE);
         // now all calls to FirebaseDatabase are called with mDatabase.
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        // add listener for auth state changes.
-//        myAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
-        // when we log out, remove listener for authorizations.
-//        if (mAuthListener != null) {
-//            myAuth.removeAuthStateListener(mAuthListener);
-//        }
     }
 
 
@@ -99,8 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(LOGINLOG, "signInWithEmail:success");
-
-//                          //TODO: make user object
+                            //TODO: make user object
 
                             goToHome();
                         } else {
@@ -108,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
                             Log.w(LOGINLOG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_LONG).show();
-                            updateUI(null);
                         }
                     }
                 });
@@ -236,12 +218,12 @@ public class LoginActivity extends AppCompatActivity {
         final User user = new User(firstName, lastName, coupleID, email);
 
         // create a couple object. Assume the user is always the husband for now...
-        final Couple couple = new Couple(user.getLastName(), user, null, null);
+        final Couple couple = new Couple(user.getLastName(), user, null);
 
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         // create a new reference under the users in FB, add the user to the database
-        DatabaseReference userRef = mDatabase.child("users").child(mUser.getUid());
+        final DatabaseReference userRef = mDatabase.child("users").child(mUser.getUid());
         // save this new user in firebase database tree under "users" child tree.
         userRef.setValue(user);
 
@@ -278,11 +260,9 @@ public class LoginActivity extends AppCompatActivity {
                     DatabaseReference chatRef =  coupleRef.child("chat");
                     Vector <TextMessage> v = new Vector<>();
 
-
 //                    v.add("Hello! This is a space where you can chat with your boo thang.");
 //                    v.add("Send messages to your spouse about whatever you'd like.");
 //                    v.add("Don't worry, this is a private space.");
-
 
                     TextMessage tm = new TextMessage("test message", user.getFirstName());
                     v.add(tm);
@@ -314,10 +294,4 @@ public class LoginActivity extends AppCompatActivity {
                 MainActivity.class);
         startActivity(intentToStartMainActivity);
     }
-
-    private void updateUI(FirebaseUser user) {
-
-    }
-
-
 }

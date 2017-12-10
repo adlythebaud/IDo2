@@ -19,7 +19,6 @@ import java.util.List;
  * Creates and handles the AlarmManager needed to push notifications to the Users phone.
  * @author Conrad
  */
-
 public class PushImplimentation extends Activity {
     private static final String TAG = "Push_Implementation";
     private Date timeToSend;

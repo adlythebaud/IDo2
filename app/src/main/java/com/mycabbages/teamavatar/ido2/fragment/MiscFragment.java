@@ -8,9 +8,8 @@ import android.view.ViewGroup;
 import com.mycabbages.teamavatar.ido2.R;
 
 /**
- * Created by Preston on 11/17/2017.
+ * Created by Preston on 11/17/2017
  */
-
 public class MiscFragment extends BaseFragment {
 
     public static MiscFragment create() {
