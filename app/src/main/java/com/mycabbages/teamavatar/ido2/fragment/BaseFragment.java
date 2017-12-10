@@ -10,12 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A Base class for the fragments we will be using.
- *
- * @author Preston
+/*
+ * Base fragment is the parent for all the fragments in the program. Sets forth the needed functions
+ * the fragments will need to inflate the view.
  */
-
 public abstract class BaseFragment extends Fragment {
     private View mRoot;
 
@@ -43,5 +41,11 @@ public abstract class BaseFragment extends Fragment {
     @LayoutRes
     public abstract int getLayoutResId();
 
+    /**
+     *
+     * @param root The root view
+     * @param container
+     * @param savedInstanceState
+     */
     public abstract void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
 }
