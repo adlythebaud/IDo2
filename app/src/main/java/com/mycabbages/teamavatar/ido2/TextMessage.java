@@ -33,7 +33,7 @@ public class TextMessage {
         return messageUser;
     }
     public void setMessageUser(String messageUser) {
-        this.messageText = messageUser;
+        this.messageUser = messageUser;
     }
 
     public String getMessageText() {
