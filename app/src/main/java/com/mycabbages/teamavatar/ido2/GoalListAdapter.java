@@ -74,18 +74,16 @@ public class GoalListAdapter extends ArrayAdapter<Goal> {
         TextView textViewTime = view.findViewById(R.id.time_left_text);
         Date date = new Date();
 
-        Calendar calendar1;
+/*        Calendar calendar1;
         Calendar cal = new GregorianCalendar();
         calendar1 = goal.get(position).getDateAndTimeToComplete();
         //calendar1 = calendar - calendar1;
-        long timeFinish = calendar1.getTimeInMillis();
+        long timeFinish = calendar1.getTimeInMillis();*/
 
         User user = new User();
         goal = user.getGoals();
 
-        System.out.println("Time in millsec. till 18:30 = "
-                + (cal.getTimeInMillis() - System.currentTimeMillis()));
-        long timeLeft = (goal.get(position).getDateAndTimeToComplete().getTimeInMillis() - System.currentTimeMillis());
+        long timeLeft = (goal.get(position).getmLongCalendar() - System.currentTimeMillis());
 
 
         int hrs = (int) (MILLISECONDS.toHours(timeLeft) % 24);
