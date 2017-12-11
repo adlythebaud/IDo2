@@ -69,43 +69,33 @@ public class GoalListAdapter extends ArrayAdapter<Goal> {
         }
 
         TextView textViewName = view.findViewById(R.id.goal);
-
-
         TextView textViewTime = view.findViewById(R.id.time_left_text);
-        Date date = new Date();
 
-        Calendar calendar1;
-        Calendar cal = new GregorianCalendar();
-        calendar1 = goal.get(position).getDateAndTimeToComplete();
-        //calendar1 = calendar - calendar1;
-        long timeFinish = calendar1.getTimeInMillis();
+        Date date = new Date();
 
         User user = new User();
         goal = user.getGoals();
 
-        System.out.println("Time in millsec. till 18:30 = "
-                + (cal.getTimeInMillis() - System.currentTimeMillis()));
-        long timeLeft = (goal.get(position).getDateAndTimeToComplete().getTimeInMillis() - System.currentTimeMillis());
+        long timeLeft = (goal.get(position).getmLongCalendar() - System.currentTimeMillis());
 
 
         int hrs = (int) (MILLISECONDS.toHours(timeLeft) % 24);
         int min = (int) (MILLISECONDS.toMinutes(timeLeft) % 60);
         int days = (int) (MILLISECONDS.toDays(timeLeft) % 31);
 
-        textViewTime.setText(days+" days "+hrs+" hours "+min+" minutes ");
+        String timeLeftDisplay = days + "days " + hrs + "hours " + min + "minutes";
+        textViewTime.setText(timeLeftDisplay);
 
         ImageButton checkBox = view.findViewById(R.id.checkBox);
 
         Goal goals = goal.get(position);
         textViewName.setText(goals.getGoalTitle());
 
+        //Listen for the User clicking the check box to remove the goal
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                System.out.println("button pushed");
-//                //we will call this method to remove the selected value from the list
-//                //we are passing the position which is to be removed in the method
-//              removeGoal(position);
+
                 goal.remove(position);
                 //reloading the list
                 notifyDataSetChanged();
@@ -113,25 +103,4 @@ public class GoalListAdapter extends ArrayAdapter<Goal> {
         });
         return view;
     }
-
-
-
-
-//    private void removeGoal(final int position) {
-//        //Creating an alert dialog to confirm the deletion
-//        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//        builder.setTitle("Are you sure you want to delete this?");
-//
-//        //if the response is positive in the alert
-//        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//                //removing the item
-//                goal.remove(position);
-//                //reloading the list
-//                notifyDataSetChanged();
-//            }
-//        });
-//    }
-
 }
