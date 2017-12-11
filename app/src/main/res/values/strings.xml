@@ -11,7 +11,7 @@
     <string name="request_permission">This sample needs camera permission</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 
-
+    <string name="Question">Question</string>
     <string name="month_hint">1 &#8211; 12</string>
     <string name="pick_month">Month:</string>
     <string name="year_hint">2017</string>
@@ -41,6 +41,20 @@
         <item>11</item>
         <item>12</item>
     </string-array>
+
+    <string-array name="quiz_scores">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
 
     <string-array name="day_entries1">
         <item>1</item>
@@ -111,7 +125,6 @@
         <item>AM</item>
         <item>PM</item>
     </string-array>
-
 
 
 </resources>
