@@ -1,6 +1,7 @@
 package com.mycabbages.teamavatar.ido2;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -72,5 +73,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    /*
+    * Logs the user out after the Logout button has been clicked.
+    */
+    public void logout(View view) {
+        FirebaseAuth.getInstance().signOut();
+        Intent intentToLogOut = new Intent(this, LoginActivity.class);
+        startActivity(intentToLogOut);
     }
 }
