@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * Creates and handles the AlarmManager needed to push notifications to the Users phone.
+ *
  * @author Conrad
  */
 public class PushImplimentation extends Activity {
@@ -32,6 +33,7 @@ public class PushImplimentation extends Activity {
     private AlarmManager alarmMgr;
 
 
+
     /*
     * Sets the alarm to allow the notifications to be sent after the app closes.
     */
@@ -41,7 +43,7 @@ public class PushImplimentation extends Activity {
         alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         pendingIntent = PendingIntent.getBroadcast(context, 0, dialogIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 21600000, pendingIntent);
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 20000, pendingIntent);
 
     }
 
@@ -68,7 +70,7 @@ public class PushImplimentation extends Activity {
                 }
             }
             for (int i = 0; i < notify.size(); i++){
-               if(notify.get(i).isSent() == true){
+               if(notify.get(i).isSent()){
                    notify.remove(i);
                }
             }

@@ -17,10 +17,10 @@ public class PushIt extends BroadcastReceiver {
 public void onReceive(final Context context, Intent intent) {
         PushImplimentation push = new PushImplimentation();
             push.alarmSet(context);
-            try {
+        try {
             push.checkNotifications(context);
         }catch (Exception e) {
-            new FileNotFoundException();
+            e.printStackTrace();
         }
 
     }

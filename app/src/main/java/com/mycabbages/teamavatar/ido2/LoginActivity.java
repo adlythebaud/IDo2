@@ -260,10 +260,6 @@ public class LoginActivity extends AppCompatActivity {
                     DatabaseReference chatRef =  coupleRef.child("chat");
                     Vector <TextMessage> v = new Vector<>();
 
-//                    v.add("Hello! This is a space where you can chat with your boo thang.");
-//                    v.add("Send messages to your spouse about whatever you'd like.");
-//                    v.add("Don't worry, this is a private space.");
-
                     TextMessage tm = new TextMessage("test message", user.getFirstName());
                     v.add(tm);
                     chatRef.setValue(v);
